@@ -14,34 +14,43 @@
         android:theme="@style/Theme.Farmlog"
         tools:targetApi="31">
         <activity
-            android:name=".LandsMapActivity"
-            android:exported="false" />
+            android:name="com.example.farmlog.landsmap.LandsMapActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name=".SecondRegistrationActivity"
-            android:exported="false" />
+            android:name="com.example.farmlog.registration.SecondRegistrationActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name=".RegistrationActivity"
-            android:exported="false" />
+            android:name="com.example.farmlog.registration.RegistrationActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
+            android:name="com.example.farmlog.login.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name=".WelcomeActivity"
-            android:exported="false" />
+            android:name="com.example.farmlog.welcome.WelcomeActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.Farmlog" />
+
+        <!-- Splash screen is shown first -->
         <activity
-            android:name=".SplashScreenActivity"
-            android:exported="false" />
-        <activity
+            android:name="com.example.farmlog.splashscreen.SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.Farmlog" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--<activity
             android:name=".MainActivityOLD"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Farmlog">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        </activity>-->
     </application>
 
 </manifest>

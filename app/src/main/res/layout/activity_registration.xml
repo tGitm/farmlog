@@ -10,12 +10,15 @@
         android:id="@+id/illustrationTop"
         android:layout_width="387dp"
         android:layout_height="436dp"
+        android:layout_marginTop="-150dp"
+        android:layout_marginEnd="-190dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_blob1"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="-148dp" />
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -42,11 +45,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/loginViewsMargin"
-            android:textSize="22sp"
-            android:paddingStart="3dp"
             android:layout_marginBottom="30dp"
+            android:paddingStart="3dp"
             android:text="@string/signup_subtitle1"
             android:textColor="@color/darkGray"
+            android:textSize="22sp"
             tools:ignore="RtlSymmetry" />
 
         <com.google.android.material.textfield.TextInputEditText
@@ -81,6 +84,7 @@
             android:textColor="@color/whiteTextColor" />
 
         <TextView
+            android:id="@+id/goLogin"
             style="@style/parent"
             android:layout_marginTop="@dimen/loginViewsMargin"
             android:text="@string/signup_login_hint"
@@ -92,11 +96,15 @@
 
     <ImageView
         android:id="@+id/illustrationBottomLogin"
-        android:layout_width="206dp"
-        android:layout_height="243dp"
+        android:layout_width="238dp"
+        android:layout_height="237dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="-50dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         app:srcCompat="@drawable/agro1"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="482dp" />
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
