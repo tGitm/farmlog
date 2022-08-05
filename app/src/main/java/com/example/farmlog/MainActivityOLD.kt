@@ -12,7 +12,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.farmlog.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivityOLD : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
