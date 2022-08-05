@@ -103,13 +103,23 @@
 
     <ImageView
         android:id="@+id/illustrationBottomLogin"
-        android:layout_width="286dp"
-        android:layout_height="253dp"
+        android:layout_width="220dp"
+        android:layout_height="229dp"
         android:layout_marginStart="30dp"
-        android:layout_marginBottom="-40dp"
+        android:layout_marginBottom="-50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/farmer2"
         tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/goBack"
+        android:layout_width="35dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

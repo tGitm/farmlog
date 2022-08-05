@@ -14,6 +14,7 @@
     <color name="lightGray">#eeefee</color>
     <color name="gray">#a7a7a7</color>
     <color name="darkGray">#7c747a</color>
+    <color name="darkerGray">#3e3a3d</color>
 
     <!--colros for card-->
     <color name="whiteCardColor">#fff</color>
