@@ -8,6 +8,7 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -51,8 +52,8 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/welcome_description"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:text="@string/welcome_description" />
 
         <Button
             android:id="@+id/cirLoginButton"
@@ -70,10 +71,12 @@
         android:id="@+id/illustrationBottom"
         android:layout_width="387dp"
         android:layout_height="436dp"
+        android:layout_marginTop="-150dp"
+        android:layout_marginEnd="-190dp"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:srcCompat="@drawable/ic_blob1"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-153dp"
-        tools:layout_editor_absoluteY="493dp" />
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

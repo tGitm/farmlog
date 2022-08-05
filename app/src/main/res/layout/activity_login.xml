@@ -10,12 +10,15 @@
         android:id="@+id/illustrationTop"
         android:layout_width="387dp"
         android:layout_height="436dp"
+        android:layout_marginTop="-150dp"
+        android:layout_marginEnd="-190dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_blob1"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="-148dp" />
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -84,16 +87,17 @@
             android:hint="@string/login_password_hint" />
 
         <Button
-            android:id="@+id/cirLoginButton"
+            android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/loginViewsMargin"
             android:background="@drawable/button_rounded"
             android:text="@string/loginButton"
-            android:textColor="@color/whiteTextColor" />
+            android:textColor="@color/whiteTextColor"/>
 
         <TextView
+            android:id="@+id/goRegister"
             style="@style/parent"
             android:layout_marginTop="@dimen/loginViewsMargin"
             android:text="@string/login_signup_hint"
@@ -107,10 +111,13 @@
         android:id="@+id/illustrationBottomLogin"
         android:layout_width="287dp"
         android:layout_height="268dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:srcCompat="@drawable/farmer1"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="470dp" />
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/primaryButtonColor</item>
         <item name="colorPrimaryVariant">@color/primaryVariantColor</item>
         <item name="colorSecondary">@color/darkGray</item>
-        <item name="colorSecondaryVariant">@color/lightGray</item>
+        <item name="colorSecondaryVariant">@color/gray</item>
     </style>
 
     <style name="Theme.Farmlog" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
