@@ -4,33 +4,33 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/to_map"
-            android:title="@string/to_map"
-            android:icon="@drawable/ic_maps"/>
+            android:icon="@drawable/ic_maps"
+            android:title="@string/to_map" />
 
         <item
             android:id="@+id/to_archive"
-            android:title="@string/archive"
-            android:icon="@drawable/ic_archive_folder" />
+            android:icon="@drawable/ic_archive_folder"
+            android:title="@string/archive" />
 
         <item
             android:id="@+id/add_work"
-            android:title="@string/add_new_work"
-            android:icon="@drawable/ic_add_new"/>
+            android:icon="@drawable/ic_add_new"
+            android:title="@string/add_new_work" />
 
         <item
             android:id="@+id/my_profile"
-            android:title="@string/my_profile"
-            android:icon="@drawable/ic_profle"/>
+            android:icon="@drawable/ic_profle"
+            android:title="@string/my_profile" />
 
         <item
             android:id="@+id/to_about"
-            android:title="@string/about"
-            android:icon="@drawable/ic_about"/>
+            android:icon="@drawable/ic_about"
+            android:title="@string/about" />
 
         <item
             android:id="@+id/sign_out"
-            android:title="@string/sign_out"
-            android:icon="@drawable/ic_log_out"/>
+            android:icon="@drawable/ic_log_out"
+            android:title="@string/sign_out" />
     </group>
 
 </menu>

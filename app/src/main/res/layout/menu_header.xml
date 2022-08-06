@@ -5,7 +5,7 @@
     android:layout_height="120dp"
     android:background="@color/lightestGray"
     android:elevation="30dp"
-    android:layout_marginBottom="30dp">
+    android:translationZ="1dp">
 
     <TextView
         android:id="@+id/menu_title"

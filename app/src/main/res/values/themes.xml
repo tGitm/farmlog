@@ -3,15 +3,17 @@
     <style name="Base.Theme.Farmlog" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="colorPrimary">@color/primaryButtonColor</item>
+        <item name="colorPrimary">@color/primaryTextColor</item>
         <item name="colorPrimaryVariant">@color/primaryVariantColor</item>
         <item name="colorSecondary">@color/darkGray</item>
         <item name="colorSecondaryVariant">@color/gray</item>
+        <item name="colorControlHighlight">@color/lightGray</item>
     </style>
 
     <style name="Theme.Farmlog" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
     </style>
 
     <style name="Theme.Farmlog.NoActionBar">

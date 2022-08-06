@@ -74,6 +74,10 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 
+    <style name="navigationTheme">
+        <item name="colorPrimary">@color/primaryTextColor</item>
+        <item name="colorControlHighlight">@color/darkerGray</item>
+    </style>
 
 
 </resources>

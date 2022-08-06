@@ -16,7 +16,8 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/menu_header"
         app:menu="@menu/farmlog_menu"
-        app:itemIconSize="16dp" >
+        app:itemIconSize="16dp"
+        android:theme="@style/navigationTheme">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -38,6 +39,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".landsmap.LandsMapActivity" >
