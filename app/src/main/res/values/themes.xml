@@ -9,6 +9,18 @@
         <item name="colorSecondaryVariant">@color/gray</item>
     </style>
 
-    <style name="Theme.Farmlog" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
+    <style name="Theme.Farmlog" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Farmlog.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Farmlog.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Farmlog.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

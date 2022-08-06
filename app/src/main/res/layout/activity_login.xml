@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".login.LoginActivity">
 
     <ImageView
@@ -41,50 +42,48 @@
             android:layout_marginBottom="30dp"
             android:text="@string/loginTitle"
             android:textColor="@color/primaryTextColor" />
-        <!--
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEmail"
-            style="@style/parent"
-            android:layout_marginTop="@dimen/loginViewsMargin">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextEmail"
-                style="@style/modifiedEditText"
-                android:hint="@string/login_email_hint"
-                android:inputType="textEmailAddress"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputEditText>-->
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/gray"
+                android:hint="@string/login_email_hint" />
 
-        <!--
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputPassword"
+            android:id="@+id/username_text_input_layout"
+            app:passwordToggleEnabled="true"
             android:layout_width="match_parent"
-            android:layout_height="19dp"
-            android:layout_marginTop="@dimen/loginViewsMargin">
+            android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/editTextPassword"
-                style="@style/modifiedEditText"
-                android:hint="@string/login_password_hint"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>-->
+                android:backgroundTint="@color/gray"
+                android:hint="@string/login_password_hint" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/gray"
-            android:hint="@string/login_email_hint" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:backgroundTint="@color/gray"
-            android:hint="@string/login_password_hint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/rememberMe"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/login_remeber_me"
+            android:layout_marginBottom="30dp" />
 
         <Button
             android:id="@+id/loginButton"
@@ -103,7 +102,6 @@
             android:text="@string/login_signup_hint"
             android:textAlignment="textEnd"
             android:textColor="@color/darkGray" />
-
 
     </LinearLayout>
 

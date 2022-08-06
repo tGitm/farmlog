@@ -12,6 +12,7 @@
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Geslo</string>
     <string name="login_signup_hint">Še nimaš računa? Registriraj se</string>
+    <string name="login_remeber_me">Zapomni si me</string>
 
     <!-- REGISTER -->
     <string name="signup_title">Registracija</string>
@@ -33,6 +34,18 @@
     <string name="welcome_subTitle">Hvala za vašo registracijo</string>
     <string name="welcome_description">Aplikacija je namenjena lažjemu arhiviranju in pregledovanju opravljenega dela na vaših zemljiščih.</string>
     <string name="welcome_button">Začni z uporabo</string>
+
+    <!-- Top bar text -->
+    <string name="menuText">MENI</string>
+    <string name="archiveText">ARHIV</string>
+
+    <!-- Navigation menu items-->
+    <string name="to_map">Zemljevid zemljišč</string>
+    <string name="archive">Arhiv opravil</string>
+    <string name="add_new_work">Dodaj opravilo</string>
+    <string name="my_profile">Moj profil</string>
+    <string name="about">O aplikaciji</string>
+    <string name="sign_out">Odjava</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -79,4 +92,14 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
 </resources>
