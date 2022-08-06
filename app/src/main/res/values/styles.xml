@@ -13,6 +13,13 @@
         <item name="android:focusableInTouchMode">true</item>
     </style>
 
+    <style name="mainHeaderTetxt" parent="parent">
+        <item name="android:textSize">40sp</item>
+        <!--<item name="android:textAlignment">center</item>-->
+        <item name="android:textColor">@color/darkerGray</item>
+
+    </style>
+
     <style name="headerText" parent="parent">
         <item name="android:textSize">30sp</item>
         <!--<item name="android:textAlignment">center</item>-->

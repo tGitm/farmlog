@@ -5,7 +5,32 @@
         <item
             android:id="@+id/to_map"
             android:title="@string/to_map"
-            android:icon=""
-            />
+            android:icon="@drawable/ic_maps"/>
+
+        <item
+            android:id="@+id/to_archive"
+            android:title="@string/archive"
+            android:icon="@drawable/ic_archive_folder" />
+
+        <item
+            android:id="@+id/add_work"
+            android:title="@string/add_new_work"
+            android:icon="@drawable/ic_add_new"/>
+
+        <item
+            android:id="@+id/my_profile"
+            android:title="@string/my_profile"
+            android:icon="@drawable/ic_profle"/>
+
+        <item
+            android:id="@+id/to_about"
+            android:title="@string/about"
+            android:icon="@drawable/ic_about"/>
+
+        <item
+            android:id="@+id/sign_out"
+            android:title="@string/sign_out"
+            android:icon="@drawable/ic_log_out"/>
     </group>
+
 </menu>
