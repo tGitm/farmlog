@@ -1,10 +1,12 @@
 <resources>
+    <!-- App strings -->
     <string name="map_key" translatable="false">AIzaSyCl4vuQBpNKLArrqXhOPBUVDnYjmd-omus</string>
 
     <string name="app_name">farmlog</string>
     <string name="appTitle">FarmLog</string>
     <string name="action_settings">Nastavitve</string>
     <string name="madeBy">Razvil: Tim Rus</string>
+    <string name="app_slogan">Hitro, pregledno in enostavno</string>
 
     <!-- LOGIN -->
     <string name="loginTitle">Prijava</string>

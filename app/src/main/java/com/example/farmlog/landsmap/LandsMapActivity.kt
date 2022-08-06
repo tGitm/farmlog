@@ -1,9 +1,16 @@
 package com.example.farmlog.landsmap
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
+import android.widget.RelativeLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import com.example.farmlog.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -11,14 +18,25 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.navigation.NavigationView
 
-class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback {
+class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
+    NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var mMap: GoogleMap
+    private lateinit var menuIcon: ImageView
+    private lateinit var drawerMenu: DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var content: ConstraintLayout
+
+    private var END_SCALE: Float = 0.7f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // hidding status bar
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lands_map)
@@ -27,6 +45,65 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        // hooks
+        menuIcon = findViewById(R.id.open_menu)
+        drawerMenu = findViewById(R.id.drawer_menu)
+        navigationView = findViewById(R.id.navigation)
+        content = findViewById(R.id.content)
+
+        navigationDrawer()
+    }
+
+    // Navigation Drawer
+    private fun navigationDrawer() {
+        navigationView.bringToFront()
+        navigationView.setNavigationItemSelectedListener(this)
+        navigationView.setCheckedItem(R.id.to_map)
+
+        menuIcon.setOnClickListener() {
+            if (drawerMenu.isDrawerVisible(GravityCompat.START)) {
+                drawerMenu.closeDrawer(GravityCompat.START)
+            } else {
+                drawerMenu.openDrawer(GravityCompat.START)
+            }
+        }
+
+        animateNavigationDrawer()
+    }
+
+    private fun animateNavigationDrawer() {
+        // bottom line is for changin the color
+        //drawerMenu.setScrimColor(getResources().getColor(R.color.primaryTextColor));
+        drawerMenu.addDrawerListener(object : SimpleDrawerListener() {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+
+                // Scale the View based on current slide offset
+                val diffScaledOffset: Float = slideOffset * (1 - END_SCALE)
+                val offsetScale = 1 - diffScaledOffset
+                content.setScaleX(offsetScale)
+                content.setScaleY(offsetScale)
+
+                // Translate the View, accounting for the scaled width
+                val xOffset = drawerView.width * slideOffset
+                val xOffsetDiff: Float = content.getWidth() * diffScaledOffset / 2
+                val xTranslation = xOffset - xOffsetDiff
+                content.setTranslationX(xTranslation)
+            }
+        })
+    }
+
+    override fun onBackPressed() {
+        if (drawerMenu.isDrawerVisible(GravityCompat.START)) {
+            drawerMenu.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    // onClick event for navigation item
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        return true
     }
 
     override fun finish() {
@@ -49,15 +126,6 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
@@ -66,4 +134,6 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(globoko).title("Globoko"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(globoko))
     }
+
+
 }

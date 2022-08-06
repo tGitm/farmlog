@@ -3,19 +3,43 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/whiteCardColor"
         android:layout_gravity="start"
-        app:headerLayout=""
-        app:menu=""/>
+        app:headerLayout="@layout/menu_header"
+        app:menu="@menu/farmlog_menu"
+        app:itemIconSize="16dp"
+        android:theme="@style/navigationTheme">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/menu_farmerImg"
+                android:layout_width="239dp"
+                android:layout_height="235dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/ic_farmer3" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.navigation.NavigationView>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".landsmap.LandsMapActivity" >
