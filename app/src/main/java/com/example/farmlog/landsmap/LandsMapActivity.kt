@@ -1,5 +1,6 @@
 package com.example.farmlog.landsmap
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import com.example.farmlog.R
+import com.example.farmlog.archive.ArchiveActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -25,6 +27,7 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
 
     private lateinit var mMap: GoogleMap
     private lateinit var menuIcon: ImageView
+    private lateinit var archiveIcon: ImageView
     private lateinit var drawerMenu: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var content: ConstraintLayout
@@ -51,6 +54,12 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         drawerMenu = findViewById(R.id.drawer_menu)
         navigationView = findViewById(R.id.navigation)
         content = findViewById(R.id.content)
+        archiveIcon = findViewById(R.id.archive)
+
+        archiveIcon.setOnClickListener() {
+            startActivity(Intent(this, ArchiveActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+        }
 
         navigationDrawer()
     }
@@ -111,6 +120,15 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        // adding marker
+        val globoko = LatLng(45.95481200216156, 15.63454882337749)
+        mMap.addMarker(MarkerOptions().position(globoko).title("Globoko"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(globoko))
+    }
+
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {
@@ -125,15 +143,4 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
             )
         }
     }
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-
-        // adding marker
-        val globoko = LatLng(45.95481200216156, 15.63454882337749)
-        mMap.addMarker(MarkerOptions().position(globoko).title("Globoko"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(globoko))
-    }
-
-
 }

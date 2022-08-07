@@ -17,12 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.Farmlog"
         tools:targetApi="31">
-
-        <!-- Add Google maps API key -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/map_key" />
-
+        <activity
+            android:name="com.example.farmlog.archive.ArchiveActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.Farmlog" />
         <activity
             android:name="com.example.farmlog.landsmap.LandsMapActivity"
             android:exported="true"
@@ -53,6 +51,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Add Google maps API key -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key" />
     </application>
 
 </manifest>
