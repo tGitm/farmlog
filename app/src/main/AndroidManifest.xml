@@ -18,31 +18,45 @@
         android:theme="@style/Base.Theme.Farmlog"
         tools:targetApi="31">
         <activity
-            android:name="com.example.farmlog.archive.ArchiveActivity"
+            android:name=".profile.ChangePasswordActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.Farmlog"/>
+        <activity
+            android:name=".profile.EditProfileActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name="com.example.farmlog.landsmap.LandsMapActivity"
+            android:name=".profile.ProfileActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name="com.example.farmlog.registration.SecondRegistrationActivity"
+            android:name=".archive.ArchiveActivity"
+            android:exported="true"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Base.Theme.Farmlog" />
+        <activity
+            android:name=".landsmap.LandsMapActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name="com.example.farmlog.registration.RegistrationActivity"
+            android:name=".registration.SecondRegistrationActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name="com.example.farmlog.login.LoginActivity"
+            android:name=".registration.RegistrationActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name="com.example.farmlog.welcome.WelcomeActivity"
+            android:name=".login.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Base.Theme.Farmlog" />
+        <activity
+            android:name=".welcome.WelcomeActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.Farmlog" /> <!-- Splash screen is shown first -->
         <activity
-            android:name="com.example.farmlog.splashscreen.SplashScreenActivity"
+            android:name=".splashscreen.SplashScreenActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.Farmlog">
             <intent-filter>
@@ -50,9 +64,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Add Google maps API key -->
+        </activity> <!-- Add Google maps API key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />

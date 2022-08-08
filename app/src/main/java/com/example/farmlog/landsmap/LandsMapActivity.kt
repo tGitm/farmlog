@@ -14,6 +14,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import com.example.farmlog.R
 import com.example.farmlog.archive.ArchiveActivity
+import com.example.farmlog.login.LoginActivity
+import com.example.farmlog.profile.ProfileActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -79,6 +81,7 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         }
 
         animateNavigationDrawer()
+
     }
 
     private fun animateNavigationDrawer() {
@@ -112,7 +115,35 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
 
     // onClick event for navigation item
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        return true
+        when (item.itemId) {
+            R.id.to_map -> {
+                this.startActivity(Intent(this,LandsMapActivity::class.java))
+                return true
+            }
+            R.id.to_archive -> {
+                this.startActivity(Intent(this,ArchiveActivity::class.java))
+                return true
+            }
+            R.id.add_work -> {
+                this.startActivity(Intent(this,ArchiveActivity::class.java))
+                return true
+            }
+            R.id.my_profile -> {
+                this.startActivity(Intent(this,ProfileActivity::class.java))
+                return true
+            }
+            R.id.to_about -> {
+                this.startActivity(Intent(this,ProfileActivity::class.java))
+                return true
+            }
+            R.id.sign_out -> {
+                this.startActivity(Intent(this,LoginActivity::class.java))
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
+        return false
     }
 
     override fun finish() {
