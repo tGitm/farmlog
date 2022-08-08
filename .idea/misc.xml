@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/documents/farmlog/app/src/main/res/drawable/bottom_bar.xml" value="0.1655" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/button_rounded.xml" value="0.237" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/drawable/highlight_color.xml" value="0.235" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_add_new.xml" value="0.235" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_archive_regular.xml" value="0.183" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_arrow_back.xml" value="0.183" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_arrow_back_white.xml" value="0.183" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1655" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_blob.xml" value="0.1655" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_blob1.xml" value="0.201" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_farm.xml" value="0.1395" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_farm_background.xml" value="0.1395" />
@@ -19,11 +24,13 @@
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_wave.xml" value="0.1" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_wave_background.xml" value="0.1" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_wave_foreground.xml" value="0.1" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/drawable/nav_item_drawable.xml" value="0.235" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/side_nav_bar.xml" value="0.228" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/top_bar_archive.xml" value="0.183" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/top_bar_rounded_bottom.xml" value="0.2265" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/vawes.xml" value="0.13" />
-        <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_archive.xml" value="0.20334928229665072" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/drawable/view_background.xml" value="0.235" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_archive.xml" value="0.33" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_change_password.xml" value="0.25" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_edit_profile.xml" value="0.33" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_lands_map.xml" value="0.25" />
@@ -52,6 +59,7 @@
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/top_bar.xml" value="0.33" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/top_bar_archive.xml" value="0.33" />
         <entry key="..\:/documents/farmlog/app/src/main/res/menu/activity_main_drawer.xml" value="0.38697916666666665" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/menu/farmlog_bottom_menu.xml" value="0.31680205215904234" />
         <entry key="..\:/documents/farmlog/app/src/main/res/menu/farmlog_menu.xml" value="0.33" />
         <entry key="..\:/documents/farmlog/app/src/main/res/menu/menu.xml" value="0.38697916666666665" />
         <entry key="..\:/documents/farmlog/app/src/main/res/menu/menu_main.xml" value="0.38697916666666665" />
