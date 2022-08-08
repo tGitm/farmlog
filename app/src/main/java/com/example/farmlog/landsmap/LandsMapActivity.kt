@@ -6,9 +6,9 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
@@ -22,6 +22,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
@@ -32,7 +34,8 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
     private lateinit var archiveIcon: ImageView
     private lateinit var drawerMenu: DrawerLayout
     private lateinit var navigationView: NavigationView
-    private lateinit var content: ConstraintLayout
+    private lateinit var bottomAppBar: BottomAppBar
+    private lateinit var content: CoordinatorLayout
 
     private var END_SCALE: Float = 0.7f
 
@@ -57,6 +60,8 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         navigationView = findViewById(R.id.navigation)
         content = findViewById(R.id.content)
         archiveIcon = findViewById(R.id.archive)
+        bottomAppBar = findViewById(R.id.bottomAppBar)
+
 
         archiveIcon.setOnClickListener() {
             startActivity(Intent(this, ArchiveActivity::class.java))

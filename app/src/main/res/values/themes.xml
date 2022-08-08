@@ -10,12 +10,6 @@
         <item name="colorControlHighlight">@color/lightGray</item>
     </style>
 
-    <style name="Theme.Farmlog" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
-    </style>
-
     <style name="Theme.Farmlog.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

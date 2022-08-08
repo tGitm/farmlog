@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         android:background="@color/whiteCardColor"
         android:layout_gravity="start"
+        app:itemBackground="@drawable/nav_item_drawable"
         app:headerLayout="@layout/menu_header"
         app:menu="@menu/farmlog_menu"
         app:itemIconSize="16dp"
@@ -37,28 +38,92 @@
 
     </com.google.android.material.navigation.NavigationView>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".landsmap.LandsMapActivity" >
 
-        <RelativeLayout
+        <include
+            layout="@layout/google_map"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" />
 
-            <include
-                layout="@layout/top_bar"
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:fabCradleVerticalOffset="10dp"
+            app:fabCradleMargin="10dp"
+            app:fabCradleRoundedCornerRadius="10dp"
+            android:background="@drawable/bottom_bar"
+            android:theme="@style/Theme.Farmlog.LandsMap">
+
+            <RelativeLayout
+                android:id="@+id/bottomMenuIcons"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="70dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <include
-                layout="@layout/google_map"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/open_menu"
+                    android:layout_width="25sp"
+                    android:layout_height="25sp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="35sp"
+                    android:src="@drawable/ic_menu_regular" />
 
-        </RelativeLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/open_menu"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="34dp"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/menuText"
+                    android:textSize="11sp" />
+
+                <ImageView
+                    android:id="@+id/archive"
+                    android:layout_width="25sp"
+                    android:layout_height="25sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="35sp"
+                    android:src="@drawable/ic_archive_folder" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/archive"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="34sp"
+                    android:text="@string/archiveText"
+                    android:textSize="11sp" />
+
+            </RelativeLayout>
+
+
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addNewChore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primaryTextColor"
+            app:tint="@null"
+            android:src="@drawable/ic_add_new"
+            app:layout_anchor="@id/bottomAppBar"
+            android:theme="@style/Theme.Farmlog.LandsMap" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
