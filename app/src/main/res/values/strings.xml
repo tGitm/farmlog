@@ -49,6 +49,24 @@
     <string name="about">O aplikaciji</string>
     <string name="sign_out">Odjava</string>
 
+    <!-- Archive page -->
+    <string name="archiveTitle">Arhiv opravil</string>
+
+    <!-- Profile page -->
+    <string name="user_email">Email: </string>
+    <string name="change_password">Spremeni geslo</string>
+    <string name="new_password">Novo geslo: </string>
+    <string name="repeat_new_password">Ponovi novo geslo: </string>
+    <string name="user_first_name">Ime: </string>
+    <string name="user_last_name">Priimek: </string>
+    <string name="user_address">Naslov: </string>
+    <string name="user_post">Pošta: </string>
+    <string name="user_zip">Poštna številka: </string>
+    <string name="user_MID">GERK MID: </string>
+    <string name="edit_profile">Uredi profil</string>
+    <string name="save_edited_profile">Shrani</string>
+
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

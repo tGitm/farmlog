@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.ProfileActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/top_bar_archive"
+        android:elevation="500dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backOnMain"
+            android:layout_width="27sp"
+            android:layout_height="27sp"
+            android:layout_above="@+id/profile_image"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="35sp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_arrow_back_white" />
+
+        <!--
+        <ImageView
+            android:id="@+id/editProfile"
+            android:layout_width="27sp"
+            android:layout_height="27sp"
+            android:layout_above="@+id/profile_image"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="35sp"
+            android:src="@drawable/ic_edit_white" />
+            -->
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="76dp"
+            android:layout_height="78dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/ic_profile_white" />
+
+        <TextView
+            android:id="@+id/user_name"
+            style="@style/mainHeaderTetxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_image"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="-5dp"
+            android:layout_marginBottom="15dp"
+            android:text="Tim Rus"
+            android:textColor="@color/white"
+            tools:ignore="RelativeOverlap" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/profileLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/user_email"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="@string/user_email"
+            android:textColor="@color/primaryTextColor" />
+
+        <TextView
+            android:id="@+id/value_user_email"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="timrus.dev@gmail.com"
+            android:textColor="@color/darkerGray" />
+
+
+        <TextView
+            android:id="@+id/user_first_name"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_first_name"
+            android:textColor="@color/primaryTextColor" />
+
+        <TextView
+            android:id="@+id/value_user_first_name"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="Tim"
+            android:textColor="@color/darkerGray" />
+
+        <TextView
+            android:id="@+id/user_last_name"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_last_name"
+            android:textColor="@color/primaryTextColor" />
+
+        <TextView
+            android:id="@+id/value_user_last_name"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="Rus"
+            android:textColor="@color/darkerGray" />
+
+        <TextView
+            android:id="@+id/user_address"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_address"
+            android:textColor="@color/primaryTextColor" />
+
+        <TextView
+            android:id="@+id/value_user_address"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="Globoko 10k"
+            android:textColor="@color/darkerGray" />
+
+        <TextView
+            android:id="@+id/user_post"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_post"
+            android:textColor="@color/primaryTextColor" />
+
+        <TextView
+            android:id="@+id/value_user_post"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="Globoko"
+            android:textColor="@color/darkerGray" />
+
+        <TextView
+            android:id="@+id/user_zip"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_zip"
+            android:textColor="@color/primaryTextColor" />
+
+        <TextView
+            android:id="@+id/value_user_zip"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="8254"
+            android:textColor="@color/darkerGray" />
+
+        <TextView
+            android:id="@+id/user_MID"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_MID"
+            android:textColor="@color/primaryTextColor" />
+
+        <TextView
+            android:id="@+id/value_user_MID"
+            style="@style/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="123456789"
+            android:textColor="@color/darkerGray" />
+
+
+        <Button
+            android:id="@+id/edit_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_rounded"
+            android:text="@string/edit_profile"
+            android:textColor="@color/whiteTextColor" />
+
+        <TextView
+            android:id="@+id/change_password"
+            style="@style/parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:text="@string/change_password"
+            android:textAlignment="textEnd"
+            android:textColor="@color/darkGray" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
