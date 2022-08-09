@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/backOnMain"
+            android:id="@+id/backToChores"
             android:layout_width="27sp"
             android:layout_height="27sp"
             android:layout_alignParentStart="true"
@@ -25,14 +25,13 @@
             android:layout_marginStart="35sp"
             android:src="@drawable/ic_arrow_back_white" />
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/backOnMain"
-            android:text="@string/new_chore"
+            android:layout_toEndOf="@+id/backToChores"
+            android:text="@string/edit_chore"
             android:textColor="@color/white"
             android:textSize="20sp" />
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".addchores.AddNewChoreActivity">
+    tools:context=".archive.EditArchiveActivity">
 
     <LinearLayout
         android:id="@+id/topbar"
@@ -16,7 +16,7 @@
 
         <include
             android:id="@+id/include"
-            layout="@layout/top_bar_add_chore" />
+            layout="@layout/top_bar_edit_chore" />
     </LinearLayout>
 
     <ScrollView
@@ -123,8 +123,8 @@
                 android:id="@+id/choreImage"
                 android:layout_width="match_parent"
                 android:layout_height="215dp"
-                android:layout_marginBottom="30dp"
                 android:background="@drawable/image_upload_background"
+                android:layout_marginBottom="30dp"
                 android:src="@drawable/ic_baseline_image_24" />
 
             <Button

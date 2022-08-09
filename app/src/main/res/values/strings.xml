@@ -56,7 +56,12 @@
     <string name="archiveTitle">Arhiv opravil</string>
     <string name="new_chore">Dodaj opravilo</string>
     <string name="edit_chore">Uredi opravilo</string>
+    <string name="single_chore">Pregled opravila</string>
     <string name="delete_chore">Izbriši opravilo</string>
+
+    <!-- Single chore preview -->
+    <string name="land_preview">Zemljišče</string>
+
 
     <!-- Chores page -->
     <string name="land">Izberi zemljišče</string>
