@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".archive.ArchiveSingleItemActivity">
+
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/top_bar_single_archive" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/addChoreScrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintTop_toBottomOf="@+id/topbar"
+        android:layout_marginTop="90dp"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="vertical"
+            android:paddingTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="100dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/land_preview"
+                android:textColor="@color/primaryTextColor"
+                android:textFontWeight="500"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/chore_review_land"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Lorem Ipsum"
+                android:textColor="@color/darkerGray"
+                android:textFontWeight="500"
+                android:layout_marginBottom="20dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/chore_name"
+                android:textColor="@color/primaryTextColor"
+                android:textFontWeight="500"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/chore_review_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Lorem Ipsum"
+                android:textColor="@color/darkerGray"
+                android:textFontWeight="500"
+                android:layout_marginBottom="20dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/chore_description"
+                android:textColor="@color/primaryTextColor"
+                android:textFontWeight="500"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/chore_review_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Lorem Ipsum"
+                android:textColor="@color/darkerGray"
+                android:textFontWeight="500"
+                android:layout_marginBottom="20dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/chore_accessories"
+                android:textColor="@color/primaryTextColor"
+                android:textFontWeight="500"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/chore_review_accessories"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Lorem Ipsum"
+                android:textColor="@color/darkerGray"
+                android:textFontWeight="500"
+                android:layout_marginBottom="20dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/chore_date"
+                android:textColor="@color/primaryTextColor"
+                android:textFontWeight="500"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/chore_land"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="8.8.2022"
+                android:textColor="@color/darkerGray"
+                android:textFontWeight="500"
+                android:layout_marginBottom="20dp"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/choreImage"
+                android:layout_width="match_parent"
+                android:layout_height="215dp"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/ic_baseline_image_24" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/editChore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primaryTextColor"
+        app:tint="@null"
+        android:src="@drawable/ic_edit_white"
+        android:theme="@style/Theme.Farmlog.LandsMap"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

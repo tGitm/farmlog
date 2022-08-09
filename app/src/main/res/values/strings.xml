@@ -20,6 +20,9 @@
     <string name="signup_title">Registracija</string>
     <string name="signup_subtitle1">Korak 1</string>
     <string name="signup_subtitle2">Korak 2</string>
+    <string name="signup_subtitle3">Korak 3</string>
+    <string name="signup_first_name_hint">Ime</string>
+    <string name="signup_last_name_hint">Priimek</string>
     <string name="signup_email_hint">Email</string>
     <string name="signup_password_hint">Geslo</string>
     <string name="signup_passwordRepeat_hint">Ponovi geslo</string>
@@ -51,6 +54,23 @@
 
     <!-- Archive page -->
     <string name="archiveTitle">Arhiv opravil</string>
+    <string name="new_chore">Dodaj opravilo</string>
+    <string name="edit_chore">Uredi opravilo</string>
+    <string name="single_chore">Pregled opravila</string>
+    <string name="delete_chore">Izbriši opravilo</string>
+
+    <!-- Single chore preview -->
+    <string name="land_preview">Zemljišče</string>
+
+
+    <!-- Chores page -->
+    <string name="land">Izberi zemljišče</string>
+    <string name="chore_name">Ime opravila</string>
+    <string name="chore_description">Opis</string>
+    <string name="chore_accessories">Uporabljene snovi</string>
+    <string name="chore_date">Datum opravila</string>
+    <string name="chore_picture">Dodaj sliko</string>
+    <string name="save_button">Shrani opravilo</string>
 
     <!-- Profile page -->
     <string name="user_email">Email: </string>
@@ -65,7 +85,6 @@
     <string name="user_MID">GERK MID: </string>
     <string name="edit_profile">Uredi profil</string>
     <string name="save_edited_profile">Shrani</string>
-
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
