@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@drawable/top_bar_archive"
-        android:elevation="500dp"
+        android:elevation="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,17 +25,6 @@
             android:layout_marginStart="35sp"
             android:layout_marginTop="30dp"
             android:src="@drawable/ic_arrow_back_white" />
-
-        <ImageView
-            android:id="@+id/save_edited_profile"
-            android:layout_width="27sp"
-            android:layout_height="27sp"
-            android:layout_above="@+id/profile_image"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="35sp"
-            android:src="@drawable/ic_save" />
-
 
         <ImageView
             android:id="@+id/profile_image"
@@ -191,5 +180,20 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save_edited_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primaryTextColor"
+        app:tint="@null"
+        android:src="@drawable/ic_save"
+        android:theme="@style/Theme.Farmlog.LandsMap"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
