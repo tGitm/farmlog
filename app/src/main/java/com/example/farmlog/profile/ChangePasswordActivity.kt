@@ -19,7 +19,7 @@ class ChangePasswordActivity : AppCompatActivity() {
         backIcon = findViewById(R.id.backOnMain)
 
         backIcon.setOnClickListener() {
-            startActivity(Intent(this, LandsMapActivity::class.java))
+            startActivity(Intent(this, ProfileActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
         }
         window.decorView.viewTreeObserver.addOnGlobalLayoutListener {
