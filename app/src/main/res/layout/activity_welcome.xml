@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/loginViewsMargin"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/button"
             android:text="@string/welcome_button"
             android:textColor="@color/whiteTextColor" />
 

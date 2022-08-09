@@ -52,61 +52,40 @@
             android:textSize="22sp"
             tools:ignore="RtlSymmetry" />
 
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/address_text_input_layout"
+            android:id="@+id/password_text_input_layout"
+            app:passwordToggleEnabled="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/address"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPassword"
                 android:layout_marginBottom="10dp"
-                android:hint="@string/signup_address_hint" />
+                android:backgroundTint="@color/gray"
+                android:hint="@string/login_password_hint" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/post_text_input_layout"
+            android:id="@+id/repeat_password_text_input_layout"
+            app:passwordToggleEnabled="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/post"
+                android:id="@+id/passwordRepeat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:hint="@string/signup_post_hint" />
+                android:inputType="textPassword"
+                android:hint="@string/signup_passwordRepeat_hint" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/postal_code_text_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/postalCode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:layout_marginBottom="10dp"
-                android:hint="@string/signup_zip_hint" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/gerk_text_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/gerkMID"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/signup_GERK_hint" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/registrationButton2"
@@ -114,8 +93,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/loginViewsMargin"
-            android:background="@drawable/button_rounded"
-            android:text="@string/signup_registerButton2_hint"
+            android:background="@drawable/button"
+            android:text="@string/signup_registerButton1_hint"
             android:textColor="@color/whiteTextColor" />
 
         <TextView
@@ -131,13 +110,13 @@
 
     <ImageView
         android:id="@+id/illustrationBottomLogin"
-        android:layout_width="220dp"
-        android:layout_height="229dp"
+        android:layout_width="222dp"
+        android:layout_height="230dp"
         android:layout_marginStart="30dp"
-        android:layout_marginBottom="-50dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/farmer2"
+        app:srcCompat="@drawable/ic_chore"
         tools:ignore="MissingConstraints" />
 
     <ImageView

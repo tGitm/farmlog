@@ -7,12 +7,12 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import com.example.farmlog.R
+import com.example.farmlog.addchores.AddNewChoreActivity
 import com.example.farmlog.archive.ArchiveActivity
 import com.example.farmlog.login.LoginActivity
 import com.example.farmlog.profile.ProfileActivity
@@ -23,7 +23,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 
 class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
@@ -36,6 +36,7 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
     private lateinit var navigationView: NavigationView
     private lateinit var bottomAppBar: BottomAppBar
     private lateinit var content: CoordinatorLayout
+    private lateinit var addChore: FloatingActionButton
 
     private var END_SCALE: Float = 0.7f
 
@@ -61,7 +62,12 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         content = findViewById(R.id.content)
         archiveIcon = findViewById(R.id.archive)
         bottomAppBar = findViewById(R.id.bottomAppBar)
+        addChore = findViewById(R.id.addNewChore)
 
+        addChore.setOnClickListener() {
+            startActivity(Intent(this, AddNewChoreActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+        }
 
         archiveIcon.setOnClickListener() {
             startActivity(Intent(this, ArchiveActivity::class.java))
@@ -130,7 +136,7 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                 return true
             }
             R.id.add_work -> {
-                this.startActivity(Intent(this,ArchiveActivity::class.java))
+                this.startActivity(Intent(this,AddNewChoreActivity::class.java))
                 return true
             }
             R.id.my_profile -> {

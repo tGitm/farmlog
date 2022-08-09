@@ -53,6 +53,34 @@
             tools:ignore="RtlSymmetry" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/first_name_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/signup_first_name_hint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/last_name_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/signup_last_name_hint" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_text_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -67,45 +95,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/password_text_input_layout"
-            app:passwordToggleEnabled="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/gray"
-                android:hint="@string/login_password_hint" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/repeat_password_text_input_layout"
-            app:passwordToggleEnabled="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordRepeat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:hint="@string/signup_passwordRepeat_hint" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
         <Button
             android:id="@+id/registrationButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/loginViewsMargin"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/button"
             android:text="@string/signup_registerButton1_hint"
             android:textColor="@color/whiteTextColor" />
 
@@ -122,8 +118,8 @@
 
     <ImageView
         android:id="@+id/illustrationBottomLogin"
-        android:layout_width="169dp"
-        android:layout_height="181dp"
+        android:layout_width="167dp"
+        android:layout_height="187dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="-50dp"
         android:layout_marginBottom="5dp"
