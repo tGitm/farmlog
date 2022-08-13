@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--<solid android:color="@color/primaryTextColor"/>-->
+    <solid android:color="@color/primaryTextColor" />
 
+    <!--
     <gradient
         android:angle="45"
         android:centerX="35%"
-        android:startColor="#2a8027"
+        android:startColor="@color/darkerGray"
         android:endColor="@color/primaryVariantColor"
         android:type="linear"
-    />
+    />-->
 
     <corners
         android:bottomLeftRadius="21dp"

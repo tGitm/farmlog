@@ -43,6 +43,7 @@
     <!-- Top bar text -->
     <string name="menuText">MENI</string>
     <string name="archiveText">ARHIV</string>
+    <string name="map_screen_title">Moja zemljišča</string>
 
     <!-- Navigation menu items-->
     <string name="to_map">Zemljevid zemljišč</string>

@@ -16,35 +16,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/open_menu"
-            android:layout_width="27sp"
-            android:layout_height="27sp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="35sp"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/ic_menu_regular" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/open_menu"
             android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="2dp"
-            android:text="@string/menuText"
-            android:textSize="11sp" />
+            android:layout_centerVertical="true"
+            android:layout_marginStart="37dp"
+            android:text="@string/map_screen_title"
+            android:textSize="22sp" />
 
         <ImageView
-            android:id="@+id/archive"
-            android:layout_width="28sp"
-            android:layout_height="28sp"
+            android:id="@+id/profile"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="25dp"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="35sp"
-            android:src="@drawable/ic_archive_folder" />
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_profle" />
 
+        <!--
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,28 +45,9 @@
             android:layout_alignParentBottom="true"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="35sp"
-            android:text="@string/archiveText"
-            android:textSize="11sp" />
+            android:text="@string/profile_text"
+            android:textSize="11sp" />-->
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:id="@+id/addWork"
-            android:layout_width="70sp"
-            android:layout_height="70sp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_plus_1"/>
-
-
-    </RelativeLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

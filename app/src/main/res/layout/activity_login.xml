@@ -100,6 +100,7 @@
             android:layout_marginBottom="10dp"
             android:text="@string/login_signup_hint"
             android:textAlignment="textEnd"
+            android:background="?attr/selectableItemBackground"
             android:textColor="@color/darkGray" />
 
     </LinearLayout>

@@ -32,6 +32,7 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
     private lateinit var mMap: GoogleMap
     private lateinit var menuIcon: ImageView
     private lateinit var archiveIcon: ImageView
+    private lateinit var profileIcon: ImageView
     private lateinit var drawerMenu: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var bottomAppBar: BottomAppBar
@@ -63,6 +64,7 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         archiveIcon = findViewById(R.id.archive)
         bottomAppBar = findViewById(R.id.bottomAppBar)
         addChore = findViewById(R.id.addNewChore)
+        profileIcon = findViewById(R.id.profile)
 
         addChore.setOnClickListener() {
             startActivity(Intent(this, AddNewChoreActivity::class.java))
@@ -71,6 +73,11 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
 
         archiveIcon.setOnClickListener() {
             startActivity(Intent(this, ArchiveActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+        }
+
+        profileIcon.setOnClickListener() {
+            startActivity(Intent(this, ProfileActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
         }
 

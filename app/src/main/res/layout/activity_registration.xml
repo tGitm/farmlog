@@ -111,6 +111,7 @@
             android:layout_marginTop="@dimen/loginViewsMargin"
             android:text="@string/signup_login_hint"
             android:textAlignment="textEnd"
+            android:background="?attr/selectableItemBackground"
             android:textColor="@color/darkGray" />
 
 
