@@ -4,22 +4,43 @@ import android.content.Intent
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.farmlog.R
 import com.example.farmlog.login.LoginActivity
 import com.example.farmlog.welcome.WelcomeActivity
+import com.google.android.material.textfield.TextInputEditText
 
-class SecondRegistrationActivity : AppCompatActivity() {
+class ThirdRegistrationActivity : AppCompatActivity() {
+    var address: TextInputEditText? = null
+    var post: TextInputEditText? = null
+    var zip: TextInputEditText? = null
+    var gerkMID: TextInputEditText? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // hidding status bar
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second_registration)
+        setContentView(R.layout.activity_third_registration)
+
+        address = findViewById(R.id.address)
+        post = findViewById(R.id.post)
+        zip = findViewById(R.id.postalCode)
+        gerkMID = findViewById(R.id.gerkMID)
+
+        // get data from 2nd registration activity
+        val intent: Intent = getIntent()
+        val firstName: String = intent.getStringExtra("firstName")!!
+        val lastName: String = intent.getStringExtra("lastName")!!
+        val email: String = intent.getStringExtra("email")!!
+        val password: String = intent.getStringExtra("password")!!
+        val passwordRepeat: String = intent.getStringExtra("passwordRepeat")!!
 
         val goLogin: TextView = findViewById(R.id.goLogin)
         goLogin.setOnClickListener() {
@@ -30,16 +51,18 @@ class SecondRegistrationActivity : AppCompatActivity() {
 
         val goBack: ImageView = findViewById(R.id.goBack)
         goBack.setOnClickListener() {
-            val intent = Intent(this, RegistrationActivity::class.java)
+            val intent = Intent(this, SecondRegistrationActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
-        val goToThird: Button = findViewById(R.id.registrationButton2)
-        goToThird.setOnClickListener() {
-            val intent = Intent(this, ThirdRegistrationActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        val completeRegister: Button = findViewById(R.id.registrationButton3)
+        completeRegister.setOnClickListener() {
+            if (validateText()) {
+                val intent = Intent(this, WelcomeActivity::class.java)
+                startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            }
         }
 
         window.decorView.viewTreeObserver.addOnGlobalLayoutListener {
@@ -57,6 +80,26 @@ class SecondRegistrationActivity : AppCompatActivity() {
                 onWindowFocusChanged()
             }
         }
+    }
+
+    private fun validateText(): Boolean {
+        if (address?.text?.isEmpty() == true) {
+            Toast.makeText(this, "Naslov je obvezen", Toast.LENGTH_LONG).show()
+            return false
+        }
+        if (post?.text?.isEmpty() == true) {
+            Toast.makeText(this, "Pošta je obvezna", Toast.LENGTH_LONG).show()
+            return false
+        }
+        if (zip?.text?.isEmpty() == true) {
+            Toast.makeText(this, "Poštna številka je obvezna", Toast.LENGTH_LONG).show()
+            return false
+        }
+        if (gerkMID?.text?.isEmpty() == true) {
+            Toast.makeText(this, "GERK MID je obvezen", Toast.LENGTH_LONG).show()
+            return false
+        }
+        return true
     }
 
     private fun onWindowFocusChanged() {

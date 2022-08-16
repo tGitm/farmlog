@@ -4,22 +4,37 @@ import android.content.Intent
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.farmlog.R
 import com.example.farmlog.login.LoginActivity
 import com.example.farmlog.welcome.WelcomeActivity
+import com.google.android.material.textfield.TextInputEditText
 
-class ThirdRegistrationActivity : AppCompatActivity() {
+class SecondRegistrationActivity : AppCompatActivity() {
+    var password: TextInputEditText? = null
+    var passwordRepeat: TextInputEditText? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // hidding status bar
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_third_registration)
+        setContentView(R.layout.activity_second_registration)
+
+        password = findViewById(R.id.password)
+        passwordRepeat = findViewById(R.id.passwordRepeat)
+
+        // get data from 1st registration activity
+        val intent: Intent = getIntent()
+        val firstName: String = intent.getStringExtra("firstName")!!
+        val lastName: String = intent.getStringExtra("lastName")!!
+        val email: String = intent.getStringExtra("email")!!
 
         val goLogin: TextView = findViewById(R.id.goLogin)
         goLogin.setOnClickListener() {
@@ -30,16 +45,25 @@ class ThirdRegistrationActivity : AppCompatActivity() {
 
         val goBack: ImageView = findViewById(R.id.goBack)
         goBack.setOnClickListener() {
-            val intent = Intent(this, SecondRegistrationActivity::class.java)
+            val intent = Intent(this, RegistrationActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
-        val completeRegister: Button = findViewById(R.id.registrationButton3)
-        completeRegister.setOnClickListener() {
-            val intent = Intent(this, WelcomeActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        val goToThird: Button = findViewById(R.id.registrationButton2)
+        goToThird.setOnClickListener() {
+            if (validateText()) {
+                val intent = Intent(this, ThirdRegistrationActivity::class.java)
+                intent.putExtra("firstName", firstName)
+                intent.putExtra("lastName", lastName)
+                intent.putExtra("email", email)
+                intent.putExtra("password", password?.text.toString())
+                intent.putExtra("passwordRepeat", passwordRepeat?.text.toString())
+                if (validatePassword()) {
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                }
+            }
         }
 
         window.decorView.viewTreeObserver.addOnGlobalLayoutListener {
@@ -57,6 +81,28 @@ class ThirdRegistrationActivity : AppCompatActivity() {
                 onWindowFocusChanged()
             }
         }
+    }
+
+    private fun validateText(): Boolean {
+        if (password?.text?.isEmpty() == true) {
+            Toast.makeText(this, "Geslo je obvezno", Toast.LENGTH_LONG).show()
+            return false
+        }
+        if (passwordRepeat?.text?.isEmpty() == true) {
+            Toast.makeText(this, "Ponovitev gesla je obvezna", Toast.LENGTH_LONG).show()
+            return false
+        }
+        return true
+    }
+
+    private fun validatePassword(): Boolean {
+        if (password?.text.toString() != passwordRepeat?.text.toString()) {
+            Toast.makeText(this, "Gesli se ne ujemata", Toast.LENGTH_LONG).show()
+            password?.setText(null)
+            passwordRepeat?.setText(null)
+            return false
+        }
+        return true
     }
 
     private fun onWindowFocusChanged() {
