@@ -12,15 +12,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.farmlog.R
+import com.example.farmlog.api.RetrofitClient
+import com.example.farmlog.auth.models.RegistrationResponse
 import com.example.farmlog.login.LoginActivity
 import com.example.farmlog.welcome.WelcomeActivity
 import com.google.android.material.textfield.TextInputEditText
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ThirdRegistrationActivity : AppCompatActivity() {
     var address: TextInputEditText? = null
     var post: TextInputEditText? = null
     var zip: TextInputEditText? = null
     var gerkMID: TextInputEditText? = null
+    var gerkId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // hidding status bar
@@ -42,6 +48,8 @@ class ThirdRegistrationActivity : AppCompatActivity() {
         val password: String = intent.getStringExtra("password")!!
         val passwordRepeat: String = intent.getStringExtra("passwordRepeat")!!
 
+        gerkId = gerkMID?.text.toString().toInt()
+
         val goLogin: TextView = findViewById(R.id.goLogin)
         goLogin.setOnClickListener() {
             val intent = Intent(this, LoginActivity::class.java)
@@ -56,12 +64,32 @@ class ThirdRegistrationActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
+        val loginIntent = Intent(this, LoginActivity::class.java)
         val completeRegister: Button = findViewById(R.id.registrationButton3)
         completeRegister.setOnClickListener() {
             if (validateText()) {
                 val intent = Intent(this, WelcomeActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
+                RetrofitClient.instance.createUser(
+                    firstName,
+                    lastName,
+                    email,
+                    password,
+                    gerkId!!
+                ).enqueue(object: Callback<RegistrationResponse>{
+                    override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
+                        t.message?.let { it1 -> Log.i("API_failure: ", it1) }
+                        Toast.makeText(baseContext, "Prišlo je do napake, poskusite ponovno", Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onResponse(call: Call<RegistrationResponse>, response: Response<RegistrationResponse>) {
+                        Toast.makeText(baseContext, "Uporabnik je registriran", Toast.LENGTH_LONG).show()
+                        startActivity(loginIntent)
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                    }
+                })
             }
         }
 
