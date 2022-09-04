@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/land"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/darkerGray"
                 android:textFontWeight="500"
                 android:textSize="18sp" />
 
@@ -56,21 +56,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/chore_name"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/darkerGray"
                 android:textFontWeight="500"
                 android:textSize="18sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/chore_name"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="30dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/chore_description"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/darkerGray"
                 android:textFontWeight="500"
                 android:textSize="17sp" />
 
@@ -87,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/chore_accessories"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/darkerGray"
                 android:textFontWeight="500"
                 android:textSize="18sp" />
 
@@ -104,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/chore_date"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/darkerGray"
                 android:textFontWeight="500"
                 android:textSize="18sp" />
 
@@ -118,6 +121,15 @@
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/chore_picture_text"
+                android:textColor="@color/darkerGray"
+                android:textFontWeight="500"
+                android:layout_marginBottom="5dp"
+                android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/choreImage"

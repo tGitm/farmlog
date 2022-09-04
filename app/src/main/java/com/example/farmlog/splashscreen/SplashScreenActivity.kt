@@ -6,11 +6,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.WindowManager
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.farmlog.R
-import com.example.farmlog.login.LoginActivity
+import com.example.farmlog.auth.login.LoginActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 

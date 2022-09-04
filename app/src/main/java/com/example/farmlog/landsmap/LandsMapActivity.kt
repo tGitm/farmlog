@@ -14,8 +14,9 @@ import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import com.example.farmlog.R
 import com.example.farmlog.addchores.AddNewChoreActivity
 import com.example.farmlog.archive.ArchiveActivity
-import com.example.farmlog.login.LoginActivity
+import com.example.farmlog.auth.login.LoginActivity
 import com.example.farmlog.profile.ProfileActivity
+import com.example.farmlog.storage.SharedPrefManager
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -155,7 +156,7 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                 return true
             }
             R.id.sign_out -> {
-                this.startActivity(Intent(this,LoginActivity::class.java))
+                this.startActivity(Intent(this, LoginActivity::class.java))
                 return true
             }
             else -> super.onOptionsItemSelected(item)
@@ -190,6 +191,17 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                         or View.SYSTEM_UI_FLAG_FULLSCREEN
                         or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             )
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if (SharedPrefManager.getInstance(this).isLoggedIn) {
+            val intent = Intent(applicationContext, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+            startActivity(intent)
         }
     }
 }

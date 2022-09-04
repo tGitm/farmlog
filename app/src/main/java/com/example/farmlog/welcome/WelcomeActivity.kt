@@ -7,8 +7,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import com.example.farmlog.R
-import com.example.farmlog.landsmap.LandsMapActivity
-import com.example.farmlog.registration.SecondRegistrationActivity
+import com.example.farmlog.auth.login.LoginActivity
 
 class WelcomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +19,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         val goToMaps: Button = findViewById(R.id.startApp)
         goToMaps.setOnClickListener() {
-            val intent = Intent(this, LandsMapActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }

@@ -1,20 +1,33 @@
 package com.example.farmlog.api
 
+import com.example.farmlog.auth.models.LoginResponse
+import com.example.farmlog.auth.models.RegistrationBody
 import com.example.farmlog.auth.models.RegistrationResponse
+import com.example.farmlog.auth.models.SignInBody
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface Api {
 
-    @FormUrlEncoded
+    @Headers("Content-Type:application/json")
     @POST("register")
     fun createUser(
-        @Field("first_name") first_name: String,
-        @Field("last_name") last_name: String,
-        @Field("email") email: String,
-        @Field("password") password: String,
-        @Field("gerkMID") school: Int
+        @Body info: RegistrationBody
     ):Call<RegistrationResponse>
+
+    @Headers("Content-Type:application/json")
+    @POST("login")
+    fun loginUser(
+       @Body info: SignInBody
+    ):Call<LoginResponse>
+
+    /*@FormUrlEncoded
+    @Headers("Content-Type:application/json")
+    @POST("login")
+    fun loginUser(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ):Call<LoginResponse>
+
+     */
 }

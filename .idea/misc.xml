@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_add_new_chore.xml" value="0.28072916666666664" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_edit_archive.xml" value="0.28072916666666664" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_login.xml" value="0.28020833333333334" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_registration.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_second_registration.xml" value="0.28020833333333334" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_third_registration.xml" value="0.25" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_welcome.xml" value="0.18819655521783182" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/bottom_bar.xml" value="0.1655" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/button.xml" value="0.2315" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/button_pressed.xml" value="0.2315" />

@@ -10,7 +10,6 @@ import android.widget.ImageView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.farmlog.R
 import com.example.farmlog.landsmap.LandsMapActivity
-import com.example.farmlog.registration.RegistrationActivity
 import com.facebook.shimmer.ShimmerFrameLayout
 
 class ArchiveActivity : AppCompatActivity() {

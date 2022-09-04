@@ -38,7 +38,7 @@
     <string name="welcome_title">Dobrodošli v aplikaciji FarmLog!</string>
     <string name="welcome_subTitle">Hvala za vašo registracijo</string>
     <string name="welcome_description">Aplikacija je namenjena lažjemu arhiviranju in pregledovanju opravljenega dela na vaših zemljiščih.</string>
-    <string name="welcome_button">Začni z uporabo</string>
+    <string name="welcome_button">Prijavi se</string>
 
     <!-- Top bar text -->
     <string name="menuText">MENI</string>
@@ -71,6 +71,7 @@
     <string name="chore_accessories">Uporabljene snovi</string>
     <string name="chore_date">Datum opravila</string>
     <string name="chore_picture">Dodaj sliko</string>
+    <string name="chore_picture_text">Slika</string>
     <string name="save_button">Shrani opravilo</string>
 
     <!-- Profile page -->

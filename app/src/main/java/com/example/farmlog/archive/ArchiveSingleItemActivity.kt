@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.farmlog.R
-import com.example.farmlog.registration.RegistrationActivity
+import com.example.farmlog.auth.registration.RegistrationActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ArchiveSingleItemActivity : AppCompatActivity() {

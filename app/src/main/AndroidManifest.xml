@@ -67,19 +67,19 @@
             android:exported="true"
             android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name=".registration.ThirdRegistrationActivity"
+            android:name=".auth.registration.ThirdRegistrationActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name=".registration.SecondRegistrationActivity"
+            android:name=".auth.registration.SecondRegistrationActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name=".registration.RegistrationActivity"
+            android:name=".auth.registration.RegistrationActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".auth.login.LoginActivity"
             android:exported="true"
             android:screenOrientation="fullSensor"
             android:theme="@style/Base.Theme.Farmlog" />

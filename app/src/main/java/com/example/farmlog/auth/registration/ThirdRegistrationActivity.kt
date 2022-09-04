@@ -1,9 +1,10 @@
-package com.example.farmlog.registration
+package com.example.farmlog.auth.registration
 
 import android.content.Intent
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -13,8 +14,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.farmlog.R
 import com.example.farmlog.api.RetrofitClient
+import com.example.farmlog.auth.models.RegistrationBody
 import com.example.farmlog.auth.models.RegistrationResponse
-import com.example.farmlog.login.LoginActivity
+import com.example.farmlog.auth.login.LoginActivity
 import com.example.farmlog.welcome.WelcomeActivity
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
@@ -26,7 +28,6 @@ class ThirdRegistrationActivity : AppCompatActivity() {
     var post: TextInputEditText? = null
     var zip: TextInputEditText? = null
     var gerkMID: TextInputEditText? = null
-    var gerkId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // hidding status bar
@@ -41,14 +42,12 @@ class ThirdRegistrationActivity : AppCompatActivity() {
         gerkMID = findViewById(R.id.gerkMID)
 
         // get data from 2nd registration activity
-        val intent: Intent = getIntent()
-        val firstName: String = intent.getStringExtra("firstName")!!
-        val lastName: String = intent.getStringExtra("lastName")!!
-        val email: String = intent.getStringExtra("email")!!
-        val password: String = intent.getStringExtra("password")!!
-        val passwordRepeat: String = intent.getStringExtra("passwordRepeat")!!
+        val firstName: String? = intent.getStringExtra("firstName")
+        val lastName: String? = intent.getStringExtra("lastName")
+        val email: String? = intent.getStringExtra("email")
+        val password: String? = intent.getStringExtra("password")
+        val passwordRepeat: String? = intent.getStringExtra("passwordRepeat")
 
-        gerkId = gerkMID?.text.toString().toInt()
 
         val goLogin: TextView = findViewById(R.id.goLogin)
         goLogin.setOnClickListener() {
@@ -64,32 +63,36 @@ class ThirdRegistrationActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
-        val loginIntent = Intent(this, LoginActivity::class.java)
-        val completeRegister: Button = findViewById(R.id.registrationButton3)
-        completeRegister.setOnClickListener() {
-            if (validateText()) {
-                val intent = Intent(this, WelcomeActivity::class.java)
-                startActivity(intent)
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        val completeRegister: Button = findViewById(R.id.completeRegister)
+        val welcomeIntent = Intent(this, WelcomeActivity::class.java)
 
+        completeRegister.setOnClickListener() {
+            val gerkId = gerkMID?.text.toString()
+            val registrationInfo = RegistrationBody(firstName.toString(), lastName.toString() ,email.toString(), password.toString(), gerkId)
+
+            if (validateText()) {
                 RetrofitClient.instance.createUser(
-                    firstName,
-                    lastName,
-                    email,
-                    password,
-                    gerkId!!
+                    registrationInfo
                 ).enqueue(object: Callback<RegistrationResponse>{
+                    override fun onResponse(
+                        call: Call<RegistrationResponse>,
+                        response: Response<RegistrationResponse>)
+                    {
+                        Log.i("Register", response.code().toString())
+                        if (response.code() == 200) {
+                            Toast.makeText(baseContext, "Uporabnik je registriran", Toast.LENGTH_LONG).show()
+                            startActivity(welcomeIntent)
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+                        }
+                    }
+
                     override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
                         t.message?.let { it1 -> Log.i("API_failure: ", it1) }
                         Toast.makeText(baseContext, "Prišlo je do napake, poskusite ponovno", Toast.LENGTH_LONG).show()
                     }
-
-                    override fun onResponse(call: Call<RegistrationResponse>, response: Response<RegistrationResponse>) {
-                        Toast.makeText(baseContext, "Uporabnik je registriran", Toast.LENGTH_LONG).show()
-                        startActivity(loginIntent)
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-                    }
                 })
+
             }
         }
 

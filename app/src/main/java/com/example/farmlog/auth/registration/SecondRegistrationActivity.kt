@@ -1,8 +1,7 @@
-package com.example.farmlog.registration
+package com.example.farmlog.auth.registration
 
 import android.content.Intent
 import android.graphics.Rect
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,9 +10,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
-import com.example.farmlog.login.LoginActivity
-import com.example.farmlog.welcome.WelcomeActivity
+import com.example.farmlog.auth.login.LoginActivity
 import com.google.android.material.textfield.TextInputEditText
 
 class SecondRegistrationActivity : AppCompatActivity() {
@@ -31,38 +30,39 @@ class SecondRegistrationActivity : AppCompatActivity() {
         passwordRepeat = findViewById(R.id.passwordRepeat)
 
         // get data from 1st registration activity
-        val intent: Intent = getIntent()
-        val firstName: String = intent.getStringExtra("firstName")!!
-        val lastName: String = intent.getStringExtra("lastName")!!
-        val email: String = intent.getStringExtra("email")!!
+        val firstName: String? = intent.getStringExtra("firstName")
+        val lastName: String? = intent.getStringExtra("lastName")
+        val email: String? = intent.getStringExtra("email")
+
+        Log.i("lastName", firstName.toString())
 
         val goLogin: TextView = findViewById(R.id.goLogin)
         goLogin.setOnClickListener() {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            startActivity(loginIntent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
         val goBack: ImageView = findViewById(R.id.goBack)
         goBack.setOnClickListener() {
-            val intent = Intent(this, RegistrationActivity::class.java)
-            startActivity(intent)
+            val registrationIntent = Intent(this, RegistrationActivity::class.java)
+            startActivity(registrationIntent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
+        val lastRegistrationIntent = Intent(this, ThirdRegistrationActivity::class.java)
         val goToThird: Button = findViewById(R.id.registrationButton2)
         goToThird.setOnClickListener() {
+
             if (validateText()) {
-                val intent = Intent(this, ThirdRegistrationActivity::class.java)
-                intent.putExtra("firstName", firstName)
-                intent.putExtra("lastName", lastName)
-                intent.putExtra("email", email)
-                intent.putExtra("password", password?.text.toString())
-                intent.putExtra("passwordRepeat", passwordRepeat?.text.toString())
-                if (validatePassword()) {
-                    startActivity(intent)
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                }
+                lastRegistrationIntent.putExtra("firstName", firstName.toString())
+                lastRegistrationIntent.putExtra("lastName", lastName.toString())
+                lastRegistrationIntent.putExtra("email", email.toString())
+                lastRegistrationIntent.putExtra("password", password?.text.toString())
+                lastRegistrationIntent.putExtra("passwordRepeat", passwordRepeat?.text.toString())
+
+                startActivity(lastRegistrationIntent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
         }
 
@@ -96,14 +96,14 @@ class SecondRegistrationActivity : AppCompatActivity() {
     }
 
     private fun validatePassword(): Boolean {
-        if (password?.text.toString() != passwordRepeat?.text.toString()) {
+        if (password?.text.toString().trim() != passwordRepeat?.text.toString().trim()) {
             Toast.makeText(this, "Gesli se ne ujemata", Toast.LENGTH_LONG).show()
-            password?.setText(null)
-            passwordRepeat?.setText(null)
             return false
         }
         return true
     }
+
+
 
     private fun onWindowFocusChanged() {
         val v = window.decorView

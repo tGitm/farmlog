@@ -1,4 +1,4 @@
-package com.example.farmlog.registration
+package com.example.farmlog.auth.registration
 
 import android.content.Intent
 import android.graphics.Rect
@@ -10,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
-import com.example.farmlog.login.LoginActivity
+import com.example.farmlog.auth.login.LoginActivity
 import com.google.android.material.textfield.TextInputEditText
 
 
@@ -39,13 +39,13 @@ class RegistrationActivity : AppCompatActivity() {
 
         // send data to next activity
         val next: Button = findViewById(R.id.registrationButton1)
+        val secondRegistrationIntent = Intent(this, SecondRegistrationActivity::class.java)
         next.setOnClickListener() {
             if (validateText()) {
-                val intent = Intent(this, SecondRegistrationActivity::class.java)
-                intent.putExtra("firstName", firstName?.text.toString())
-                intent.putExtra("lastName", lastName?.text.toString())
-                intent.putExtra("email", email?.text.toString())
-                startActivity(intent)
+                secondRegistrationIntent.putExtra("firstName", firstName?.text.toString())
+                secondRegistrationIntent.putExtra("lastName", lastName?.text.toString())
+                secondRegistrationIntent.putExtra("email", email?.text.toString())
+                startActivity(secondRegistrationIntent)
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
         }
