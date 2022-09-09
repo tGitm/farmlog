@@ -13,10 +13,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.farmlog.R
 import com.example.farmlog.chores.api.RetrofitClient
-import com.example.farmlog.auth.models.RegistrationBody
-import com.example.farmlog.auth.models.RegistrationResponse
+import com.example.farmlog.auth.usermodels.RegistrationBody
+import com.example.farmlog.auth.usermodels.RegistrationResponse
 import com.example.farmlog.auth.login.LoginActivity
-import com.example.farmlog.storage.SharedPrefManager
 import com.example.farmlog.welcome.WelcomeActivity
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
@@ -96,7 +95,6 @@ class ThirdRegistrationActivity : AppCompatActivity() {
                         Toast.makeText(baseContext, "Prišlo je do napake, poskusite ponovno", Toast.LENGTH_LONG).show()
                     }
                 })
-
             }
         }
 

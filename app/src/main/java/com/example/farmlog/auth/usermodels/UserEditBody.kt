@@ -1,6 +1,6 @@
-package com.example.farmlog.auth.models
+package com.example.farmlog.auth.usermodels
 
-data class User(
+data class UserEditBody(
     val first_name: String?,
     val last_name: String?,
     val email: String?,
@@ -8,8 +8,5 @@ data class User(
     val address: String?,
     val post: String?,
     val postal_code: String?,
-    val gerkMID: String?,
-    val _id: String?,
-    val date: String?,
-    val __v: Int
+    val gerkMID: String?
 )

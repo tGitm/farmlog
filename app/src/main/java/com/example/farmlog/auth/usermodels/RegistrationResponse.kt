@@ -1,4 +1,4 @@
-package com.example.farmlog.auth.models
+package com.example.farmlog.auth.usermodels
 
 data class RegistrationResponse(
     val user_id: String,

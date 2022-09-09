@@ -1,7 +1,7 @@
 package com.example.farmlog.storage
 
 import android.content.Context
-import com.example.farmlog.auth.models.User
+import com.example.farmlog.auth.usermodels.User
 
 class SharedPrefManager private constructor(private val mCtx: Context) {
 

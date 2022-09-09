@@ -1,9 +1,7 @@
 package com.example.farmlog.auth.api
 
-import com.example.farmlog.auth.models.LoginResponse
-import com.example.farmlog.auth.models.RegistrationBody
-import com.example.farmlog.auth.models.RegistrationResponse
-import com.example.farmlog.auth.models.SignInBody
+import com.example.farmlog.auth.usermodels.RegistrationBody
+import com.example.farmlog.auth.usermodels.RegistrationResponse
 import retrofit2.Call
 import retrofit2.http.*
 

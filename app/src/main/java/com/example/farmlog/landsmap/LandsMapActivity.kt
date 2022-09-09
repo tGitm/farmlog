@@ -156,7 +156,11 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                 return true
             }
             R.id.sign_out -> {
-                this.startActivity(Intent(this, LoginActivity::class.java))
+                SharedPrefManager.getInstance(applicationContext).clear()
+                val loginActivity = Intent(this, LoginActivity::class.java)
+                loginActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                this.startActivity(loginActivity)
                 return true
             }
             else -> super.onOptionsItemSelected(item)
