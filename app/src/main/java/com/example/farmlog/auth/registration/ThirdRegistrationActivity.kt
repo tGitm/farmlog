@@ -16,6 +16,7 @@ import com.example.farmlog.chores.api.RetrofitClient
 import com.example.farmlog.auth.models.RegistrationBody
 import com.example.farmlog.auth.models.RegistrationResponse
 import com.example.farmlog.auth.login.LoginActivity
+import com.example.farmlog.storage.SharedPrefManager
 import com.example.farmlog.welcome.WelcomeActivity
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
@@ -47,7 +48,6 @@ class ThirdRegistrationActivity : AppCompatActivity() {
         val password: String? = intent.getStringExtra("password")
         val passwordRepeat: String? = intent.getStringExtra("passwordRepeat")
 
-
         val goLogin: TextView = findViewById(R.id.goLogin)
         goLogin.setOnClickListener() {
             val intent = Intent(this, LoginActivity::class.java)
@@ -66,8 +66,12 @@ class ThirdRegistrationActivity : AppCompatActivity() {
         val welcomeIntent = Intent(this, WelcomeActivity::class.java)
 
         completeRegister.setOnClickListener() {
+            val addressvalue: String = address?.text.toString()
+            val postValue: String = post?.text.toString()
+            val zipValue: String = zip?.text.toString()
             val gerkId = gerkMID?.text.toString()
-            val registrationInfo = RegistrationBody(firstName.toString(), lastName.toString() ,email.toString(), password.toString(), gerkId)
+
+            val registrationInfo = RegistrationBody(firstName.toString(), lastName.toString() ,email.toString(), password.toString(), addressvalue, postValue, zipValue, gerkId)
 
             if (validateText()) {
                 RetrofitClient.instance.createUser(
@@ -82,7 +86,7 @@ class ThirdRegistrationActivity : AppCompatActivity() {
                         if (response.code() == 200) {
                             Toast.makeText(baseContext, "Uporabnik je registriran", Toast.LENGTH_LONG).show()
                             startActivity(welcomeIntent)
-                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 
                         }
                     }

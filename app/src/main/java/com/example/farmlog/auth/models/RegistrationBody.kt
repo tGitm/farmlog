@@ -7,5 +7,8 @@ data class RegistrationBody(
     val last_name: String,
     val email: String,
     val password: String,
+    val address: String,
+    val post: String,
+    val postal_code: String,
     val gerkMID: String
 )

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
 import com.example.farmlog.landsmap.LandsMapActivity
+import com.example.farmlog.storage.SharedPrefManager
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -39,17 +40,19 @@ class ProfileActivity : AppCompatActivity() {
         changePassword = findViewById(R.id.change_password)
         backIcon = findViewById(R.id.backOnMain)
 
-        val getUserData = getSharedPreferences("Login", MODE_PRIVATE)
-        email.text = getUserData.getString("email", null)
-        firstName.text = getUserData.getString("first_name", null)
-        lastName.text = getUserData.getString("last_name", null)
-        address.text = getUserData.getString("address", null)
-        post.text = getUserData.getString("post", null)
-        postalCode.text = getUserData.getString("postalCode", null)
-        gerkMID.text = getUserData.getString("gerkMID", null)
+        //val getUserData = getSharedPreferences("Login", MODE_PRIVATE)
+        email.text = SharedPrefManager.getInstance(applicationContext).user.email //getUserData.getString("email", null)
+        firstName.text = SharedPrefManager.getInstance(applicationContext).user.first_name
+        lastName.text = SharedPrefManager.getInstance(applicationContext).user.last_name
+        address.text = SharedPrefManager.getInstance(applicationContext).user.address
+        post.text = SharedPrefManager.getInstance(applicationContext).user.post
+        postalCode.text = SharedPrefManager.getInstance(applicationContext).user.postal_code
+        gerkMID.text = SharedPrefManager.getInstance(applicationContext).user.gerkMID
 
         editProfile.setOnClickListener() {
             val intent = Intent(this, EditProfileActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
         }

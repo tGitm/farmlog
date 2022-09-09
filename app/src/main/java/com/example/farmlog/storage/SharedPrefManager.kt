@@ -15,31 +15,38 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
         get() {
             val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
             return User(
-                sharedPreferences.getString("_id", null),
                 sharedPreferences.getString("first_name", null),
                 sharedPreferences.getString("last_name", null),
                 sharedPreferences.getString("email", null),
                 sharedPreferences.getString("password", null),
+                sharedPreferences.getString("address", null),
+                sharedPreferences.getString("post", null),
+                sharedPreferences.getString("postal_code", null),
                 sharedPreferences.getString("gerkMID", null),
+                sharedPreferences.getString("_id", null),
                 sharedPreferences.getString("date", null),
                 sharedPreferences.getInt("__v", 0)
             )
         }
 
 
-    fun saveUser(user: User) {
+    fun saveUser(user: User?) {
 
         val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-
-        editor.putString("_id", user._id)
-        editor.putString("email", user.email)
-        editor.putString("first_name", user.first_name)
-        editor.putString("last_name", user.last_name)
-        editor.putString("password", user.password)
-        editor.putString("gerkMID", user.gerkMID)
-        editor.putString("date", user.date)
-        editor.putInt("__v", user.__v)
+        editor.putString("email", user?.email)
+        editor.putString("first_name", user?.first_name)
+        editor.putString("last_name", user?.last_name)
+        editor.putString("password", user?.password)
+        editor.putString("address", user?.address)
+        editor.putString("post", user?.post)
+        editor.putString("postal_code", user?.postal_code)
+        editor.putString("gerkMID", user?.gerkMID)
+        editor.putString("_id", user?._id)
+        editor.putString("date", user?.date)
+        if (user != null) {
+            editor.putInt("__v", user.__v)
+        }
 
         editor.apply()
 

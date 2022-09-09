@@ -3,7 +3,6 @@ package com.example.farmlog.auth.login
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
-import android.renderscript.Sampler
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -40,7 +39,6 @@ class LoginActivity : AppCompatActivity() {
 
         val mainActivity = Intent(this, LandsMapActivity::class.java)
 
-
         login.setOnClickListener() {
             val email = email?.text.toString().trim()
             val password = password?.text.toString().trim()
@@ -54,15 +52,6 @@ class LoginActivity : AppCompatActivity() {
                         call: Call<LoginResponse>,
                         response: Response<LoginResponse>
                     ) {
-                        /*
-                        response.body()?.let { it1 -> Log.i("user", it1.user_token) }
-                        response.body()?.let { it1 -> Log.i("user", it1.user._id.toString()) }
-                        response.body()?.let { it1 -> Log.i("user", it1.user.first_name.toString()) }
-                        response.body()?.let { it1 -> Log.i("user", it1.user.last_name.toString()) }
-                        response.body()?.let { it1 -> Log.i("user", it1.user.email.toString()) }
-                        response.body()?.let { it1 -> Log.i("user", it1.user.password.toString()) }
-                        response.body()?.let { it1 -> Log.i("user", it1.user.gerkMID.toString()) }
-                         */
 
                         if (response.code() == 200) {
                             SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user!!)
@@ -78,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
                             userData.putString("last_name", response.body()?.user?.last_name.toString())
                             userData.putString("email", response.body()?.user?.email.toString())
                             userData.putString("post", response.body()?.user?.post.toString())
-                            userData.putString("postalCode", response.body()?.user?.postalCode.toString())
+                            userData.putString("postal_code", response.body()?.user?.postal_code.toString())
                             userData.putString("gerkMID", response.body()?.user?.gerkMID.toString())
                             userData.apply()
 

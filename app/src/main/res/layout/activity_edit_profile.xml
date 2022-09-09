@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray"
                 android:layout_marginBottom="5dp"
-                android:hint="timrus.dev@gmail.com" />
+                android:hint="" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray"
                 android:layout_marginBottom="5dp"
-                android:hint="Tim" />
+                android:hint="" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray"
                 android:layout_marginBottom="5dp"
-                android:hint="Rus" />
+                android:hint="" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray"
                 android:layout_marginBottom="5dp"
-                android:hint="Globoko 10k" />
+                android:hint="" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray"
                 android:layout_marginBottom="5dp"
-                android:hint="Globoko"
+                android:hint=""
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -159,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray"
                 android:layout_marginBottom="5dp"
-                android:hint="8254"
+                android:hint=""
                 android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -175,7 +175,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray"
-                android:hint="1234567890"
+                android:hint=""
                 android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>

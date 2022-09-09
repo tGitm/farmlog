@@ -1,9 +1,6 @@
 package com.example.farmlog.auth.api
 
-import com.example.farmlog.auth.models.LoginResponse
-import com.example.farmlog.auth.models.RegistrationBody
-import com.example.farmlog.auth.models.RegistrationResponse
-import com.example.farmlog.auth.models.SignInBody
+import com.example.farmlog.auth.models.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -20,6 +17,10 @@ interface Api {
     fun loginUser(
        @Body info: SignInBody
     ):Call<LoginResponse>
+
+    @Headers("Content-Type:application/json")
+    @PUT("edit/{id}")
+    fun editUser(@Path("id") id: String?, @Body info: UserEditBody): Call<UserEditResponse>
 
     /*@FormUrlEncoded
     @Headers("Content-Type:application/json")
