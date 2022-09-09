@@ -1,4 +1,4 @@
-package com.example.farmlog.api
+package com.example.farmlog.auth.api
 
 import com.example.farmlog.auth.models.LoginResponse
 import com.example.farmlog.auth.models.RegistrationBody

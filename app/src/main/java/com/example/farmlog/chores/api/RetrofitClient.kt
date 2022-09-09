@@ -1,5 +1,5 @@
-package com.example.farmlog.api
-import android.util.Base64
+package com.example.farmlog.chores.api
+import com.example.farmlog.auth.api.Api
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,7 +22,7 @@ object RetrofitClient {
             chain.proceed(request)
         }.build()
 
-
+ 
     val instance: Api by lazy {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)

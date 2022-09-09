@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -13,7 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.farmlog.R
-import com.example.farmlog.api.RetrofitClient
+import com.example.farmlog.chores.api.RetrofitClient
 import com.example.farmlog.auth.models.RegistrationBody
 import com.example.farmlog.auth.models.RegistrationResponse
 import com.example.farmlog.auth.login.LoginActivity
@@ -79,6 +78,7 @@ class ThirdRegistrationActivity : AppCompatActivity() {
                         response: Response<RegistrationResponse>)
                     {
                         Log.i("Register", response.code().toString())
+
                         if (response.code() == 200) {
                             Toast.makeText(baseContext, "Uporabnik je registriran", Toast.LENGTH_LONG).show()
                             startActivity(welcomeIntent)

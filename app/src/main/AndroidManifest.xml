@@ -42,7 +42,7 @@
             android:name=".archive.EditArchiveActivity"
             android:exported="false" />
         <activity
-            android:name=".addchores.AddNewChoreActivity"
+            android:name=".chores.AddNewChoreActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.Farmlog" />
         <activity

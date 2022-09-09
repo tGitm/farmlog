@@ -45,6 +45,12 @@
         <item name="android:textColor">@color/whiteTextColor</item>
     </style>
 
+    <style name="headerTextSmaller" parent="parent">
+        <item name="android:textSize">25sp</item>
+        <!--<item name="android:textAlignment">center</item>-->
+        <item name="android:textColor">@color/whiteTextColor</item>
+    </style>
+
     <style name="subHeaderText" parent="parent">
         <item name="android:textSize">20sp</item>
         <!--<item name="android:textAlignment">center</item>-->

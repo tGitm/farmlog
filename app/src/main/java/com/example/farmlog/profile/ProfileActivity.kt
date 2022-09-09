@@ -1,17 +1,25 @@
 package com.example.farmlog.profile
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
 import com.example.farmlog.landsmap.LandsMapActivity
 
+
 class ProfileActivity : AppCompatActivity() {
 
+    private lateinit var email: TextView
+    private lateinit var firstName: TextView
+    private lateinit var lastName: TextView
+    private lateinit var address: TextView
+    private lateinit var post: TextView
+    private lateinit var postalCode: TextView
+    private lateinit var gerkMID: TextView
     private lateinit var editProfile: Button
     private lateinit var changePassword: TextView
     private lateinit var backIcon: ImageView
@@ -20,9 +28,25 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        email = findViewById(R.id.value_user_email)
+        firstName = findViewById(R.id.value_user_first_name)
+        lastName = findViewById(R.id.value_user_last_name)
+        address = findViewById(R.id.value_user_address)
+        post = findViewById(R.id.value_user_post)
+        postalCode = findViewById(R.id.value_user_zip)
+        gerkMID = findViewById(R.id.value_user_MID)
         editProfile = findViewById(R.id.edit_profile)
         changePassword = findViewById(R.id.change_password)
         backIcon = findViewById(R.id.backOnMain)
+
+        val getUserData = getSharedPreferences("Login", MODE_PRIVATE)
+        email.text = getUserData.getString("email", null)
+        firstName.text = getUserData.getString("first_name", null)
+        lastName.text = getUserData.getString("last_name", null)
+        address.text = getUserData.getString("address", null)
+        post.text = getUserData.getString("post", null)
+        postalCode.text = getUserData.getString("postalCode", null)
+        gerkMID.text = getUserData.getString("gerkMID", null)
 
         editProfile.setOnClickListener() {
             val intent = Intent(this, EditProfileActivity::class.java)

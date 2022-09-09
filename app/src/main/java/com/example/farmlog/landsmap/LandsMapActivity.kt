@@ -12,7 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import com.example.farmlog.R
-import com.example.farmlog.addchores.AddNewChoreActivity
+import com.example.farmlog.chores.AddNewChoreActivity
 import com.example.farmlog.archive.ArchiveActivity
 import com.example.farmlog.auth.login.LoginActivity
 import com.example.farmlog.profile.ProfileActivity
@@ -144,7 +144,7 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                 return true
             }
             R.id.add_work -> {
-                this.startActivity(Intent(this,AddNewChoreActivity::class.java))
+                this.startActivity(Intent(this, AddNewChoreActivity::class.java))
                 return true
             }
             R.id.my_profile -> {

@@ -3,6 +3,7 @@ package com.example.farmlog.auth.login
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.renderscript.Sampler
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -10,16 +11,17 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
-import com.example.farmlog.api.RetrofitClient
 import com.example.farmlog.auth.models.LoginResponse
 import com.example.farmlog.auth.models.SignInBody
-import com.example.farmlog.landsmap.LandsMapActivity
 import com.example.farmlog.auth.registration.RegistrationActivity
+import com.example.farmlog.chores.api.RetrofitClient
+import com.example.farmlog.landsmap.LandsMapActivity
 import com.example.farmlog.storage.SharedPrefManager
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var login: Button
@@ -52,14 +54,33 @@ class LoginActivity : AppCompatActivity() {
                         call: Call<LoginResponse>,
                         response: Response<LoginResponse>
                     ) {
-                        /*Log.i("Response code", response.code().toString())
-                        Log.i("Email", email)
-                        Log.i("Password", password)*/
+                        /*
+                        response.body()?.let { it1 -> Log.i("user", it1.user_token) }
+                        response.body()?.let { it1 -> Log.i("user", it1.user._id.toString()) }
+                        response.body()?.let { it1 -> Log.i("user", it1.user.first_name.toString()) }
+                        response.body()?.let { it1 -> Log.i("user", it1.user.last_name.toString()) }
+                        response.body()?.let { it1 -> Log.i("user", it1.user.email.toString()) }
+                        response.body()?.let { it1 -> Log.i("user", it1.user.password.toString()) }
+                        response.body()?.let { it1 -> Log.i("user", it1.user.gerkMID.toString()) }
+                         */
 
                         if (response.code() == 200) {
                             SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user!!)
 
                             mainActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                            // store data in sharedPreferences
+                            val sp = getSharedPreferences("Login", MODE_PRIVATE)
+                            val userData = sp.edit()
+                            userData.putString("user_token", response.body()?.user_token)
+                            userData.putString("id", response.body()?.user?._id.toString())
+                            userData.putString("first_name", response.body()?.user?.first_name.toString())
+                            userData.putString("last_name", response.body()?.user?.last_name.toString())
+                            userData.putString("email", response.body()?.user?.email.toString())
+                            userData.putString("post", response.body()?.user?.post.toString())
+                            userData.putString("postalCode", response.body()?.user?.postalCode.toString())
+                            userData.putString("gerkMID", response.body()?.user?.gerkMID.toString())
+                            userData.apply()
 
                             startActivity(mainActivity)
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)

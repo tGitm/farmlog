@@ -49,7 +49,7 @@
 
         <TextView
             android:id="@+id/user_name"
-            style="@style/mainHeaderTetxt"
+            style="@style/headerTextSmaller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/profile_image"
@@ -58,7 +58,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="-5dp"
             android:layout_marginBottom="15dp"
-            android:text="Tim Rus"
+            android:text="Moj račun"
             android:textColor="@color/white"
             tools:ignore="RelativeOverlap" />
 
@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:text="timrus.dev@gmail.com"
+            android:text="Email"
             android:textColor="@color/darkerGray" />
 
 
@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:text="Tim"
+            android:text="Ime"
             android:textColor="@color/darkerGray" />
 
         <TextView
@@ -129,7 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:text="Rus"
+            android:text="Priimek"
             android:textColor="@color/darkerGray" />
 
         <TextView
@@ -146,7 +146,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:text="Globoko 10k"
+            android:text="Naslov"
             android:textColor="@color/darkerGray" />
 
         <TextView
@@ -163,7 +163,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:text="Globoko"
+            android:text="Pošta"
             android:textColor="@color/darkerGray" />
 
         <TextView
@@ -180,7 +180,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:text="8254"
+            android:text="Poštna številka"
             android:textColor="@color/darkerGray" />
 
         <TextView
@@ -197,7 +197,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="123456789"
+            android:text="Gerk MID"
             android:textColor="@color/darkerGray" />
 
 
