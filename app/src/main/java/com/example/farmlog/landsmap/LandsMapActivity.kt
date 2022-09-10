@@ -16,9 +16,9 @@ import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import com.example.farmlog.R
 import com.example.farmlog.archive.ArchiveActivity
 import com.example.farmlog.auth.login.LoginActivity
-import com.example.farmlog.auth.usermodels.UserEditResponse
 import com.example.farmlog.chores.AddNewChoreActivity
 import com.example.farmlog.landsmap.api.RetrofitClientLands
+import com.example.farmlog.landsmap.models.GeojsonResponse
 import com.example.farmlog.landsmap.models.GeojsonResponseItem
 import com.example.farmlog.profile.ProfileActivity
 import com.example.farmlog.storage.SharedPrefManager
@@ -32,9 +32,12 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.reflect.Type
 
 
 class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
@@ -184,50 +187,69 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
-    fun getGeojsonData() {
-        var geojson = ArrayList<GeojsonResponseItem>()
+    /*fun getGeojsonData() {
+        //var geojson = ArrayList<GeojsonResponseItem>()
         val user_id: String? = SharedPrefManager.getInstance(applicationContext).user._id
+        val gson = Gson();
 
-        RetrofitClientLands.instance.getLand(user_id).enqueue(object : Callback<GeojsonResponseItem> {
+
+        RetrofitClientLands.instance.getLand(user_id).enqueue(object : Callback<GeojsonResponse> {
             override fun onResponse(
-                call: Call<GeojsonResponseItem>,
-                response: Response<GeojsonResponseItem>
+                call: Call<GeojsonResponse>,
+                response: Response<GeojsonResponse>
             ) {
                 if (response.code() == 200) {
-                    //SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user)
-                    Log.i(
-                        "updated user",
-                        SharedPrefManager.getInstance(applicationContext).user.toString()
-                    )
-                    Toast.makeText(
-                        applicationContext,
-                        "Uporabnik je uspešno posodobljen",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    // val geojson: ArrayList<GeojsonResponseItem> = gson.fromJson(, GeojsonResponseItem::class.java);
+
+                   Log.i("Api-lands", response.body().toString())
+                   Log.i("Map response", response.code().toString())
                 }
             }
 
-            override fun onFailure(call: Call<GeojsonResponseItem>, t: Throwable) {
-                t.message?.let { it1 -> Log.i("API_failure: ", it1) }
+            override fun onFailure(call: Call<GeojsonResponse>, t: Throwable) {
+                Log.i("Map response", t.toString())
+            }
+        })
+    }*/
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        var geojson = ArrayList<GeojsonResponse>()
+        // getGeojsonData()
+
+        val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID
+        val gson = Gson();
+
+        RetrofitClientLands.instance.getLand(userGerkId).enqueue(object : Callback<GeojsonResponse> {
+            override fun onResponse(
+                call: Call<GeojsonResponse>,
+                response: Response<GeojsonResponse>
+            ) {
+                if (response.code() == 200) {
+                    // val geojson: ArrayList<GeojsonResponseItem> = gson.fromJson(, GeojsonResponseItem::class.java);
+
+                    Log.i("Map-response", response.code().toString())
+                    Log.i("Map-response", response.body().toString())
+                    Log.i("Map-geometry", response.body()?.lands.toString())
+                } else {
+                    Log.i("Map-error", response.errorBody().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<GeojsonResponse>, t: Throwable) {
+                Log.i("Map response", t.message.toString())
                 Toast.makeText(
                     applicationContext,
-                    "Prišlo je do napake, poskusite ponovno",
+                    "Prišlo je do napake, na novo zaženite aplikacijo",
                     Toast.LENGTH_LONG
                 ).show()
             }
         })
-    }
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-        getGeojsonData()
 
         // adding marker
         val globoko = LatLng(45.95481200216156, 15.63454882337749)
         mMap.addMarker(MarkerOptions().position(globoko).title("Globoko"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(globoko))
-
-
 
         mMap.setOnPolygonClickListener(OnPolygonClickListener {
             //do whatever with polygon!
