@@ -1,6 +1,4 @@
-package com.example.farmlog.auth.models
-
-import retrofit2.http.Field
+package com.example.farmlog.auth.usermodels
 
 data class RegistrationBody(
     val first_name: String,

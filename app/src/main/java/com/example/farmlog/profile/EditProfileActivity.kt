@@ -9,9 +9,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.farmlog.R
-import com.example.farmlog.auth.models.UserEditBody
-import com.example.farmlog.auth.models.UserEditResponse
-import com.example.farmlog.chores.api.RetrofitClient
+import com.example.farmlog.auth.api.RetrofitClient
+import com.example.farmlog.auth.usermodels.UserEditBody
+import com.example.farmlog.auth.usermodels.UserEditResponse
 import com.example.farmlog.storage.SharedPrefManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
@@ -66,11 +66,6 @@ class EditProfileActivity : AppCompatActivity() {
         val id: String? = SharedPrefManager.getInstance(applicationContext).user._id
         //val id: String? = getUserData.getString("id", null)
 
-
-
-
-        Log.i("old user", SharedPrefManager.getInstance(applicationContext).user.toString())
-
         saveButton.setOnClickListener() {
 
             emailTemp = if (email.text.toString().isEmpty()) {
@@ -116,9 +111,10 @@ class EditProfileActivity : AppCompatActivity() {
             }
 
             val editUserData = UserEditBody(
-                emailTemp,
                 firstNameTemp,
                 lastNameTemp,
+                emailTemp,
+                SharedPrefManager.getInstance(applicationContext).user.password.toString(),
                 addressTemp,
                 postTemp,
                 postalCodeTemp,

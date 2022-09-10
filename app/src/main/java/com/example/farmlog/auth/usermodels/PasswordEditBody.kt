@@ -1,11 +1,10 @@
-package com.example.farmlog.auth.models
+package com.example.farmlog.auth.usermodels
 
-import retrofit2.http.Field
-
-data class UserEditBody(
+data class PasswordEditBody(
     val first_name: String?,
     val last_name: String?,
     val email: String?,
+    val password: String?,
     val address: String?,
     val post: String?,
     val postal_code: String?,

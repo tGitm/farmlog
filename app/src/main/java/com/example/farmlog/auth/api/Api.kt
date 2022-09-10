@@ -1,6 +1,6 @@
 package com.example.farmlog.auth.api
 
-import com.example.farmlog.auth.models.*
+import com.example.farmlog.auth.usermodels.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -22,13 +22,8 @@ interface Api {
     @PUT("edit/{id}")
     fun editUser(@Path("id") id: String?, @Body info: UserEditBody): Call<UserEditResponse>
 
-    /*@FormUrlEncoded
     @Headers("Content-Type:application/json")
-    @POST("login")
-    fun loginUser(
-        @Field("email") email: String,
-        @Field("password") password: String
-    ):Call<LoginResponse>
+    @PUT("edit/password/{id}")
+    fun editPassword(@Path("id") id: String?, @Body info: PasswordEditBody): Call<NewPasswordResponse>
 
-     */
 }
