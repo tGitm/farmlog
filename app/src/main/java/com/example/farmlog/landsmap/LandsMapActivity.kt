@@ -2,23 +2,29 @@ package com.example.farmlog.landsmap
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import com.example.farmlog.R
-import com.example.farmlog.chores.AddNewChoreActivity
 import com.example.farmlog.archive.ArchiveActivity
 import com.example.farmlog.auth.login.LoginActivity
+import com.example.farmlog.auth.usermodels.UserEditResponse
+import com.example.farmlog.chores.AddNewChoreActivity
+import com.example.farmlog.landsmap.api.RetrofitClientLands
+import com.example.farmlog.landsmap.models.GeojsonResponseItem
 import com.example.farmlog.profile.ProfileActivity
 import com.example.farmlog.storage.SharedPrefManager
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnPolygonClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -26,6 +32,10 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
     NavigationView.OnNavigationItemSelectedListener {
@@ -174,13 +184,54 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
+    fun getGeojsonData() {
+        var geojson = ArrayList<GeojsonResponseItem>()
+        val user_id: String? = SharedPrefManager.getInstance(applicationContext).user._id
+
+        RetrofitClientLands.instance.getLand(user_id).enqueue(object : Callback<GeojsonResponseItem> {
+            override fun onResponse(
+                call: Call<GeojsonResponseItem>,
+                response: Response<GeojsonResponseItem>
+            ) {
+                if (response.code() == 200) {
+                    //SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user)
+                    Log.i(
+                        "updated user",
+                        SharedPrefManager.getInstance(applicationContext).user.toString()
+                    )
+                    Toast.makeText(
+                        applicationContext,
+                        "Uporabnik je uspešno posodobljen",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<GeojsonResponseItem>, t: Throwable) {
+                t.message?.let { it1 -> Log.i("API_failure: ", it1) }
+                Toast.makeText(
+                    applicationContext,
+                    "Prišlo je do napake, poskusite ponovno",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        })
+    }
+
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        getGeojsonData()
 
         // adding marker
         val globoko = LatLng(45.95481200216156, 15.63454882337749)
         mMap.addMarker(MarkerOptions().position(globoko).title("Globoko"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(globoko))
+
+
+
+        mMap.setOnPolygonClickListener(OnPolygonClickListener {
+            //do whatever with polygon!
+        })
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

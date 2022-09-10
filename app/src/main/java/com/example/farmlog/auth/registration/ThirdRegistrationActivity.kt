@@ -12,7 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.farmlog.R
-import com.example.farmlog.chores.api.RetrofitClient
+import com.example.farmlog.auth.api.RetrofitClient
 import com.example.farmlog.auth.usermodels.RegistrationBody
 import com.example.farmlog.auth.usermodels.RegistrationResponse
 import com.example.farmlog.auth.login.LoginActivity

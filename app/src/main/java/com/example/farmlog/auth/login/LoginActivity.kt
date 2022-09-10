@@ -10,10 +10,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
+import com.example.farmlog.auth.api.RetrofitClient
 import com.example.farmlog.auth.usermodels.LoginResponse
 import com.example.farmlog.auth.usermodels.SignInBody
 import com.example.farmlog.auth.registration.RegistrationActivity
-import com.example.farmlog.chores.api.RetrofitClient
 import com.example.farmlog.landsmap.LandsMapActivity
 import com.example.farmlog.storage.SharedPrefManager
 import com.google.android.material.textfield.TextInputEditText

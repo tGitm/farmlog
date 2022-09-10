@@ -9,9 +9,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.farmlog.R
+import com.example.farmlog.auth.api.RetrofitClient
 import com.example.farmlog.auth.usermodels.UserEditBody
 import com.example.farmlog.auth.usermodels.UserEditResponse
-import com.example.farmlog.chores.api.RetrofitClient
 import com.example.farmlog.storage.SharedPrefManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
