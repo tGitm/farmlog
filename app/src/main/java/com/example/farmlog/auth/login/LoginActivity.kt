@@ -86,7 +86,6 @@ class LoginActivity : AppCompatActivity() {
                             Toast.LENGTH_LONG
                         ).show()
                     }
-
                 })
             }
         }

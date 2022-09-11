@@ -19,7 +19,6 @@ import com.example.farmlog.auth.login.LoginActivity
 import com.example.farmlog.chores.AddNewChoreActivity
 import com.example.farmlog.landsmap.api.RetrofitClientLands
 import com.example.farmlog.landsmap.models.GeojsonResponse
-import com.example.farmlog.landsmap.models.GeojsonResponseItem
 import com.example.farmlog.profile.ProfileActivity
 import com.example.farmlog.storage.SharedPrefManager
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -32,12 +31,11 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.google.maps.android.data.geojson.GeoJsonLayer
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.reflect.Type
 
 
 class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
@@ -218,7 +216,7 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         // getGeojsonData()
 
         val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID
-        val gson = Gson();
+
 
         RetrofitClientLands.instance.getLand(userGerkId).enqueue(object : Callback<GeojsonResponse> {
             override fun onResponse(
@@ -226,11 +224,16 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                 response: Response<GeojsonResponse>
             ) {
                 if (response.code() == 200) {
-                    // val geojson: ArrayList<GeojsonResponseItem> = gson.fromJson(, GeojsonResponseItem::class.java);
+                    val body = response.body()
+                    val geo = body?.lands?.get(0)
 
-                    Log.i("Map-response", response.code().toString())
-                    Log.i("Map-response", response.body().toString())
-                    Log.i("Map-geometry", response.body()?.lands.toString())
+                    //var geo1 = JSONObject(geo?.get(1).toString())
+                    var geos = geo?.get("geometry")
+                    val jo2: JSONObject? = JSONObject(geos.toString())
+                    val geoJsonData: JSONObject? = jo2
+                    val layer = GeoJsonLayer(mMap, geoJsonData)
+                    layer.addLayerToMap()
+
                 } else {
                     Log.i("Map-error", response.errorBody().toString())
                 }
@@ -250,6 +253,8 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         val globoko = LatLng(45.95481200216156, 15.63454882337749)
         mMap.addMarker(MarkerOptions().position(globoko).title("Globoko"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(globoko))
+        mMap.uiSettings.isZoomControlsEnabled = true
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
 
         mMap.setOnPolygonClickListener(OnPolygonClickListener {
             //do whatever with polygon!
