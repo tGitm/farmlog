@@ -32,6 +32,7 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.maps.android.data.geojson.GeoJsonLayer
+import com.google.maps.android.data.geojson.GeoJsonPolygonStyle
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -185,38 +186,11 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
-    /*fun getGeojsonData() {
-        //var geojson = ArrayList<GeojsonResponseItem>()
-        val user_id: String? = SharedPrefManager.getInstance(applicationContext).user._id
-        val gson = Gson();
-
-
-        RetrofitClientLands.instance.getLand(user_id).enqueue(object : Callback<GeojsonResponse> {
-            override fun onResponse(
-                call: Call<GeojsonResponse>,
-                response: Response<GeojsonResponse>
-            ) {
-                if (response.code() == 200) {
-                    // val geojson: ArrayList<GeojsonResponseItem> = gson.fromJson(, GeojsonResponseItem::class.java);
-
-                   Log.i("Api-lands", response.body().toString())
-                   Log.i("Map response", response.code().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<GeojsonResponse>, t: Throwable) {
-                Log.i("Map response", t.toString())
-            }
-        })
-    }*/
-
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         var geojson = ArrayList<GeojsonResponse>()
-        // getGeojsonData()
 
         val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID
-
 
         RetrofitClientLands.instance.getLand(userGerkId).enqueue(object : Callback<GeojsonResponse> {
             override fun onResponse(
@@ -225,17 +199,37 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
             ) {
                 if (response.code() == 200) {
                     val body = response.body()
-                    val geo = body?.lands?.get(0)
 
-                    //var geo1 = JSONObject(geo?.get(1).toString())
-                    var geos = geo?.get("geometry")
-                    val jo2: JSONObject? = JSONObject(geos.toString())
-                    val geoJsonData: JSONObject? = jo2
-                    val layer = GeoJsonLayer(mMap, geoJsonData)
-                    layer.addLayerToMap()
+                    if (body != null) {
+                        for (i in 0 until body.lands.size) {
+                            val geo = body.lands[i]
 
-                } else {
-                    Log.i("Map-error", response.errorBody().toString())
+                            val geos = geo.get("geometry")
+                            val properties = geo.get("properties")
+
+                            //Log.i("Properties", properties.toString())
+                            val geometryJson: JSONObject = JSONObject(geos.toString())
+                            val geoJsonData: JSONObject = geometryJson
+
+                            val layer = GeoJsonLayer(mMap, geoJsonData)
+                            val style: GeoJsonPolygonStyle = layer.defaultPolygonStyle
+                            style.fillColor = resources.getColor(R.color.darkGray)
+                            style.strokeColor = resources.getColor(R.color.darkerGray)
+                            style.strokeWidth = 2f
+                            layer.addLayerToMap()
+
+                            layer.setOnFeatureClickListener {
+                                Log.i("Properties", properties.toString())
+                            }
+                            mMap.setOnMapClickListener {
+                                Log.i("PropertiesMa" +
+                                        "p", properties.toString())
+                            }
+                        }
+
+                    } else {
+                        Log.i("Map-error", response.errorBody().toString())
+                    }
                 }
             }
 
@@ -250,15 +244,10 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         })
 
         // adding marker
-        val globoko = LatLng(45.95481200216156, 15.63454882337749)
-        mMap.addMarker(MarkerOptions().position(globoko).title("Globoko"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(globoko))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(45.92757404830929, 15.595209429220395)))
         mMap.uiSettings.isZoomControlsEnabled = true
-        mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 12.5f ) );
 
-        mMap.setOnPolygonClickListener(OnPolygonClickListener {
-            //do whatever with polygon!
-        })
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

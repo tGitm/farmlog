@@ -1,4 +1,4 @@
-package com.example.farmlog.archive
+package com.example.farmlog.chores.archive
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.farmlog.R
-import java.time.LocalDateTime
+import com.example.farmlog.chores.models.Chore
 import java.time.format.DateTimeFormatter
 
 class ArchiveAdapter : RecyclerView.Adapter<ArchiveAdapter.ChoresViewHolder>() {
-    private var choresList: ArrayList<ChoresModel> = ArrayList()
+    private var choresList: ArrayList<Chore?> = ArrayList()
 
-    fun addItems(items: ArrayList<ChoresModel>) {
+    fun addItems(items: ArrayList<Chore?>) {
         this.choresList = items
     }
 
@@ -22,12 +22,14 @@ class ArchiveAdapter : RecyclerView.Adapter<ArchiveAdapter.ChoresViewHolder>() {
     )
 
     override fun onBindViewHolder(holder: ChoresViewHolder, position: Int) {
-        val chore = choresList[position]
-        holder.bindView(chore)
+        val chore = choresList?.get(position)
+        if (chore != null) {
+            holder.bindView(chore)
+        }
     }
 
     override fun getItemCount(): Int {
-        return choresList.size
+        return choresList!!.size
     }
 
 
@@ -37,17 +39,14 @@ class ArchiveAdapter : RecyclerView.Adapter<ArchiveAdapter.ChoresViewHolder>() {
 
 
         @SuppressLint("NewApi")
-        fun bindView(chore: ChoresModel) {
-            val current = LocalDateTime.now()
+        fun bindView(chore: Chore) {
+            val current = chore.createdAt
 
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
             val formatted = current.format(formatter)
 
-            for (i in 1..5) {
-                archiveTitle.text = "Škropljenje sadovnjaka"
-                archiveDate.text = formatted
-            }
-
+            archiveTitle.text = chore.work_title
+            archiveDate.text = formatted
 
         }
     }

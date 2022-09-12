@@ -2,6 +2,7 @@ package com.example.farmlog.landsmap.api
 
 import com.example.farmlog.landsmap.models.GeojsonResponse
 import com.example.farmlog.landsmap.models.GeojsonResponseItem
+import com.example.farmlog.landsmap.models.Geometry
 import retrofit2.Call
 import retrofit2.http.*
 
