@@ -58,7 +58,7 @@
             android:exported="true"
             android:theme="@style/Base.Theme.Farmlog" />
         <activity
-            android:name=".archive.ArchiveActivity"
+            android:name=".chores.archive.ArchiveActivity"
             android:exported="true"
             android:screenOrientation="fullSensor"
             android:theme="@style/Base.Theme.Farmlog" />

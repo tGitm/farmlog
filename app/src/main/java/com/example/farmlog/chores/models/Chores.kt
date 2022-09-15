@@ -1,6 +1,6 @@
 package com.example.farmlog.chores.models
 
-data class Chore(
+data class Chores(
     val __v: Int,
     val _id: String,
     val accessories_used: String,

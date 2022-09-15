@@ -14,7 +14,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import com.example.farmlog.R
-import com.example.farmlog.archive.ArchiveActivity
+import com.example.farmlog.chores.archive.ArchiveActivity
 import com.example.farmlog.auth.login.LoginActivity
 import com.example.farmlog.chores.AddNewChoreActivity
 import com.example.farmlog.landsmap.api.RetrofitClientLands
@@ -23,11 +23,9 @@ import com.example.farmlog.profile.ProfileActivity
 import com.example.farmlog.storage.SharedPrefManager
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.GoogleMap.OnPolygonClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -152,7 +150,7 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                 return true
             }
             R.id.to_archive -> {
-                this.startActivity(Intent(this,ArchiveActivity::class.java))
+                this.startActivity(Intent(this, ArchiveActivity::class.java))
                 return true
             }
             R.id.add_work -> {

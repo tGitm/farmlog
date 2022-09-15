@@ -1,10 +1,8 @@
-package com.example.farmlog.archive
+package com.example.farmlog.chores.archive
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -14,9 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.farmlog.R
-import com.example.farmlog.chores.archive.ArchiveAdapter
-import com.example.farmlog.chores.models.Chore
-import com.example.farmlog.chores.models.ChoresResponse
+import com.example.farmlog.chores.models.Chores
 import com.example.farmlog.landsmap.LandsMapActivity
 import com.example.farmlog.landsmap.api.RetrofitClientChores
 import com.example.farmlog.storage.SharedPrefManager
@@ -33,51 +29,53 @@ class ArchiveActivity : AppCompatActivity() {
     private var adapter: ArchiveAdapter? = null
     private lateinit var backIcon: ImageView
     private lateinit var recyclerView: RecyclerView
-    private lateinit var layoutManager: LinearLayoutManager
 
-    var choresList: ArrayList<Chore?> = ArrayList()
+    var choresList: MutableList<Chores> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_archive)
 
+        initView()
+        initRecycleView()
+        fetchChores()
+
         // hooks
-        shrimmerView = findViewById(R.id.shimmer_view_container)
+        //shrimmerView = findViewById(R.id.shimmer_view_container)
         swiperRefres = findViewById(R.id.swipeRefresh)
         backIcon = findViewById(R.id.backOnMain)
-        recyclerView = findViewById(R.id.archive_recycler)
 
         backIcon.setOnClickListener() {
             startActivity(Intent(this, LandsMapActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
         }
 
+        /*
         Handler(Looper.getMainLooper()).postDelayed({
             // need to stop when data will be loaded
             shrimmerView.stopShimmer()
             shrimmerView.visibility = View.GONE
-        }, 2000)
+        }, 1500)
+        */
 
         swiperRefres.setOnRefreshListener {
             // get data from db/API
+            fetchChores()
         }
-
-        initRecycleView()
-        fetchChores()
     }
 
     // get chores for user from api response
     private fun fetchChores() {
         val userId: String? = SharedPrefManager.getInstance(applicationContext).user._id
 
-        RetrofitClientChores.instance.getUserChores(userId).enqueue(object : Callback<Chore> {
+        RetrofitClientChores.instance.getUserChores(userId).enqueue(object : Callback<MutableList<Chores>> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
-                call: Call<Chore>,
-                response: Response<Chore>
+                call: Call<MutableList<Chores>>,
+                response: Response<MutableList<Chores>>
             ) {
                 if (response.code() == 200) {
-                    choresList.addAll(listOf(response.body()))
+                    response.body()?.let { choresList.addAll(it) }
                     adapter?.addItems(choresList)
 
                     Log.i("ChoresList", choresList.toString())
@@ -87,7 +85,7 @@ class ArchiveActivity : AppCompatActivity() {
                     }
                 }
 
-            override fun onFailure(call: Call<Chore>, t: Throwable) {
+            override fun onFailure(call: Call<MutableList<Chores>>, t: Throwable) {
                 Log.i("Api-chores-error", t.message.toString())
                 Toast.makeText(
                     applicationContext,
@@ -98,10 +96,13 @@ class ArchiveActivity : AppCompatActivity() {
         })
     }
 
+    private fun initView() {
+        recyclerView = findViewById(R.id.archive_list)
+    }
+
     private fun initRecycleView() {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ArchiveAdapter()
-        recyclerView.adapter = adapter
+        recyclerView.adapter = ArchiveAdapter()
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

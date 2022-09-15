@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".archive.ArchiveActivity">
+    tools:context=".chores.archive.ArchiveActivity">
 
     <LinearLayout
         android:id="@+id/topbar"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/topbar">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/archive_recycler"
+            android:id="@+id/archive_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="1dp"
@@ -44,7 +44,7 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
+    <!--
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
         android:layout_width="match_parent"
@@ -72,7 +72,7 @@
             <include layout="@layout/archive_item_shrimmer" />
 
         </LinearLayout>
-    </com.facebook.shimmer.ShimmerFrameLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
