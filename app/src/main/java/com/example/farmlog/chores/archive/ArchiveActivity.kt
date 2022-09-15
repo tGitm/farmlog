@@ -3,6 +3,8 @@ package com.example.farmlog.chores.archive
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -24,7 +26,7 @@ import retrofit2.Response
 
 class ArchiveActivity : AppCompatActivity() {
 
-    private lateinit var swiperRefres: SwipeRefreshLayout
+    //private lateinit var swiperRefres: SwipeRefreshLayout
     private lateinit var shrimmerView: ShimmerFrameLayout
     private var adapter: ArchiveAdapter? = null
     private lateinit var backIcon: ImageView
@@ -41,8 +43,8 @@ class ArchiveActivity : AppCompatActivity() {
         fetchChores()
 
         // hooks
-        //shrimmerView = findViewById(R.id.shimmer_view_container)
-        swiperRefres = findViewById(R.id.swipeRefresh)
+        shrimmerView = findViewById(R.id.shimmer_view_container)
+        //swiperRefres = findViewById(R.id.swipeRefresh)
         backIcon = findViewById(R.id.backOnMain)
 
         backIcon.setOnClickListener() {
@@ -50,18 +52,18 @@ class ArchiveActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
         }
 
-        /*
+
         Handler(Looper.getMainLooper()).postDelayed({
             // need to stop when data will be loaded
             shrimmerView.stopShimmer()
             shrimmerView.visibility = View.GONE
         }, 1500)
-        */
 
+        /*
         swiperRefres.setOnRefreshListener {
             // get data from db/API
             fetchChores()
-        }
+        }*/
     }
 
     // get chores for user from api response
@@ -77,6 +79,7 @@ class ArchiveActivity : AppCompatActivity() {
                 if (response.code() == 200) {
                     response.body()?.let { choresList.addAll(it) }
                     adapter?.addItems(choresList)
+                    adapter?.notifyDataSetChanged()
 
                     Log.i("ChoresList", choresList.toString())
 
@@ -102,7 +105,8 @@ class ArchiveActivity : AppCompatActivity() {
 
     private fun initRecycleView() {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = ArchiveAdapter()
+        adapter = ArchiveAdapter(mutableListOf())
+        recyclerView.adapter = adapter
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

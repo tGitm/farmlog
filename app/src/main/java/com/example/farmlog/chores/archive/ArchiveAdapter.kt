@@ -10,11 +10,11 @@ import com.example.farmlog.R
 import com.example.farmlog.chores.models.Chores
 import java.time.format.DateTimeFormatter
 
-class ArchiveAdapter : RecyclerView.Adapter<ArchiveAdapter.ChoresViewHolder>() {
-    private var choresList: MutableList<Chores> = ArrayList()
+class ArchiveAdapter(private val choresList : MutableList<Chores>) : RecyclerView.Adapter<ArchiveAdapter.ChoresViewHolder>() {
 
     fun addItems(items: MutableList<Chores>) {
-        choresList = items
+        choresList.clear()
+        choresList.addAll(items)
         Log.i("ChoresAdapter", choresList.toString())
     }
 
