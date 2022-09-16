@@ -43,6 +43,11 @@ class ArchiveAdapter(private var choresList: MutableList<Chores>, clickListener:
         return choresList.size
     }
 
+    fun removeItem(position: Int) {
+        choresList.removeAt(position)
+        notifyDataSetChanged()
+    }
+
     interface ClickListener {
         fun clickedItem(choreModel: Chores)
     }

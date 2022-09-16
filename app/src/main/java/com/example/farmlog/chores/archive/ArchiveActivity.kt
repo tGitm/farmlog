@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.farmlog.R
@@ -19,6 +20,7 @@ import com.example.farmlog.landsmap.LandsMapActivity
 import com.example.farmlog.landsmap.api.RetrofitClientChores
 import com.example.farmlog.storage.SharedPrefManager
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,7 +35,7 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
     private lateinit var backIcon: ImageView
     private lateinit var recyclerView: RecyclerView
     private lateinit var search: SearchView
-    private lateinit var editChore: ImageView
+    //private lateinit var deleteChore: ImageView
 
     var choresList: MutableList<Chores> = ArrayList()
 
@@ -45,10 +47,10 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
         initRecycleView()
         fetchChores()
 
-        editChore.setOnClickListener() {
+        /*deleteChore.setOnClickListener() {
             startActivity(Intent(this, LandsMapActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
-        }
+        }*/
 
         backIcon.setOnClickListener() {
             startActivity(Intent(this, LandsMapActivity::class.java))
@@ -77,12 +79,46 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
             recyclerView.visibility = View.VISIBLE
         }, 1000)
 
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                // this method is called
+                // when the item is moved.
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                // TODO: call delete on API
+
+
+                val deletedChore: Chores = choresList[viewHolder.adapterPosition]
+                val position = viewHolder.adapterPosition
+
+                choresList.removeAt(viewHolder.adapterPosition)
+
+                adapter?.notifyItemRemoved(viewHolder.adapterPosition)
+                Snackbar.make(recyclerView, "Deleted " + deletedChore.work_title, Snackbar.LENGTH_LONG)
+                    .setAction(
+                        "Undo",
+                        View.OnClickListener {
+                            choresList.add(position, deletedChore)
+
+                            adapter?.notifyItemInserted(position)
+                        }).show()
+            }
+        }).attachToRecyclerView(recyclerView)
+
         /*
         swiperRefres.setOnRefreshListener {
             // get data from db/API
             fetchChores()
         }*/
     }
+
 
     // get chores for user from api response
     private fun fetchChores() {
@@ -119,7 +155,7 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
 
     private fun initView() {
         recyclerView = findViewById(R.id.archive_list)
-        editChore = findViewById(R.id.editChoreElement)
+        //deleteChore = findViewById(R.id.deleteChoreItem)
         shrimmerView = findViewById(R.id.shimmer_view_container)
         search = findViewById(R.id.search_view)
         //swiperRefres = findViewById(R.id.swipeRefresh)
@@ -156,50 +192,4 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
         startActivity(secondRegistrationIntent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
-
-    /*
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.farmlog_archive_menu, menu)
-        var menuItem = menu!!.findItem(R.id.searchView)
-        var searchView: SearchView = menuItem.actionView as SearchView
-
-        // search bar logic
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
-
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText!!.isNotEmpty()) {
-                    displayList.clear()
-                    var searchT = newText.toLowerCase(Locale.getDefault())
-
-                    Log.i("Search", searchT)
-
-                    for (chore in choresList) {
-                        if (chore.work_title.toLowerCase(Locale.getDefault())
-                                .contains(searchT) || chore.accessories_used.toLowerCase(Locale.getDefault())
-                                .contains(searchT) || chore.createdAt.toLowerCase(Locale.getDefault())
-                                .contains(searchT)
-                        ) {
-                            displayList.add(chore)
-                        }
-                        recyclerView.adapter!!.notifyDataSetChanged()
-                    }
-                } else {
-                    displayList.clear()
-                    displayList.addAll(choresList)
-                    recyclerView.adapter!!.notifyDataSetChanged()
-                }
-                return true
-            }
-        })
-
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
-    }*/
 }
