@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.farmlog.R
 import com.example.farmlog.chores.models.Chores
+import com.example.farmlog.chores.models.DeleteResponse
 import com.example.farmlog.landsmap.LandsMapActivity
 import com.example.farmlog.landsmap.api.RetrofitClientChores
 import com.example.farmlog.storage.SharedPrefManager
@@ -91,12 +92,39 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-
-                // TODO: call delete on API
-
-
                 val deletedChore: Chores = choresList[viewHolder.adapterPosition]
                 val position = viewHolder.adapterPosition
+
+                // TODO: call delete on API
+                RetrofitClientChores.instance.deleteChore(choresList[position]._id).enqueue(object : Callback<DeleteResponse> {
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onResponse(
+                        call: Call<DeleteResponse>,
+                        response: Response<DeleteResponse>
+                    ) {
+                        if (response.code() == 200) {
+                            Toast.makeText(
+                                applicationContext,
+                                "Opravilo je bilo uspešno odstranjeno",
+                                Toast.LENGTH_LONG
+                            ).show()
+
+                            Log.i("ChoresList", choresList.toString())
+
+                        } else {
+                            Log.i("Map-error", response.errorBody().toString())
+                        }
+                    }
+
+                    override fun onFailure(call: Call<DeleteResponse>, t: Throwable) {
+                        Log.i("Api-chores-error", t.message.toString())
+                        Toast.makeText(
+                            applicationContext,
+                            "Prišlo je do napake, na novo zaženite aplikacijo",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                })
 
                 choresList.removeAt(viewHolder.adapterPosition)
 
