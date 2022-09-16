@@ -33,6 +33,7 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
     private lateinit var backIcon: ImageView
     private lateinit var recyclerView: RecyclerView
     private lateinit var search: SearchView
+    private lateinit var editChore: ImageView
 
     var choresList: MutableList<Chores> = ArrayList()
 
@@ -44,11 +45,10 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
         initRecycleView()
         fetchChores()
 
-        // hooks
-        shrimmerView = findViewById(R.id.shimmer_view_container)
-        search = findViewById(R.id.search_view)
-        //swiperRefres = findViewById(R.id.swipeRefresh)
-        backIcon = findViewById(R.id.backOnMain)
+        editChore.setOnClickListener() {
+            startActivity(Intent(this, LandsMapActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+        }
 
         backIcon.setOnClickListener() {
             startActivity(Intent(this, LandsMapActivity::class.java))
@@ -117,9 +117,13 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
         })
     }
 
-
     private fun initView() {
         recyclerView = findViewById(R.id.archive_list)
+        editChore = findViewById(R.id.editChoreElement)
+        shrimmerView = findViewById(R.id.shimmer_view_container)
+        search = findViewById(R.id.search_view)
+        //swiperRefres = findViewById(R.id.swipeRefresh)
+        backIcon = findViewById(R.id.backOnMain)
     }
 
     private fun initRecycleView() {
