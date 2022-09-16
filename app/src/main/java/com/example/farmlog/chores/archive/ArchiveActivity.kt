@@ -8,11 +8,11 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.farmlog.R
 import com.example.farmlog.chores.models.Chores
 import com.example.farmlog.landsmap.LandsMapActivity
@@ -22,15 +22,17 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.collections.ArrayList
 
 
-class ArchiveActivity : AppCompatActivity() {
+class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
 
     //private lateinit var swiperRefres: SwipeRefreshLayout
     private lateinit var shrimmerView: ShimmerFrameLayout
     private var adapter: ArchiveAdapter? = null
     private lateinit var backIcon: ImageView
     private lateinit var recyclerView: RecyclerView
+    private lateinit var search: SearchView
 
     var choresList: MutableList<Chores> = ArrayList()
 
@@ -44,6 +46,7 @@ class ArchiveActivity : AppCompatActivity() {
 
         // hooks
         shrimmerView = findViewById(R.id.shimmer_view_container)
+        search = findViewById(R.id.search_view)
         //swiperRefres = findViewById(R.id.swipeRefresh)
         backIcon = findViewById(R.id.backOnMain)
 
@@ -52,12 +55,27 @@ class ArchiveActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
         }
 
+        // search bar logic
+        search.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
 
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter?.filter?.filter(newText)
+                return true
+            }
+
+        })
+
+        recyclerView.visibility = View.INVISIBLE
         Handler(Looper.getMainLooper()).postDelayed({
             // need to stop when data will be loaded
             shrimmerView.stopShimmer()
             shrimmerView.visibility = View.GONE
-        }, 1500)
+            recyclerView.visibility = View.VISIBLE
+        }, 1000)
 
         /*
         swiperRefres.setOnRefreshListener {
@@ -99,13 +117,14 @@ class ArchiveActivity : AppCompatActivity() {
         })
     }
 
+
     private fun initView() {
         recyclerView = findViewById(R.id.archive_list)
     }
 
     private fun initRecycleView() {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ArchiveAdapter(mutableListOf())
+        adapter = ArchiveAdapter(mutableListOf(), this)
         recyclerView.adapter = adapter
     }
 
@@ -123,4 +142,60 @@ class ArchiveActivity : AppCompatActivity() {
             )
         }
     }
+
+    override fun clickedItem(choreModel: Chores) {
+        val secondRegistrationIntent = Intent(this, ArchiveSingleItemActivity::class.java)
+        secondRegistrationIntent.putExtra("choreName", choreModel.work_title)
+        secondRegistrationIntent.putExtra("choreDesc", choreModel.work_description)
+        secondRegistrationIntent.putExtra("choreAcc", choreModel.accessories_used)
+        secondRegistrationIntent.putExtra("choreDate", choreModel.createdAt)
+        startActivity(secondRegistrationIntent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+    }
+
+    /*
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.farmlog_archive_menu, menu)
+        var menuItem = menu!!.findItem(R.id.searchView)
+        var searchView: SearchView = menuItem.actionView as SearchView
+
+        // search bar logic
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText!!.isNotEmpty()) {
+                    displayList.clear()
+                    var searchT = newText.toLowerCase(Locale.getDefault())
+
+                    Log.i("Search", searchT)
+
+                    for (chore in choresList) {
+                        if (chore.work_title.toLowerCase(Locale.getDefault())
+                                .contains(searchT) || chore.accessories_used.toLowerCase(Locale.getDefault())
+                                .contains(searchT) || chore.createdAt.toLowerCase(Locale.getDefault())
+                                .contains(searchT)
+                        ) {
+                            displayList.add(chore)
+                        }
+                        recyclerView.adapter!!.notifyDataSetChanged()
+                    }
+                } else {
+                    displayList.clear()
+                    displayList.addAll(choresList)
+                    recyclerView.adapter!!.notifyDataSetChanged()
+                }
+                return true
+            }
+        })
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
+    }*/
 }

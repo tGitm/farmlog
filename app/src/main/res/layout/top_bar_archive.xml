@@ -8,6 +8,7 @@
     android:translationZ="1dp" >
 
     <RelativeLayout
+        android:id="@+id/archiveToolbar"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:background="@drawable/top_bar_archive"

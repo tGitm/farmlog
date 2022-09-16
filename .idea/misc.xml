@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/drawable/searchview_background.xml" value="0.343" />
         <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_add_new_chore.xml" value="0.28072916666666664" />
-        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_archive.xml" value="0.22644927536231885" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_archive.xml" value="0.5324519230769231" />
         <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_archive_single_item.xml" value="0.22644927536231885" />
         <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_edit_archive.xml" value="0.28072916666666664" />
         <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_login.xml" value="0.28020833333333334" />
@@ -13,6 +14,14 @@
         <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_third_registration.xml" value="0.25" />
         <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/activity_welcome.xml" value="0.18819655521783182" />
         <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/archive_item.xml" value="0.22644927536231885" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/archive_item_shrimmer.xml" value="0.23072916666666668" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/content_main.xml" value="0.14628623188405798" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/top_bar_archive.xml" value="0.33" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/layout/top_bar_single_archive.xml" value="0.371875" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/menu/farmlog_archive_menu.xml" value="0.371875" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/menu/farmlog_bottom_menu.xml" value="0.25" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/menu/farmlog_menu.xml" value="0.371875" />
+        <entry key="..\:/Users/tim.rus/Documents/farmlog/app/src/main/res/menu/menu_main.xml" value="0.371875" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/bottom_bar.xml" value="0.1655" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/button.xml" value="0.2315" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/button_pressed.xml" value="0.2315" />

@@ -19,30 +19,43 @@
             layout="@layout/top_bar_archive" />
     </LinearLayout>
 
+    <!--
+    <LinearLayout
+        android:id="@+id/searchField"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topbar" />
+        -->
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
+    <android.widget.SearchView
+        android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/topbar">
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="15"
+        android:queryHint="@string/search_archive"
+        android:background="@drawable/searchview_background"
+        android:iconifiedByDefault="false"
+        app:layout_constraintTop_toBottomOf="@+id/topbar"
+        android:queryBackground="@android:color/transparent"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/archive_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginBottom="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/archive_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_view" />
 
 
     <com.facebook.shimmer.ShimmerFrameLayout
@@ -53,7 +66,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topbar">
+        app:layout_constraintTop_toBottomOf="@+id/search_view">
 
         <LinearLayout
             android:id="@+id/archiveShrimmer"
@@ -73,6 +86,7 @@
 
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

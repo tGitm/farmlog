@@ -59,10 +59,10 @@
     <string name="edit_chore">Uredi opravilo</string>
     <string name="single_chore">Pregled opravila</string>
     <string name="delete_chore">Izbriši opravilo</string>
+    <string name="search_archive">Poišči opravilo</string>
 
     <!-- Single chore preview -->
     <string name="land_preview">Zemljišče</string>
-
 
     <!-- Chores page -->
     <string name="land">Izberi zemljišče</string>
