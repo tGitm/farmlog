@@ -95,7 +95,6 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
                 val deletedChore: Chores = choresList[viewHolder.adapterPosition]
                 val position = viewHolder.adapterPosition
 
-                // TODO: call delete on API
                 RetrofitClientChores.instance.deleteChore(choresList[position]._id).enqueue(object : Callback<DeleteResponse> {
                     @SuppressLint("NotifyDataSetChanged")
                     override fun onResponse(

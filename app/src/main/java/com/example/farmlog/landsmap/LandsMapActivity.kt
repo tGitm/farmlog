@@ -14,9 +14,9 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
 import com.example.farmlog.R
-import com.example.farmlog.chores.archive.ArchiveActivity
 import com.example.farmlog.auth.login.LoginActivity
 import com.example.farmlog.chores.AddNewChoreActivity
+import com.example.farmlog.chores.archive.ArchiveActivity
 import com.example.farmlog.landsmap.api.RetrofitClientLands
 import com.example.farmlog.landsmap.models.GeojsonResponse
 import com.example.farmlog.profile.ProfileActivity
@@ -29,7 +29,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import com.google.maps.android.data.Feature
 import com.google.maps.android.data.geojson.GeoJsonLayer
+import com.google.maps.android.data.geojson.GeoJsonLayer.GeoJsonOnFeatureClickListener
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle
 import org.json.JSONObject
 import retrofit2.Call
@@ -101,7 +103,7 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         navigationView.setNavigationItemSelectedListener(this)
         navigationView.setCheckedItem(R.id.to_map)
 
-        menuIcon.setOnClickListener() {
+        menuIcon.setOnClickListener {
             if (drawerMenu.isDrawerVisible(GravityCompat.START)) {
                 drawerMenu.closeDrawer(GravityCompat.START)
             } else {
@@ -214,14 +216,19 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                             style.fillColor = resources.getColor(R.color.darkGray)
                             style.strokeColor = resources.getColor(R.color.darkerGray)
                             style.strokeWidth = 2f
+                            style.isClickable = false
                             layer.addLayerToMap()
 
-                            layer.setOnFeatureClickListener {
-                                Log.i("Properties", properties.toString())
-                            }
+                            /*layer.setOnFeatureClickListener(
+                                GeoJsonOnFeatureClickListener { feature: Feature ->
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "GeoJSON polygon clicked: $properties",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } as GeoJsonOnFeatureClickListener)*/
                             mMap.setOnMapClickListener {
-                                Log.i("PropertiesMa" +
-                                        "p", properties.toString())
+                                Log.i("Map_clicked", "polygon: $properties")
                             }
                         }
 
@@ -267,7 +274,7 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         super.onStart()
 
         if (SharedPrefManager.getInstance(this).isLoggedIn) {
-            val intent = Intent(applicationContext, LoginActivity::class.java)
+            val intent = Intent(applicationContext, LandsMapActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
             startActivity(intent)
