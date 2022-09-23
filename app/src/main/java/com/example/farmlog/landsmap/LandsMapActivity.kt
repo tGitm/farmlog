@@ -29,9 +29,12 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
-import com.google.maps.android.data.Feature
+import com.google.maps.android.clustering.ClusterManager
+import com.google.maps.android.collections.GroundOverlayManager
+import com.google.maps.android.collections.MarkerManager
+import com.google.maps.android.collections.PolygonManager
+import com.google.maps.android.collections.PolylineManager
 import com.google.maps.android.data.geojson.GeoJsonLayer
-import com.google.maps.android.data.geojson.GeoJsonLayer.GeoJsonOnFeatureClickListener
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle
 import org.json.JSONObject
 import retrofit2.Call
@@ -190,6 +193,12 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         mMap = googleMap
         var geojson = ArrayList<GeojsonResponse>()
 
+        val markerManager = MarkerManager(mMap)
+        val groundOverlayManager = GroundOverlayManager(mMap)
+        val polygonManager = PolygonManager(mMap)
+        val polylineManager = PolylineManager(mMap)
+
+
         val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID
 
         RetrofitClientLands.instance.getLand(userGerkId).enqueue(object : Callback<GeojsonResponse> {
@@ -210,8 +219,17 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                             //Log.i("Properties", properties.toString())
                             val geometryJson: JSONObject = JSONObject(geos.toString())
                             val geoJsonData: JSONObject = geometryJson
+                             
 
-                            val layer = GeoJsonLayer(mMap, geoJsonData)
+
+                            val layer = GeoJsonLayer(
+                                mMap,
+                                geoJsonData,
+                                applicationContext,
+                                markerManager,
+                                polygonManager,
+                                polylineManager,
+                                groundOverlayManager)
                             val style: GeoJsonPolygonStyle = layer.defaultPolygonStyle
                             style.fillColor = resources.getColor(R.color.darkGray)
                             style.strokeColor = resources.getColor(R.color.darkerGray)
