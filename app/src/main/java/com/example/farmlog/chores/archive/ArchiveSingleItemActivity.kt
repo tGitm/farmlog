@@ -1,25 +1,28 @@
 package com.example.farmlog.chores.archive
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
+import com.example.farmlog.archive.EditArchiveActivity
 import com.example.farmlog.auth.registration.RegistrationActivity
 import com.example.farmlog.chores.models.Chores
-import com.example.farmlog.landsmap.LandsMapActivity
+import com.example.farmlog.chores.models.DeleteResponse
 import com.example.farmlog.landsmap.api.RetrofitClientChores
 import com.example.farmlog.storage.SharedPrefManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.collections.HashMap
+
 
 class ArchiveSingleItemActivity : AppCompatActivity() {
     private lateinit var editChore: FloatingActionButton
@@ -28,6 +31,11 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
     private lateinit var choreDesc: TextView
     private lateinit var choreAccessories: TextView
     private lateinit var choreDate: TextView
+    private lateinit var removeChore: ImageView
+    private lateinit var choreId: String
+    private lateinit var dialog: Dialog
+    private lateinit var dialogYes: Button
+    private lateinit var dialogNo: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +43,29 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
 
         init()
 
+        dialog.setContentView(R.layout.delete_dialog)
+        dialog.window?.attributes?.windowAnimations = R.style.dialogStyle;
+
         editChore.setOnClickListener {
-            startActivity(Intent(this, RegistrationActivity::class.java))
+            startActivity(Intent(this, EditArchiveActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
+
+        removeChore.setOnClickListener {
+            dialog.show()
+        }
+
+        dialogYes = dialog.findViewById(R.id.dialog_ok)
+        dialogNo = dialog.findViewById(R.id.dialog_cancel)
+
+        dialogYes.setOnClickListener {
+            removeItem()
+            startActivity(Intent(this, ArchiveActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+        }
+
+        dialogNo.setOnClickListener {
+            dialog.dismiss()
         }
 
         goBackButton.setOnClickListener() {
@@ -64,8 +92,7 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
                 response: Response<Chores>
             ) {
                 if (response.code() == 200) {
-
-
+                    Log.i("Api_success", response.body().toString())
                 } else {
                     Log.i("Api_error", response.errorBody().toString())
                 }
@@ -89,6 +116,8 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
         choreDate = findViewById(R.id.chore_review_date)
         editChore = findViewById(R.id.editChore)
         goBackButton = findViewById(R.id.backOnArchive)
+        removeChore = findViewById(R.id.removeChore)
+        dialog = Dialog(this)
 
         getData()
     }
@@ -96,16 +125,42 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
     // get data from recycler view
     private fun getData() {
         val intent = intent.extras
-        var workTitle = intent?.get("choreName")
-        var choreDes = intent?.get("choreDesc")
-        var choreAccs = intent?.get("choreAcc")
-        var choreD = intent?.get("choreDate")
+        val workId = intent?.get("choreId")
+        val workTitle = intent?.get("choreName")
+        val choreDes = intent?.get("choreDesc")
+        val choreAccs = intent?.get("choreAcc")
+        val choreD = intent?.get("choreDate")
 
+        choreId = workId.toString()
         choreName.text = workTitle.toString()
         choreDesc.text = choreDes.toString()
         choreAccessories.text = choreAccs.toString()
         choreDate.text = choreD.toString()
+    }
 
+    // remove chore from user
+    private fun removeItem() {
+        RetrofitClientChores.instance.deleteChore(choreId).enqueue(object : Callback<DeleteResponse> {
+            override fun onResponse(
+                call: Call<DeleteResponse>,
+                response: Response<DeleteResponse>
+            ) {
+                if (response.code() == 200) {
+                    Log.i("DeletedChore", choreId)
+                } else {
+                    Log.i("Api_error", response.errorBody().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<DeleteResponse>, t: Throwable) {
+                Log.i("Api-chores-error", t.message.toString())
+                Toast.makeText(
+                    applicationContext,
+                    "Prišlo je do napake, na novo zaženite aplikacijo",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        })
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

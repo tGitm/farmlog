@@ -88,6 +88,12 @@
     <string name="edit_profile">Uredi profil</string>
     <string name="save_edited_profile">Shrani</string>
 
+    <!-- Dialog strings -->
+    <string name="delete_dialog_title">Odstrani opravilo</string>
+    <string name="delete_dialog_description">Ste prepričani, da želite odstraniti opravilo?</string>
+    <string name="dialog_yes">Potrdi</string>
+    <string name="dialog_no">Prekliči</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

@@ -19,6 +19,16 @@
         <item name="android:textColor">@color/darkerGray</item>
     </style>
 
+    <style name="dialogStyle">
+        <item name="android:windowAnimationStyle">@style/animations</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="animations">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+
     <!-- designs for login and register -->
     <style name="parent">
         <item name="android:layout_width">match_parent</item>
@@ -55,6 +65,12 @@
         <item name="android:textSize">20sp</item>
         <!--<item name="android:textAlignment">center</item>-->
         <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="dialogTitle" parent="parent">
+        <item name="android:textSize">20sp</item>
+        <!--<item name="android:textAlignment">center</item>-->
+        <item name="android:textColor">@color/darkerGray</item>
     </style>
 
     <style name="loginHeader">

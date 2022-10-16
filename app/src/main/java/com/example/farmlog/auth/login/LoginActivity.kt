@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var register: TextView
     var email: TextInputEditText? = null
     var password: TextInputEditText? = null
+    private lateinit var loadingIcon: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
         password = findViewById(R.id.passwordLogin)
         register = findViewById(R.id.goRegister)
         login = findViewById(R.id.loginButton)
+        loadingIcon = findViewById(R.id.loadingData)
 
         val mainActivity = Intent(this, LandsMapActivity::class.java)
 
@@ -43,6 +46,8 @@ class LoginActivity : AppCompatActivity() {
             val email = email?.text.toString().trim()
             val password = password?.text.toString().trim()
             val signInInfo = SignInBody(email, password)
+
+            loadingIcon.visibility = View.VISIBLE
 
             if (validateText()) {
                 RetrofitClient.instance.loginUser(
@@ -52,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
                         call: Call<LoginResponse>,
                         response: Response<LoginResponse>
                     ) {
-
+                        loadingIcon.visibility = View.INVISIBLE
                         if (response.code() == 200) {
                             SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user!!)
 
@@ -79,6 +84,7 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                        loadingIcon.visibility = View.INVISIBLE
                         t.message?.let { it1 -> Log.i("API_failure: ", it1) }
                         Toast.makeText(
                             applicationContext,

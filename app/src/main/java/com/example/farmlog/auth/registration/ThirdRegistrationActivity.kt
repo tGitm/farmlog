@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.farmlog.R
 import com.example.farmlog.auth.api.RetrofitClient
 import com.example.farmlog.auth.usermodels.RegistrationBody
@@ -27,6 +24,7 @@ class ThirdRegistrationActivity : AppCompatActivity() {
     var post: TextInputEditText? = null
     var zip: TextInputEditText? = null
     var gerkMID: TextInputEditText? = null
+    private lateinit var loadingIcon: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // hidding status bar
@@ -39,6 +37,7 @@ class ThirdRegistrationActivity : AppCompatActivity() {
         post = findViewById(R.id.post)
         zip = findViewById(R.id.postalCode)
         gerkMID = findViewById(R.id.gerkMID)
+        loadingIcon = findViewById(R.id.loadingData)
 
         // get data from 2nd registration activity
         val firstName: String? = intent.getStringExtra("firstName")
@@ -65,6 +64,8 @@ class ThirdRegistrationActivity : AppCompatActivity() {
         val welcomeIntent = Intent(this, WelcomeActivity::class.java)
 
         completeRegister.setOnClickListener() {
+            loadingIcon.visibility = View.VISIBLE
+
             val addressvalue: String = address?.text.toString()
             val postValue: String = post?.text.toString()
             val zipValue: String = zip?.text.toString()
@@ -80,6 +81,7 @@ class ThirdRegistrationActivity : AppCompatActivity() {
                         call: Call<RegistrationResponse>,
                         response: Response<RegistrationResponse>)
                     {
+                        loadingIcon.visibility = View.INVISIBLE
                         Log.i("Register", response.code().toString())
 
                         if (response.code() == 200) {
@@ -91,6 +93,7 @@ class ThirdRegistrationActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
+                        loadingIcon.visibility = View.INVISIBLE
                         t.message?.let { it1 -> Log.i("API_failure: ", it1) }
                         Toast.makeText(baseContext, "Prišlo je do napake, poskusite ponovno", Toast.LENGTH_LONG).show()
                     }

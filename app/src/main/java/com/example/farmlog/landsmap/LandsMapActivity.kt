@@ -219,17 +219,9 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                             //Log.i("Properties", properties.toString())
                             val geometryJson: JSONObject = JSONObject(geos.toString())
                             val geoJsonData: JSONObject = geometryJson
-                             
 
 
-                            val layer = GeoJsonLayer(
-                                mMap,
-                                geoJsonData,
-                                applicationContext,
-                                markerManager,
-                                polygonManager,
-                                polylineManager,
-                                groundOverlayManager)
+                            val layer = GeoJsonLayer(mMap, geoJsonData)
                             val style: GeoJsonPolygonStyle = layer.defaultPolygonStyle
                             style.fillColor = resources.getColor(R.color.darkGray)
                             style.strokeColor = resources.getColor(R.color.darkerGray)

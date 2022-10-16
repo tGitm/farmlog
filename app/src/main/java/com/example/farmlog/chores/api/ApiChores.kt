@@ -21,4 +21,7 @@ interface ApiChores {
         @Query("_id") choreId: String?,
         @Query("user_id") userId: String?,
     ): Call<Chores>
+
+    // for editing existing chore
+
 }

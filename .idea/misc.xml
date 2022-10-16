@@ -26,15 +26,19 @@
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/button.xml" value="0.2315" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/button_pressed.xml" value="0.2315" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/button_rounded.xml" value="0.237" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/drawable/button_rounded_grey.xml" value="0.3005" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/button_smaller.xml" value="0.2315" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/drawable/dialog_rounded.xml" value="0.2265" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/highlight_color.xml" value="0.235" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_add_new.xml" value="0.235" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_archive_regular.xml" value="0.183" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_arrow_back.xml" value="0.183" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_arrow_back_white.xml" value="0.183" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1655" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.3005" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_blob.xml" value="0.1655" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_blob1.xml" value="0.201" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_edit_white.xml" value="0.3005" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_farm.xml" value="0.1395" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_farm_background.xml" value="0.1395" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_farming.xml" value="0.235" />
@@ -45,6 +49,7 @@
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.228" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.228" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_profle.xml" value="0.2375" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_trash_can.xml" value="0.3005" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_wave.xml" value="0.1" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_wave_background.xml" value="0.1" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/ic_wave_foreground.xml" value="0.1" />
@@ -69,13 +74,14 @@
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_registration.xml" value="0.33" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_second_registration.xml" value="0.33" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_splash_screen.xml" value="0.2" />
-        <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_third_registration.xml" value="0.1" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_third_registration.xml" value="0.22" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_welcome.xml" value="0.36231884057971014" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/app_bar_menu.xml" value="0.38697916666666665" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/archive_item.xml" value="0.25" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/archive_item_shrimmer.xml" value="0.25" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/content_main.xml" value="0.3605072463768116" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/content_menu.xml" value="0.38697916666666665" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/layout/delete_dialog.xml" value="0.31680205215904234" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/fragment_first.xml" value="0.3605072463768116" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/fragment_gallery.xml" value="0.38697916666666665" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/fragment_home.xml" value="0.38697916666666665" />

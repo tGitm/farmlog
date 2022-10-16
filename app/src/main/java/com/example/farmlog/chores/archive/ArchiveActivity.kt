@@ -48,7 +48,8 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
         initRecycleView()
         fetchChores()
 
-        /*deleteChore.setOnClickListener() {
+        /*
+        deleteChore.setOnClickListener() {
             startActivity(Intent(this, LandsMapActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
         }*/
@@ -80,6 +81,8 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
             recyclerView.visibility = View.VISIBLE
         }, 1000)
 
+        /*
+        // do something on swipe or move
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -136,8 +139,13 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
 
                             adapter?.notifyItemInserted(position)
                         }).show()
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    fetchChores()
+                }, 1000)
+
             }
-        }).attachToRecyclerView(recyclerView)
+        }).attachToRecyclerView(recyclerView)*/
 
         /*
         swiperRefres.setOnRefreshListener {
@@ -165,7 +173,7 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
                     Log.i("ChoresList", choresList.toString())
 
                     } else {
-                        Log.i("Map-error", response.errorBody().toString())
+                        Log.i("Api_error", response.errorBody().toString())
                     }
                 }
 
@@ -211,12 +219,13 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
     }
 
     override fun clickedItem(choreModel: Chores) {
-        val secondRegistrationIntent = Intent(this, ArchiveSingleItemActivity::class.java)
-        secondRegistrationIntent.putExtra("choreName", choreModel.work_title)
-        secondRegistrationIntent.putExtra("choreDesc", choreModel.work_description)
-        secondRegistrationIntent.putExtra("choreAcc", choreModel.accessories_used)
-        secondRegistrationIntent.putExtra("choreDate", choreModel.createdAt)
-        startActivity(secondRegistrationIntent)
+        val singleChoreActivity = Intent(this, ArchiveSingleItemActivity::class.java)
+        singleChoreActivity.putExtra("choreId", choreModel._id)
+        singleChoreActivity.putExtra("choreName", choreModel.work_title)
+        singleChoreActivity.putExtra("choreDesc", choreModel.work_description)
+        singleChoreActivity.putExtra("choreAcc", choreModel.accessories_used)
+        singleChoreActivity.putExtra("choreDate", choreModel.createdAt)
+        startActivity(singleChoreActivity)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 }
