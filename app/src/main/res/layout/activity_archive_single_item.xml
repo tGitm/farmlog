@@ -150,8 +150,22 @@
         android:src="@drawable/ic_edit_white"
         android:theme="@style/Theme.Farmlog.LandsMap"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="30dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/deleteChore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primaryTextColor"
+        app:tint="@null"
+        android:src="@drawable/ic_baseline_delete_24"
+        android:theme="@style/Theme.Farmlog.LandsMap"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

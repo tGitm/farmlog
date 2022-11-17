@@ -18,7 +18,7 @@ import com.example.farmlog.R
 import com.example.farmlog.chores.models.Chores
 import com.example.farmlog.chores.models.DeleteResponse
 import com.example.farmlog.landsmap.LandsMapActivity
-import com.example.farmlog.landsmap.api.RetrofitClientChores
+import com.example.farmlog.chores.api.RetrofitClientChores
 import com.example.farmlog.storage.SharedPrefManager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.snackbar.Snackbar
@@ -211,12 +211,15 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
     }
 
     override fun clickedItem(choreModel: Chores) {
-        val secondRegistrationIntent = Intent(this, ArchiveSingleItemActivity::class.java)
-        secondRegistrationIntent.putExtra("choreName", choreModel.work_title)
-        secondRegistrationIntent.putExtra("choreDesc", choreModel.work_description)
-        secondRegistrationIntent.putExtra("choreAcc", choreModel.accessories_used)
-        secondRegistrationIntent.putExtra("choreDate", choreModel.createdAt)
-        startActivity(secondRegistrationIntent)
+        val chorePreview = Intent(this, ArchiveSingleItemActivity::class.java)
+        chorePreview.putExtra("choreId", choreModel._id)
+        chorePreview.putExtra("choreName", choreModel.work_title)
+        chorePreview.putExtra("choreDesc", choreModel.work_description)
+        chorePreview.putExtra("choreAcc", choreModel.accessories_used)
+        chorePreview.putExtra("choreDate", choreModel.createdAt)
+
+        startActivity(chorePreview)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        finish()
     }
 }

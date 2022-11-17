@@ -1,5 +1,4 @@
-package com.example.farmlog.landsmap.api
-import com.example.farmlog.chores.api.ApiChores
+package com.example.farmlog.chores.api
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

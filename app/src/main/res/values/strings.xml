@@ -68,7 +68,7 @@
     <string name="land">Izberi zemljišče</string>
     <string name="chore_name">Ime opravila</string>
     <string name="chore_description">Opis</string>
-    <string name="chore_accessories">Uporabljene snovi</string>
+    <string name="chore_accessories">Uporabljene snovi / pripomočki</string>
     <string name="chore_date">Datum opravila</string>
     <string name="chore_picture">Dodaj sliko</string>
     <string name="chore_picture_text">Slika</string>

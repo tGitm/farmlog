@@ -53,6 +53,7 @@
                 android:layout_marginBottom="30dp" />
 
             <TextView
+                android:id="@+id/chore_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/chore_name"
@@ -61,7 +62,7 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/chore_name"
+                android:id="@+id/chore_name_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
@@ -70,6 +71,7 @@
                 android:inputType="textMultiLine" />
 
             <TextView
+                android:id="@+id/chore_desc_hint"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/chore_description"
@@ -78,7 +80,7 @@
                 android:textSize="17sp" />
 
             <EditText
-                android:id="@+id/chore_description"
+                android:id="@+id/chore_description_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
@@ -87,6 +89,7 @@
                 android:inputType="textMultiLine" />
 
             <TextView
+                android:id="@+id/chore_accessories_hint"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/chore_accessories"
@@ -95,7 +98,7 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/chore_accessories"
+                android:id="@+id/chore_accessories_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
@@ -122,6 +125,7 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false" />
 
+            <!--
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -150,11 +154,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/choreImage" />
 
+                -->
+
         </LinearLayout>
     </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/editChore_button"
+        android:id="@+id/save_chore_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/primaryTextColor"

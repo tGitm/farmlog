@@ -72,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
                             userData.apply()
 
                             startActivity(mainActivity)
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                            overridePendingTransition(androidx.appcompat.R.anim.abc_fade_in, androidx.appcompat.R.anim.abc_fade_out)
                         } else {
                             Toast.makeText(applicationContext, "Prišlo je do napake, poskusite ponovno", Toast.LENGTH_LONG).show()
                         }

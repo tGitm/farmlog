@@ -2,12 +2,12 @@ package com.example.farmlog.profile
 
 import android.content.Intent
 import android.graphics.Rect
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
 import com.example.farmlog.auth.api.RetrofitClient
 import com.example.farmlog.auth.usermodels.UserEditBody
@@ -151,6 +151,7 @@ class EditProfileActivity : AppCompatActivity() {
 
             startActivity(profileActivity)
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+            finish()
         }
 
         window.decorView.viewTreeObserver.addOnGlobalLayoutListener {
