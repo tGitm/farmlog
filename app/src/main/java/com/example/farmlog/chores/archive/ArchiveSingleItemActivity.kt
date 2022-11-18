@@ -51,6 +51,7 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
         editChore.setOnClickListener {
             startActivity(Intent(this, EditArchiveActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            finish()
         }
 
         removeChore.setOnClickListener {
