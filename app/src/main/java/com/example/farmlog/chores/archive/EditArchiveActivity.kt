@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.example.farmlog.R
 import com.example.farmlog.chores.api.RetrofitClientChores
+import com.example.farmlog.chores.archive.ArchiveActivity
 import com.example.farmlog.chores.archive.ArchiveSingleItemActivity
 import com.example.farmlog.chores.models.ChoreEditBody
 import com.example.farmlog.chores.models.EditChoreResponse
@@ -78,6 +79,7 @@ class EditArchiveActivity : AppCompatActivity() {
                 choreDescTemp,
                 choreAccessoriesTemp
             )
+
             RetrofitClientChores.instance.editChore(choreId, editChoreData).enqueue(object : Callback<EditChoreResponse> {
                 override fun onResponse(
                     call: Call<EditChoreResponse>,
@@ -104,18 +106,18 @@ class EditArchiveActivity : AppCompatActivity() {
             })
 
             Handler().postDelayed({
-                val archiveSingle = Intent(this, ArchiveSingleItemActivity::class.java)
-                startActivity(archiveSingle)
+                val archiveActivity = Intent(this, ArchiveActivity::class.java)
+                startActivity(archiveActivity)
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
                 finish()
             }, 1500)
         }
 
         goBackButton.setOnClickListener() {
-            val profileActivity = Intent(this, ProfileActivity::class.java)
-            profileActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            val archiveActivity = Intent(this, ArchiveActivity::class.java)
+            archiveActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-            startActivity(profileActivity)
+            startActivity(archiveActivity)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             finish()
         }
@@ -127,7 +129,7 @@ class EditArchiveActivity : AppCompatActivity() {
         choreAccessories = findViewById(R.id.chore_accessories_input)
         choreDate = findViewById(R.id.chore_setDate)
         saveEdited = findViewById(R.id.save_chore_button)
-        goBackButton = findViewById(R.id.backOnArchive)
+        goBackButton = findViewById(R.id.backToChores)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

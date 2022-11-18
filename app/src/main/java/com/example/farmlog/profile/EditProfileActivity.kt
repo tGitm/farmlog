@@ -150,12 +150,8 @@ class EditProfileActivity : AppCompatActivity() {
             profileActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
             startActivity(profileActivity)
-<<<<<<< HEAD
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-=======
-            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
             finish()
->>>>>>> 31a78621906f0248ae4a80b4cb85ac634bc96a12
         }
 
         window.decorView.viewTreeObserver.addOnGlobalLayoutListener {

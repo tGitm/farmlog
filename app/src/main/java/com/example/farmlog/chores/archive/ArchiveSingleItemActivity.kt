@@ -26,7 +26,6 @@ import retrofit2.Response
 
 class ArchiveSingleItemActivity : AppCompatActivity() {
     private lateinit var editChore: FloatingActionButton
-    private lateinit var deleteChore: FloatingActionButton
     private lateinit var goBackButton: ImageView
     private lateinit var choreName: TextView
     private lateinit var choreDesc: TextView
@@ -72,7 +71,7 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
 
         // send data to editChore acitvity
         editChore.setOnClickListener {
-            val editChoreActivity = Intent(this, RegistrationActivity::class.java)
+            val editChoreActivity = Intent(this, EditArchiveActivity::class.java)
             editChoreActivity.putExtra("choreId", choreId)
             editChoreActivity.putExtra("choreName", choreName.text)
             editChoreActivity.putExtra("choreDesc", choreDesc.text)
