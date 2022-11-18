@@ -16,7 +16,7 @@ import com.example.farmlog.archive.EditArchiveActivity
 import com.example.farmlog.auth.registration.RegistrationActivity
 import com.example.farmlog.chores.models.Chores
 import com.example.farmlog.chores.models.DeleteResponse
-import com.example.farmlog.landsmap.api.RetrofitClientChores
+import com.example.farmlog.chores.api.RetrofitClientChores
 import com.example.farmlog.storage.SharedPrefManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
@@ -26,6 +26,7 @@ import retrofit2.Response
 
 class ArchiveSingleItemActivity : AppCompatActivity() {
     private lateinit var editChore: FloatingActionButton
+    private lateinit var deleteChore: FloatingActionButton
     private lateinit var goBackButton: ImageView
     private lateinit var choreName: TextView
     private lateinit var choreDesc: TextView
@@ -43,6 +44,7 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
 
         init()
 
+        // delete popup dialog
         dialog.setContentView(R.layout.delete_dialog)
         dialog.window?.attributes?.windowAnimations = R.style.dialogStyle;
 
@@ -61,8 +63,57 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
         dialogYes.setOnClickListener {
             removeItem()
             startActivity(Intent(this, ArchiveActivity::class.java))
-            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
+
+        val userId: String? = SharedPrefManager.getInstance(applicationContext).user._id
+        val choreId: String? = intent.getStringExtra("choreId")
+
+        // send data to editChore acitvity
+        editChore.setOnClickListener {
+            val editChoreActivity = Intent(this, RegistrationActivity::class.java)
+            editChoreActivity.putExtra("choreId", choreId)
+            editChoreActivity.putExtra("choreName", choreName.text)
+            editChoreActivity.putExtra("choreDesc", choreDesc.text)
+            editChoreActivity.putExtra("choreAcc", choreAccessories.text)
+            editChoreActivity.putExtra("choreDate", choreDate.text)
+
+            startActivity(editChoreActivity)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            finish()
+        }
+
+        /*
+        deleteChore.setOnClickListener {
+            val afterDelete = Intent(this, ArchiveActivity::class.java)
+
+            RetrofitClientChores.instance.deleteChore(choreId).enqueue(object : Callback<DeleteResponse> {
+                override fun onResponse(
+                    call: Call<DeleteResponse>,
+                    response: Response<DeleteResponse>
+                ) {
+                    if (response.code() == 200) {
+                        Log.i("Api_ok", "OK")
+                    } else {
+                        Log.i("Api_error", response.errorBody().toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<DeleteResponse>, t: Throwable) {
+                    Log.i("Api-chores-error", t.message.toString())
+                    Toast.makeText(
+                        applicationContext,
+                        "Prišlo je do napake, na novo zaženite aplikacijo",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+
+            startActivity(afterDelete)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            finish()
+        }
+        */
 
         dialogNo.setOnClickListener {
             dialog.dismiss()
@@ -71,12 +122,8 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
         goBackButton.setOnClickListener() {
             startActivity(Intent(this, ArchiveActivity::class.java))
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            finish()
         }
-
-
-
-        val userId: String? = SharedPrefManager.getInstance(applicationContext).user._id
-        val choreId: String? = "6318d8c7c5bc0bacaf067c98"
 
         // hashMap fro querying the database
         val queryMap: HashMap<String, Any> = HashMap()
@@ -165,7 +212,6 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
         })
 
     }
-
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)

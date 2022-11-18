@@ -34,8 +34,6 @@ class SecondRegistrationActivity : AppCompatActivity() {
         val lastName: String? = intent.getStringExtra("lastName")
         val email: String? = intent.getStringExtra("email")
 
-        Log.i("lastName", firstName.toString())
-
         val goLogin: TextView = findViewById(R.id.goLogin)
         goLogin.setOnClickListener() {
             val loginIntent = Intent(this, LoginActivity::class.java)

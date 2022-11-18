@@ -154,6 +154,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"/>
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/removeChore"
         android:layout_width="wrap_content"

@@ -54,7 +54,12 @@ class ProfileActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
             startActivity(intent)
+<<<<<<< HEAD
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+=======
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+            finish()
+>>>>>>> 31a78621906f0248ae4a80b4cb85ac634bc96a12
         }
 
         backIcon.setOnClickListener() {
