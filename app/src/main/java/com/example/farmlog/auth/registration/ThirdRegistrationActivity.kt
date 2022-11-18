@@ -88,7 +88,6 @@ class ThirdRegistrationActivity : AppCompatActivity() {
                             Toast.makeText(baseContext, "Uporabnik je registriran", Toast.LENGTH_LONG).show()
                             startActivity(welcomeIntent)
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-
                         }
                     }
 

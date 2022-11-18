@@ -1,14 +1,12 @@
 package com.example.farmlog.auth.login
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
 import com.example.farmlog.auth.api.RetrofitClient
@@ -29,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
     var email: TextInputEditText? = null
     var password: TextInputEditText? = null
     private lateinit var loadingIcon: ProgressBar
+    private lateinit var rememberMe: CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +38,34 @@ class LoginActivity : AppCompatActivity() {
         register = findViewById(R.id.goRegister)
         login = findViewById(R.id.loginButton)
         loadingIcon = findViewById(R.id.loadingData)
+        rememberMe = findViewById(R.id.rememberMe)
 
         val mainActivity = Intent(this, LandsMapActivity::class.java)
+
+        val preferences: SharedPreferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        val checkbox: String = preferences.getString("remember", "").toString()
+
+        if (checkbox == "false") {
+            startActivity(mainActivity)
+        } else if (checkbox == "true") {
+            Toast.makeText(this, "Prosim prijavite se", Toast.LENGTH_SHORT).show()
+        }
+
+
+
+        rememberMe.setOnCheckedChangeListener { compoundButton, b ->
+            if (compoundButton.isChecked) {
+                val preferences: SharedPreferences = getSharedPreferences("checkbox", MODE_PRIVATE)
+                val editor: SharedPreferences.Editor = preferences.edit()
+                editor.putString("remember", "true")
+                editor.apply()
+            } else if (!compoundButton.isChecked) {
+                val preferences: SharedPreferences = getSharedPreferences("checkbox", MODE_PRIVATE)
+                val editor: SharedPreferences.Editor = preferences.edit()
+                editor.putString("remember", "false")
+                editor.apply()
+            }
+        }
 
         login.setOnClickListener() {
             val email = email?.text.toString().trim()
@@ -95,6 +120,7 @@ class LoginActivity : AppCompatActivity() {
                 })
             }
         }
+
 
         register.setOnClickListener() {
             startActivity(Intent(this, RegistrationActivity::class.java))

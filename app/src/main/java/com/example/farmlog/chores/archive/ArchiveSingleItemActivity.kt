@@ -73,6 +73,8 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
+
+
         val userId: String? = SharedPrefManager.getInstance(applicationContext).user._id
         val choreId: String? = "6318d8c7c5bc0bacaf067c98"
 
@@ -161,7 +163,9 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
                 ).show()
             }
         })
+
     }
+
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
