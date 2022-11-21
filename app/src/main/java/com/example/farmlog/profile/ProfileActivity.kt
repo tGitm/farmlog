@@ -61,6 +61,7 @@ class ProfileActivity : AppCompatActivity() {
         backIcon.setOnClickListener() {
             startActivity(Intent(this, LandsMapActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+            finish()
         }
 
         changePassword.setOnClickListener() {

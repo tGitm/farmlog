@@ -20,6 +20,6 @@ interface Api {
     fun editUser(@Path("id") id: String?, @Body info: UserEditBody): Call<UserEditResponse>
 
     @PUT("edit/password/{id}")
-    fun editPassword(@Path("id") id: String?, @Body info: PasswordEditBody): Call<NewPasswordResponse>
+    fun editPassword(@Path("id") id: String?, @Body info: UserEditPassword): Call<NewPasswordResponse>
 
 }

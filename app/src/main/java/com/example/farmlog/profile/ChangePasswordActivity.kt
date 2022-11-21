@@ -10,7 +10,9 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.example.farmlog.R
 import com.example.farmlog.auth.api.RetrofitClient
+import com.example.farmlog.auth.usermodels.NewPasswordResponse
 import com.example.farmlog.auth.usermodels.UserEditBody
+import com.example.farmlog.auth.usermodels.UserEditPassword
 import com.example.farmlog.auth.usermodels.UserEditResponse
 import com.example.farmlog.landsmap.LandsMapActivity
 import com.example.farmlog.storage.SharedPrefManager
@@ -49,14 +51,14 @@ class ChangePasswordActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener() {
             val passwordNew = newPass.text.toString().trim()
-            val editPassword = UserEditBody(firstName,lastName,email,passwordNew,address,post,postalCode,gerkMID)
+            val editPassword = UserEditPassword(passwordNew)
 
-            RetrofitClient.instance.editUser(
+            RetrofitClient.instance.editPassword(
                         id, editPassword
-            ).enqueue(object: Callback<UserEditResponse>{
+            ).enqueue(object: Callback<NewPasswordResponse>{
                 override fun onResponse(
-                    call: Call<UserEditResponse>,
-                    response: Response<UserEditResponse>
+                    call: Call<NewPasswordResponse>,
+                    response: Response<NewPasswordResponse>
                 ) {
 
                     if (response.code() == 200) {
@@ -70,7 +72,7 @@ class ChangePasswordActivity : AppCompatActivity() {
                         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
                     }
                 }
-                override fun onFailure(call: Call<UserEditResponse>, t: Throwable) {
+                override fun onFailure(call: Call<NewPasswordResponse>, t: Throwable) {
                     t.message?.let { it1 -> Log.i("API_failure: ", it1) }
                     Toast.makeText(
                         applicationContext,

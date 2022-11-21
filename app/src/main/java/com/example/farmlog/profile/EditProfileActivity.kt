@@ -1,8 +1,11 @@
 package com.example.farmlog.profile
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -114,7 +117,6 @@ class EditProfileActivity : AppCompatActivity() {
                 firstNameTemp,
                 lastNameTemp,
                 emailTemp,
-                SharedPrefManager.getInstance(applicationContext).user.password.toString(),
                 addressTemp,
                 postTemp,
                 postalCodeTemp,
@@ -131,6 +133,14 @@ class EditProfileActivity : AppCompatActivity() {
                         SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user)
                         Log.i("updated user", SharedPrefManager.getInstance(applicationContext).user.toString())
                         Toast.makeText(applicationContext, "Uporabnik je uspešno posodobljen", Toast.LENGTH_LONG).show()
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            val profileActivity = Intent(applicationContext, ProfileActivity::class.java)
+
+                            startActivity(profileActivity)
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                            finish()
+                        }, 1000)
                     }
                 }
 
@@ -147,7 +157,6 @@ class EditProfileActivity : AppCompatActivity() {
 
         backIcon.setOnClickListener() {
             val profileActivity = Intent(this, ProfileActivity::class.java)
-            profileActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
             startActivity(profileActivity)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)

@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClientLands {
-    private const val BASE_URL = "https://farmlogapi.herokuapp.com/api/"
+    private const val BASE_URL = "https://farmlog-api.vercel.app/api/"
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->

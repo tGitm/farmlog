@@ -48,28 +48,34 @@ class EditArchiveActivity : AppCompatActivity() {
         val choreAcc: String? = intent.getStringExtra("choreAcc")
         val choreD: String? = intent.getStringExtra("choreDate")
 
+        Log.i("chore_from_intent", "$choreId")
+        Log.i("chore_from_intent", "$choreTitle")
+        Log.i("chore_from_intent", "$choreDes")
+        Log.i("chore_from_intent", "$choreAcc")
+        Log.i("chore_from_intent", "$choreD")
+
         saveEdited.setOnClickListener {
 
-            choreTitleTemp = if (choreName.text.toString().isEmpty()) ({
-                choreTitle
-            }).toString() else {
+            choreTitleTemp = if (choreName.text.toString().isEmpty()) {
+                intent.getStringExtra("choreName").toString()
+            } else {
                 choreName.text.toString()
             }
 
             choreDescTemp = if (choreDesc.text.toString().isEmpty()) ({
-                choreDes
+                intent.getStringExtra("choreDesc").toString()
             }).toString() else {
                 choreDesc.text.toString()
             }
 
             choreAccessoriesTemp = if (choreAccessories.text.toString().isEmpty()) ({
-                choreAcc
+                intent.getStringExtra("choreAcc").toString()
             }).toString() else {
                 choreAccessories.text.toString()
             }
 
             choreDateTemp = if (choreDate.text.toString().isEmpty()) ({
-                choreD
+                intent.getStringExtra("choreDate").toString()
             }).toString() else {
                 choreDate.text.toString()
             }
