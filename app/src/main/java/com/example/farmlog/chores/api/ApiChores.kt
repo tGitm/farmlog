@@ -1,9 +1,6 @@
 package com.example.farmlog.chores.api
 
-import com.example.farmlog.chores.models.ChoreEditBody
-import com.example.farmlog.chores.models.Chores
-import com.example.farmlog.chores.models.DeleteResponse
-import com.example.farmlog.chores.models.EditChoreResponse
+import com.example.farmlog.chores.models.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -23,6 +20,12 @@ interface ApiChores {
         @Query("_id") choreId: String?,
         @Query("user_id") userId: String?,
     ): Call<Chores>
+
+    // for creating new chores
+    @PUT("add-chore")
+    fun createChore(
+        @Body info: ChoreAddBody
+    ): Call<AddChoreResponse>
 
     // for editing chore
     @PUT("update-land-work/{chore_id}")

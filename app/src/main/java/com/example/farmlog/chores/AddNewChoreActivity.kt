@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
 import android.graphics.Bitmap
 import com.example.farmlog.landsmap.LandsMapActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
 
@@ -22,6 +23,7 @@ class AddNewChoreActivity : AppCompatActivity() {
     private lateinit var addImage: Button
     private lateinit var importedImageView: ImageView
     private lateinit var goBack: ImageView
+    private lateinit var addChore: FloatingActionButton
 
     private val pickImage = 100
     private var imageUri: Uri? = null
@@ -56,6 +58,7 @@ class AddNewChoreActivity : AppCompatActivity() {
         addImage = findViewById(R.id.addImage)
         importedImageView = findViewById(R.id.choreImage)
         goBack = findViewById(R.id.backOnMain)
+        addChore = findViewById(R.id.addNewChore)
 
         goBack.setOnClickListener() {
             startActivity(Intent(this, LandsMapActivity::class.java))
