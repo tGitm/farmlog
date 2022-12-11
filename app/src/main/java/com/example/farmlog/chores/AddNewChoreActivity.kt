@@ -2,23 +2,33 @@ package com.example.farmlog.chores
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
+import android.widget.*
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
-import android.graphics.Bitmap
+import com.example.farmlog.chores.models.LandNameSpinnerModel
 import com.example.farmlog.landsmap.LandsMapActivity
+import com.example.farmlog.landsmap.api.RetrofitClientLands
+import com.example.farmlog.landsmap.models.GeojsonResponse
+import com.example.farmlog.storage.SharedPrefManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 
 class AddNewChoreActivity : AppCompatActivity() {
+    private lateinit var chooseLand: Spinner
     private lateinit var pickDate: EditText
     private lateinit var addImage: Button
     private lateinit var importedImageView: ImageView
@@ -34,6 +44,7 @@ class AddNewChoreActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_new_chore)
 
         pickDate = findViewById(R.id.chore_setDate)
+        chooseLand = findViewById(R.id.lands_spinner)
 
         pickDate.setOnClickListener {
             val c = Calendar.getInstance()
@@ -65,6 +76,9 @@ class AddNewChoreActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
         }
 
+        // get and set data from retrofit to spinner
+        getLands()
+
         /*
         addImage.isEnabled = false
 
@@ -79,14 +93,12 @@ class AddNewChoreActivity : AppCompatActivity() {
             startActivityForResult(i, 101)
         }
 
-
         override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults)
             if (requestCode == 111 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 addImage.isEnabled = true
             }
         }
-
 
         addImage.setOnClickListener() {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
@@ -113,6 +125,77 @@ class AddNewChoreActivity : AppCompatActivity() {
                 onWindowFocusChanged()
             }
         }
+    }
+
+    private fun getLands() {
+        val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID
+
+        RetrofitClientLands.instance.getLand(userGerkId).enqueue(object :
+            Callback<GeojsonResponse> {
+            override fun onResponse(
+                call: Call<GeojsonResponse>,
+                response: Response<GeojsonResponse>
+            ) {
+                if (response.code() == 200) {
+                    val body = response.body()
+
+                    if (body != null) {
+                        val data = body.lands.toString()
+                        //val jobj = JSONObject(data)
+                        //val jarray = jobj.getJSONArray("data")
+
+                        val namesOfLands: MutableList<String> = mutableListOf()
+
+                        for (i in 0 until body.lands.size) {
+                            val lands = body.lands[i]
+                            val properties = lands.get("properties")
+                            val geoJsonData: JSONObject = JSONObject(properties.toString())
+                            val name = geoJsonData.getString("DOMACE_IME")
+                            namesOfLands.add(name)
+                        }
+
+                        Log.i("LandsList: ", "$namesOfLands")
+
+                        val landsNameAdapter = ArrayAdapter(applicationContext, R.layout.spinner_row, R.id.land_name_spinner, namesOfLands)
+                        chooseLand.adapter = landsNameAdapter
+
+                        chooseLand.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(
+                                p0: AdapterView<*>?,
+                                p1: View?,
+                                p2: Int,
+                                p3: Long
+                            ) {
+                            }
+
+                            override fun onNothingSelected(p0: AdapterView<*>?) {
+                                Toast.makeText(applicationContext, "Prosim izberite parcelo", Toast.LENGTH_LONG).show()
+                            }
+
+                        }
+
+
+                        /*
+                        for (i in 0 until body.lands.size) {
+                            val geo = body.lands[i]
+
+                            val geos = geo.get("geometry")
+                            val properties = geo.get("properties")
+                        }
+                        */
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<GeojsonResponse>, t: Throwable) {
+                Log.i("AddNewChoreGetLand_error", t.message.toString())
+                Toast.makeText(
+                    applicationContext,
+                    "Prišlo je do napake, na novo zaženite aplikacijo",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

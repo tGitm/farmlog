@@ -60,7 +60,7 @@
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/top_bar_rounded_bottom.xml" value="0.2265" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/vawes.xml" value="0.13" />
         <entry key="..\:/documents/farmlog/app/src/main/res/drawable/view_background.xml" value="0.235" />
-        <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_add_new_chore.xml" value="0.5" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_add_new_chore.xml" value="0.22" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_archive.xml" value="0.33" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_archive_single_item.xml" value="0.31765711842667804" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/activity_change_password.xml" value="0.25" />
@@ -92,6 +92,7 @@
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/image_upload_background.xml" value="0.31765711842667804" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/menu_header.xml" value="0.25" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/nav_header_menu.xml" value="0.38697916666666665" />
+        <entry key="..\:/documents/farmlog/app/src/main/res/layout/spinner_row.xml" value="0.2967079948696024" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/top_bar.xml" value="0.33" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/top_bar_add_chore.xml" value="0.31765711842667804" />
         <entry key="..\:/documents/farmlog/app/src/main/res/layout/top_bar_archive.xml" value="0.33" />
