@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".archive.EditArchiveActivity">
 
+    <ImageView
+        android:id="@+id/illustrationArchive"
+        android:layout_width="940dp"
+        android:layout_height="930dp"
+        android:alpha="0.8"
+        android:layout_marginBottom="-250dp"
+        android:layout_marginStart="-570dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/background_vector"
+        tools:ignore="MissingConstraints" />
+
     <LinearLayout
         android:id="@+id/topbar"
         android:layout_width="match_parent"
@@ -19,151 +31,163 @@
             layout="@layout/top_bar_edit_chore" />
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/addChoreScrollview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        app:layout_constraintTop_toBottomOf="@+id/topbar"
-        android:layout_marginTop="90dp"
-        tools:ignore="MissingConstraints">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.8"
+        app:cardCornerRadius="8dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginTop="20dp"
+        app:cardElevation="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/topbar">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:orientation="vertical"
-            android:paddingTop="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingBottom="100dp">
+        <ScrollView
+            android:id="@+id/addChoreScrollview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            app:layout_constraintTop_toBottomOf="@+id/topbar"
+            tools:ignore="MissingConstraints">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/land"
-                android:textColor="@color/darkerGray"
-                android:textFontWeight="500"
-                android:textSize="18sp" />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp" />
-
-            <TextView
-                android:id="@+id/chore_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/chore_name"
-                android:textColor="@color/darkerGray"
-                android:textFontWeight="500"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/chore_name_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:inputType="textMultiLine" />
-
-            <TextView
-                android:id="@+id/chore_desc_hint"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/chore_description"
-                android:textColor="@color/darkerGray"
-                android:textFontWeight="500"
-                android:textSize="17sp" />
-
-            <EditText
-                android:id="@+id/chore_description_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:inputType="textMultiLine" />
-
-            <TextView
-                android:id="@+id/chore_accessories_hint"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/chore_accessories"
-                android:textColor="@color/darkerGray"
-                android:textFontWeight="500"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/chore_accessories_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:inputType="textMultiLine" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/chore_date"
-                android:textColor="@color/darkerGray"
-                android:textFontWeight="500"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/chore_setDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginBottom="30dp"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false" />
-
-            <!--
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/chore_picture_text"
-                android:textColor="@color/darkerGray"
-                android:textFontWeight="500"
-                android:layout_marginBottom="5dp"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/choreImage"
-                android:layout_width="match_parent"
-                android:layout_height="215dp"
-                android:background="@drawable/image_upload_background"
-                android:layout_marginBottom="30dp"
-                android:src="@drawable/ic_baseline_image_24" />
-
-            <Button
-                android:id="@+id/addImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:background="@drawable/button_smaller"
-                android:text="@string/chore_picture"
-                android:textColor="@color/whiteTextColor"
+                android:orientation="vertical"
+                android:paddingTop="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/choreImage" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingBottom="10dp">
 
-                -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/land"
+                    android:textColor="@color/darkerGray"
+                    android:textFontWeight="500"
+                    android:textSize="18sp" />
 
-        </LinearLayout>
-    </ScrollView>
+                <Spinner
+                    android:id="@+id/lands_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp" />
+
+                <TextView
+                    android:id="@+id/chore_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/chore_name"
+                    android:textColor="@color/darkerGray"
+                    android:textFontWeight="500"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/chore_name_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine" />
+
+                <TextView
+                    android:id="@+id/chore_desc_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/chore_description"
+                    android:textColor="@color/darkerGray"
+                    android:textFontWeight="500"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/chore_description_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine" />
+
+                <TextView
+                    android:id="@+id/chore_accessories_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/chore_accessories"
+                    android:textColor="@color/darkerGray"
+                    android:textFontWeight="500"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/chore_accessories_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/chore_date"
+                    android:textColor="@color/darkerGray"
+                    android:textFontWeight="500"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/chore_setDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="30dp"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+
+                <!--
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/chore_picture_text"
+                    android:textColor="@color/darkerGray"
+                    android:textFontWeight="500"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/choreImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="215dp"
+                    android:background="@drawable/image_upload_background"
+                    android:layout_marginBottom="30dp"
+                    android:src="@drawable/ic_baseline_image_24" />
+
+                <Button
+                    android:id="@+id/addImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/button_smaller"
+                    android:text="@string/chore_picture"
+                    android:textColor="@color/whiteTextColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/choreImage" />
+
+                    -->
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/save_chore_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/primaryTextColor"
+        android:backgroundTint="@color/secondaryButtonColor"
         app:tint="@null"
         android:src="@drawable/ic_save"
         android:theme="@style/Theme.Farmlog.LandsMap"

@@ -9,6 +9,7 @@
     <color name="transparent">#00FFFF00</color>
     <color name="primaryTextColor">#2a8027</color>
     <color name="primaryButtonColor">#2a8027</color>
+    <color name="secondaryButtonColor">#438555</color>
     <color name="primaryVariantColor">#96c095</color>
     <color name="loginBkColor">#f0f0f0</color>
     <color name="lightGray">#eeefee</color>

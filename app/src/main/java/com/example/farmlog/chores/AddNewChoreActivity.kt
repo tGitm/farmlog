@@ -44,6 +44,7 @@ class AddNewChoreActivity : AppCompatActivity() {
 
     val namesOfLands: MutableList<String> = mutableListOf()
     val userId: String? = SharedPrefManager.getInstance(this).user._id
+    var landSelected: String = ""
 
     private val pickImage = 100
     private var imageUri: Uri? = null
@@ -122,35 +123,30 @@ class AddNewChoreActivity : AppCompatActivity() {
             startActivityForResult(i, 101)
         }
 
-        addChore.setOnClickListener() {
-            var selectedLand = ""
-
-            // get and set data from retrofit to spinner
-            chooseLand.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    p0: AdapterView<*>?,
-                    p1: View?,
-                    p2: Int,
-                    p3: Long
-                ) {
-                    Log.i("SelectedLand", namesOfLands[p2])
-                    selectedLand = namesOfLands[p2]
-                }
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-                    Toast.makeText(applicationContext, "Prosim izberite parcelo", Toast.LENGTH_LONG).show()
-                }
+        // get and set data from retrofit to spinner
+        chooseLand.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                p0: AdapterView<*>?,
+                p1: View?,
+                p2: Int,
+                p3: Long
+            ) {
+                landSelected = namesOfLands[p2]
             }
 
-            Log.i("Land", selectedLand)
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                Toast.makeText(applicationContext, "Prosim izberite parcelo", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        addChore.setOnClickListener {
             val choreName = choreTitle.text.toString()
             val choreDesc = choreDescription.text.toString()
             val choreAccss = choreAccessories.text.toString()
-            val newChore = ChoreAddBody(userId, selectedLand, choreName, choreDesc, choreAccss, "image.jpg")
+            val newChore = ChoreAddBody(userId, landSelected, choreName, choreDesc, choreAccss, "image.jpg")
 
 
-            RetrofitClientChores.instance.createChore(newChore).enqueue(object :
-                Callback<AddChoreResponse> {
+            RetrofitClientChores.instance.createChore(newChore).enqueue(object : Callback<AddChoreResponse> {
                 override fun onResponse(
                     call: Call<AddChoreResponse>,
                     response: Response<AddChoreResponse>

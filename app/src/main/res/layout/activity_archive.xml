@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chores.archive.ArchiveActivity">
+    tools:context=".chores.archive.ArchiveActivity"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/illustrationArchive"
+        android:layout_width="940dp"
+        android:layout_height="930dp"
+        android:alpha="0.8"
+        android:layout_marginBottom="-280dp"
+        android:layout_marginStart="-430dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/background_vector"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:id="@+id/topbar"
@@ -18,19 +31,6 @@
             android:id="@+id/include"
             layout="@layout/top_bar_archive" />
     </LinearLayout>
-
-    <!--
-    <LinearLayout
-        android:id="@+id/searchField"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topbar" />
-        -->
 
     <android.widget.SearchView
         android:id="@+id/search_view"
@@ -49,12 +49,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@null"
         app:layout_constraintTop_toBottomOf="@+id/search_view" />
 
 
@@ -62,11 +63,14 @@
         android:id="@+id/shimmer_view_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_view">
+        app:layout_constraintTop_toBottomOf="@+id/search_view"
+        app:layout_constraintVertical_bias="0.0"
+        android:background="@null">
 
         <LinearLayout
             android:id="@+id/archiveShrimmer"
@@ -86,7 +90,6 @@
 
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

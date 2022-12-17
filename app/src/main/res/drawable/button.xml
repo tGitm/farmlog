@@ -3,7 +3,7 @@
     <item
         android:state_pressed="true"
         android:drawable="@drawable/button_pressed"
-        android:color="@color/darkGray" />
+        android:color="@color/primaryButtonColor" />
 
     <item
         android:state_pressed="false"
