@@ -14,12 +14,16 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
+import com.example.farmlog.chores.api.RetrofitClientChores
+import com.example.farmlog.chores.models.AddChoreResponse
+import com.example.farmlog.chores.models.ChoreAddBody
 import com.example.farmlog.chores.models.LandNameSpinnerModel
 import com.example.farmlog.landsmap.LandsMapActivity
 import com.example.farmlog.landsmap.api.RetrofitClientLands
 import com.example.farmlog.landsmap.models.GeojsonResponse
 import com.example.farmlog.storage.SharedPrefManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputEditText
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,11 +33,17 @@ import java.util.*
 
 class AddNewChoreActivity : AppCompatActivity() {
     private lateinit var chooseLand: Spinner
+    private lateinit var choreTitle: EditText
+    private lateinit var choreDescription: EditText
+    private lateinit var choreAccessories: EditText
     private lateinit var pickDate: EditText
     private lateinit var addImage: Button
     private lateinit var importedImageView: ImageView
     private lateinit var goBack: ImageView
     private lateinit var addChore: FloatingActionButton
+
+    val namesOfLands: MutableList<String> = mutableListOf()
+    val userId: String? = SharedPrefManager.getInstance(this).user._id
 
     private val pickImage = 100
     private var imageUri: Uri? = null
@@ -66,18 +76,20 @@ class AddNewChoreActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
 
+        choreTitle = findViewById(R.id.chore_name)
+        choreDescription = findViewById(R.id.chore_description)
+        choreAccessories = findViewById(R.id.chore_accessories)
         addImage = findViewById(R.id.addImage)
         importedImageView = findViewById(R.id.choreImage)
         goBack = findViewById(R.id.backOnMain)
-        addChore = findViewById(R.id.addNewChore)
+        addChore = findViewById(R.id.createNewChore)
 
         goBack.setOnClickListener() {
             startActivity(Intent(this, LandsMapActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
         }
 
-        // get and set data from retrofit to spinner
-        getLands()
+        addLandsToSpinner()
 
         /*
         addImage.isEnabled = false
@@ -106,8 +118,54 @@ class AddNewChoreActivity : AppCompatActivity() {
         }*/
 
         addImage.setOnClickListener() {
-            var i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(i, 101)
+        }
+
+        addChore.setOnClickListener() {
+            var selectedLand = ""
+
+            // get and set data from retrofit to spinner
+            chooseLand.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    p0: AdapterView<*>?,
+                    p1: View?,
+                    p2: Int,
+                    p3: Long
+                ) {
+                    Log.i("SelectedLand", namesOfLands[p2])
+                    selectedLand = namesOfLands[p2]
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    Toast.makeText(applicationContext, "Prosim izberite parcelo", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            Log.i("Land", selectedLand)
+            val choreName = choreTitle.text.toString()
+            val choreDesc = choreDescription.text.toString()
+            val choreAccss = choreAccessories.text.toString()
+            val newChore = ChoreAddBody(userId, selectedLand, choreName, choreDesc, choreAccss, "image.jpg")
+
+
+            RetrofitClientChores.instance.createChore(newChore).enqueue(object :
+                Callback<AddChoreResponse> {
+                override fun onResponse(
+                    call: Call<AddChoreResponse>,
+                    response: Response<AddChoreResponse>
+                ) {
+                    if (response.code() == 200) {
+                        Log.i("NewChoreSuccess", "${response.body()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<AddChoreResponse>, t: Throwable) {
+                    Log.i("Api_error", "$t")
+                    t.message?.let { it1 -> Log.i("NewChoreError: ", it1) }
+                    Toast.makeText(baseContext, "Prišlo je do napake, poskusite ponovno", Toast.LENGTH_LONG).show()
+                }
+            })
         }
 
         window.decorView.viewTreeObserver.addOnGlobalLayoutListener {
@@ -127,7 +185,28 @@ class AddNewChoreActivity : AppCompatActivity() {
         }
     }
 
-    private fun getLands() {
+    private fun getSelectedLand() : String {
+        var selectedLand = ""
+        chooseLand.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                p0: AdapterView<*>?,
+                p1: View?,
+                p2: Int,
+                p3: Long
+            ) {
+                selectedLand = namesOfLands[p2]
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                Toast.makeText(applicationContext, "Prosim izberite parcelo", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        return selectedLand
+    }
+
+
+    private fun addLandsToSpinner() {
         val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID
 
         RetrofitClientLands.instance.getLand(userGerkId).enqueue(object :
@@ -144,7 +223,6 @@ class AddNewChoreActivity : AppCompatActivity() {
                         //val jobj = JSONObject(data)
                         //val jarray = jobj.getJSONArray("data")
 
-                        val namesOfLands: MutableList<String> = mutableListOf()
 
                         for (i in 0 until body.lands.size) {
                             val lands = body.lands[i]
@@ -153,36 +231,10 @@ class AddNewChoreActivity : AppCompatActivity() {
                             val name = geoJsonData.getString("DOMACE_IME")
                             namesOfLands.add(name)
                         }
-
                         Log.i("LandsList: ", "$namesOfLands")
 
                         val landsNameAdapter = ArrayAdapter(applicationContext, R.layout.spinner_row, R.id.land_name_spinner, namesOfLands)
                         chooseLand.adapter = landsNameAdapter
-
-                        chooseLand.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-                            override fun onItemSelected(
-                                p0: AdapterView<*>?,
-                                p1: View?,
-                                p2: Int,
-                                p3: Long
-                            ) {
-                            }
-
-                            override fun onNothingSelected(p0: AdapterView<*>?) {
-                                Toast.makeText(applicationContext, "Prosim izberite parcelo", Toast.LENGTH_LONG).show()
-                            }
-
-                        }
-
-
-                        /*
-                        for (i in 0 until body.lands.size) {
-                            val geo = body.lands[i]
-
-                            val geos = geo.get("geometry")
-                            val properties = geo.get("properties")
-                        }
-                        */
                     }
                 }
             }
