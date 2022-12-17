@@ -22,7 +22,7 @@ interface ApiChores {
     ): Call<Chores>
 
     // for creating new chores
-    @PUT("add-chore")
+    @POST("add-chore")
     fun createChore(
         @Body info: ChoreAddBody
     ): Call<AddChoreResponse>

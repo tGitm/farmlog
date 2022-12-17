@@ -1,5 +1,6 @@
 package com.example.farmlog.profile
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -15,26 +16,21 @@ import com.example.farmlog.storage.SharedPrefManager
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var email: TextView
-    private lateinit var firstName: TextView
-    private lateinit var lastName: TextView
+    private lateinit var name: TextView
     private lateinit var address: TextView
-    private lateinit var post: TextView
-    private lateinit var postalCode: TextView
     private lateinit var gerkMID: TextView
     private lateinit var editProfile: Button
     private lateinit var changePassword: TextView
     private lateinit var backIcon: ImageView
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
         email = findViewById(R.id.value_user_email)
-        firstName = findViewById(R.id.value_user_first_name)
-        lastName = findViewById(R.id.value_user_last_name)
+        name = findViewById(R.id.value_user_name)
         address = findViewById(R.id.value_user_address)
-        post = findViewById(R.id.value_user_post)
-        postalCode = findViewById(R.id.value_user_zip)
         gerkMID = findViewById(R.id.value_user_MID)
         editProfile = findViewById(R.id.edit_profile)
         changePassword = findViewById(R.id.change_password)
@@ -42,11 +38,8 @@ class ProfileActivity : AppCompatActivity() {
 
         //val getUserData = getSharedPreferences("Login", MODE_PRIVATE)
         email.text = SharedPrefManager.getInstance(applicationContext).user.email //getUserData.getString("email", null)
-        firstName.text = SharedPrefManager.getInstance(applicationContext).user.first_name
-        lastName.text = SharedPrefManager.getInstance(applicationContext).user.last_name
-        address.text = SharedPrefManager.getInstance(applicationContext).user.address
-        post.text = SharedPrefManager.getInstance(applicationContext).user.post
-        postalCode.text = SharedPrefManager.getInstance(applicationContext).user.postal_code
+        name.text = SharedPrefManager.getInstance(applicationContext).user.first_name + " " + SharedPrefManager.getInstance(applicationContext).user.last_name
+        address.text = SharedPrefManager.getInstance(applicationContext).user.address + ", " + SharedPrefManager.getInstance(applicationContext).user.post + " " + SharedPrefManager.getInstance(applicationContext).user.postal_code
         gerkMID.text = SharedPrefManager.getInstance(applicationContext).user.gerkMID
 
         editProfile.setOnClickListener() {

@@ -139,18 +139,19 @@ class AddNewChoreActivity : AppCompatActivity() {
             }
         }
 
-        addChore.setOnClickListener {
-            val choreName = choreTitle.text.toString()
-            val choreDesc = choreDescription.text.toString()
-            val choreAccss = choreAccessories.text.toString()
-            val newChore = ChoreAddBody(userId, landSelected, choreName, choreDesc, choreAccss, "image.jpg")
+        val choreName = choreTitle.text.toString()
+        val choreDesc = choreDescription.text.toString()
+        val choreAccss = choreAccessories.text.toString()
+        val newChore = ChoreAddBody(userId, landSelected, choreName, choreDesc, choreAccss, "image.jpg")
 
+        addChore.setOnClickListener {
 
             RetrofitClientChores.instance.createChore(newChore).enqueue(object : Callback<AddChoreResponse> {
                 override fun onResponse(
                     call: Call<AddChoreResponse>,
                     response: Response<AddChoreResponse>
                 ) {
+                    Log.i("FarmlogReponse", "${response.code()}")
                     if (response.code() == 200) {
                         Log.i("NewChoreSuccess", "${response.body()}")
                     }
@@ -180,27 +181,6 @@ class AddNewChoreActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun getSelectedLand() : String {
-        var selectedLand = ""
-        chooseLand.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                p0: AdapterView<*>?,
-                p1: View?,
-                p2: Int,
-                p3: Long
-            ) {
-                selectedLand = namesOfLands[p2]
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                Toast.makeText(applicationContext, "Prosim izberite parcelo", Toast.LENGTH_LONG).show()
-            }
-        }
-
-        return selectedLand
-    }
-
 
     private fun addLandsToSpinner() {
         val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID

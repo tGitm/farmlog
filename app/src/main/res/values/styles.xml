@@ -11,6 +11,14 @@
         <item name="colorControlHighlight">@color/lightGray</item>
     </style>
 
+    <style name="ButtonWhite" parent="@android:style/Widget.Button">
+        <item name="android:textColor">@color/secondaryButtonColor</item>
+        <item name="android:background">@drawable/button_white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:shadowDx">3</item>
+        <item name="android:shadowDy">3</item>
+    </style>
+
     <!-- Date picker -->
     <style name="DatePicker" parent="Theme.MaterialComponents.DayNight.Dialog">
         <item name="colorAccent">@color/primaryTextColor</item>
