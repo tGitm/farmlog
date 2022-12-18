@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,13 +24,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class EditProfileActivity : AppCompatActivity() {
-    private lateinit var email: TextInputEditText
-    private lateinit var firstName: TextInputEditText
-    private lateinit var lastName: TextInputEditText
-    private lateinit var address: TextInputEditText
-    private lateinit var post: TextInputEditText
-    private lateinit var postalCode: TextInputEditText
-    private lateinit var gerkMID: TextInputEditText
+    private lateinit var email: EditText
+    private lateinit var firstName: EditText
+    private lateinit var lastName: EditText
+    private lateinit var address: EditText
+    private lateinit var post: EditText
+    private lateinit var postalCode: EditText
+    private lateinit var gerkMID: EditText
     private lateinit var saveButton: FloatingActionButton
     private lateinit var backIcon: ImageView
 
@@ -133,14 +134,6 @@ class EditProfileActivity : AppCompatActivity() {
                         SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user)
                         Log.i("updated user", SharedPrefManager.getInstance(applicationContext).user.toString())
                         Toast.makeText(applicationContext, "Uporabnik je uspešno posodobljen", Toast.LENGTH_LONG).show()
-
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            val profileActivity = Intent(applicationContext, ProfileActivity::class.java)
-
-                            startActivity(profileActivity)
-                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-                            finish()
-                        }, 1000)
                     }
                 }
 
@@ -153,6 +146,14 @@ class EditProfileActivity : AppCompatActivity() {
                     ).show()
                 }
             })
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                val profileActivity = Intent(applicationContext, ProfileActivity::class.java)
+
+                startActivity(profileActivity)
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                finish()
+            }, 1000)
         }
 
         backIcon.setOnClickListener() {
