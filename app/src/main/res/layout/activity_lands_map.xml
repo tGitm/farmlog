@@ -122,7 +122,7 @@
             android:id="@+id/addNewChore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/primaryTextColor"
+            android:backgroundTint="@color/secondaryButtonColor"
             app:tint="@null"
             android:src="@drawable/ic_add_new"
             app:layout_anchor="@id/bottomAppBar"
