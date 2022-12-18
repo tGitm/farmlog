@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.farmlog.R
@@ -26,8 +27,8 @@ import java.util.concurrent.TimeUnit
 class ChangePasswordActivity : AppCompatActivity() {
     private lateinit var backIcon: ImageView
     private lateinit var saveButton: FloatingActionButton
-    private lateinit var newPass: TextInputEditText
-    private lateinit var repeatNewPass: TextInputEditText
+    private lateinit var newPass: EditText
+    private lateinit var repeatNewPass: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +87,7 @@ class ChangePasswordActivity : AppCompatActivity() {
         backIcon.setOnClickListener() {
             startActivity(Intent(this, ProfileActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+            finish()
         }
 
         window.decorView.viewTreeObserver.addOnGlobalLayoutListener {

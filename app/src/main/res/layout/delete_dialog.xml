@@ -1,53 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
-    android:layout_marginBottom="30dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/dialog_rounded">
 
-    <TextView
-        android:id="@+id/dialog_title"
+    <ImageView
+        android:id="@+id/background_illustration_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/delete_dialog_title"
-        android:theme="@style/dialogTitle" />
+        android:layout_height="433dp"
+        android:layout_marginTop="-200dp"
+        android:layout_marginEnd="-450dp"
+        android:rotation="225"
+        android:alpha="0.8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_vector" />
 
+        <RelativeLayout
+            android:id="@+id/delete_dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp">
 
-    <TextView
-        android:id="@+id/dialog_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/description"
-        android:layout_below="@id/dialog_title"
-        android:layout_marginBottom="30dp"
-        android:text="@string/delete_dialog_description" />
+            <ImageView
+                android:id="@+id/illustrationTop"
+                android:layout_width="45dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/trash_can_solid" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/dialog_description">
+            <TextView
+                android:id="@+id/dialog_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/illustrationTop"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/delete_dialog_title"
+                android:theme="@style/dialogTitle" />
 
-        <Button
-            android:id="@+id/dialog_cancel"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="0.50"
-            android:background="@drawable/button"
-            android:text="@string/dialog_no" />
+            <TextView
+                android:id="@+id/dialog_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/description"
+                android:textColor="@color/darkerGray"
+                android:layout_below="@id/dialog_title"
+                android:layout_marginBottom="40dp"
+                android:text="@string/delete_dialog_description" />
 
-        <Button
-            android:id="@+id/dialog_ok"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_weight="0.50"
-            android:background="@drawable/button"
-            android:text="@string/dialog_yes" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/dialog_description">
+
+                <Button
+                    android:id="@+id/dialog_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="0.50"
+                    android:background="@drawable/button"
+                    android:text="@string/dialog_no" />
+
+                <Button
+                    android:id="@+id/dialog_ok"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.50"
+                    android:background="@drawable/button"
+                    android:text="@string/dialog_yes" />
+            </LinearLayout>
+        </RelativeLayout>
+
 </RelativeLayout>
