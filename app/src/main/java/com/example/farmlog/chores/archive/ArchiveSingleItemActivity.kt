@@ -26,6 +26,7 @@ import retrofit2.Response
 
 class ArchiveSingleItemActivity : AppCompatActivity() {
     private lateinit var editChore: FloatingActionButton
+    private lateinit var choreLand: TextView
     private lateinit var goBackButton: ImageView
     private lateinit var choreName: TextView
     private lateinit var choreDesc: TextView
@@ -159,6 +160,7 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        choreLand = findViewById(R.id.chore_review_land)
         choreName = findViewById(R.id.chore_review_name)
         choreDesc = findViewById(R.id.chore_review_description)
         choreAccessories = findViewById(R.id.chore_review_accessories)
@@ -175,12 +177,14 @@ class ArchiveSingleItemActivity : AppCompatActivity() {
     private fun getData() {
         val intent = intent.extras
         val workId = intent?.get("choreId")
+        val land = intent?.get("choreLand")
         val workTitle = intent?.get("choreName")
         val choreDes = intent?.get("choreDesc")
         val choreAccs = intent?.get("choreAcc")
         val choreD = intent?.get("choreDate")
 
         choreId = workId.toString()
+        choreLand.text = land.toString()
         choreName.text = workTitle.toString()
         choreDesc.text = choreDes.toString()
         choreAccessories.text = choreAccs.toString()

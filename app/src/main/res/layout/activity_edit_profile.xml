@@ -118,9 +118,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-
                         android:gravity="start|top"
-                        android:inputType="textMultiLine"
+                        android:inputType="textEmailAddress"
                         app:layout_constraintTop_toBottomOf="@+id/user_email" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>

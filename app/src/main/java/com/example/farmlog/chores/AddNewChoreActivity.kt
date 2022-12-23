@@ -1,8 +1,9 @@
 package com.example.farmlog.chores
 
+import android.R.attr
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
@@ -10,24 +11,22 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.*
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
 import com.example.farmlog.chores.api.RetrofitClientChores
 import com.example.farmlog.chores.models.AddChoreResponse
 import com.example.farmlog.chores.models.ChoreAddBody
-import com.example.farmlog.chores.models.LandNameSpinnerModel
 import com.example.farmlog.landsmap.LandsMapActivity
 import com.example.farmlog.landsmap.api.RetrofitClientLands
 import com.example.farmlog.landsmap.models.GeojsonResponse
 import com.example.farmlog.storage.SharedPrefManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.textfield.TextInputEditText
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.FileNotFoundException
+import java.io.InputStream
 import java.util.*
 
 
@@ -66,7 +65,7 @@ class AddNewChoreActivity : AppCompatActivity() {
 
             val datePickerDialog = DatePickerDialog(
                 this,
-                { view, year, monthOfYear, dayOfMonth ->
+                { _, year, monthOfYear, dayOfMonth ->
                     val dat = (dayOfMonth.toString() + "." + (monthOfYear + 1) + "." + year)
                     pickDate.setText(dat)
                 },
@@ -112,16 +111,18 @@ class AddNewChoreActivity : AppCompatActivity() {
                 addImage.isEnabled = true
             }
         }
-
-        addImage.setOnClickListener() {
-            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-            startActivityForResult(gallery, pickImage)
-        }*/
-
         addImage.setOnClickListener() {
             val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(i, 101)
         }
+        */
+
+        addImage.setOnClickListener() {
+            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            startActivityForResult(gallery, pickImage)
+        }
+
+
 
         // get and set data from retrofit to spinner
         chooseLand.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
@@ -142,7 +143,8 @@ class AddNewChoreActivity : AppCompatActivity() {
         val choreName = choreTitle.text.toString()
         val choreDesc = choreDescription.text.toString()
         val choreAccss = choreAccessories.text.toString()
-        val newChore = ChoreAddBody(userId, landSelected, choreName, choreDesc, choreAccss, "image.jpg")
+        val choreDate = pickDate.text.toString()
+        val newChore = ChoreAddBody(userId, landSelected, choreName, choreDesc, choreAccss, choreDate, "image.jpg")
 
         addChore.setOnClickListener {
 
@@ -196,10 +198,6 @@ class AddNewChoreActivity : AppCompatActivity() {
 
                     if (body != null) {
                         val data = body.lands.toString()
-                        //val jobj = JSONObject(data)
-                        //val jarray = jobj.getJSONArray("data")
-
-
                         for (i in 0 until body.lands.size) {
                             val lands = body.lands[i]
                             val properties = lands.get("properties")
@@ -228,11 +226,25 @@ class AddNewChoreActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 101) {
-            var pic = data?.getParcelableExtra<Bitmap>("data")
-            importedImageView.setImageBitmap(pic)
+        if (resultCode == RESULT_OK) {
+            try {
+                val imageUri = data?.data
+                val imageStream: InputStream? = imageUri?.let { contentResolver.openInputStream(it) }
+                val selectedImage = BitmapFactory.decodeStream(imageStream)
+                importedImageView.setImageBitmap(selectedImage)
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+                Toast.makeText(this, "Prosim poskusite ponovno.", Toast.LENGTH_LONG).show()
+            }
         }
     }
+
+    /*super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == pickImage) {
+            val pic = data?.getParcelableExtra<Bitmap>("data")
+            importedImageView.setImageBitmap(pic)
+        }*/
+
 
     private fun onWindowFocusChanged() {
         val v = window.decorView

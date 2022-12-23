@@ -90,6 +90,7 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
                 android:layout_marginBottom="10dp"
                 android:hint="@string/login_email_hint" />
 

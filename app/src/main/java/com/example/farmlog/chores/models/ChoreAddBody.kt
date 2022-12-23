@@ -6,5 +6,6 @@ data class ChoreAddBody(
     val work_title: String?,
     val work_description: String?,
     val accessories_used: String?,
+    val date: String?,
     val image: String?
 )

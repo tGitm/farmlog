@@ -221,10 +221,11 @@ class ArchiveActivity : AppCompatActivity(), ArchiveAdapter.ClickListener {
     override fun clickedItem(choreModel: Chores) {
         val singleChoreActivity = Intent(this, ArchiveSingleItemActivity::class.java)
         singleChoreActivity.putExtra("choreId", choreModel._id)
+        singleChoreActivity.putExtra("choreLand", choreModel.land_id)
         singleChoreActivity.putExtra("choreName", choreModel.work_title)
         singleChoreActivity.putExtra("choreDesc", choreModel.work_description)
         singleChoreActivity.putExtra("choreAcc", choreModel.accessories_used)
-        singleChoreActivity.putExtra("choreDate", choreModel.createdAt)
+        singleChoreActivity.putExtra("choreDate", choreModel.date)
         startActivity(singleChoreActivity)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         finish()

@@ -67,7 +67,7 @@ class ArchiveAdapter(private var choresList: MutableList<Chores>, clickListener:
             val formatted = current.format(formatter)
 
             archiveTitle.text = chore.work_title
-            archiveDate.text = chore.createdAt
+            archiveDate.text = chore.date
 
         }
     }
