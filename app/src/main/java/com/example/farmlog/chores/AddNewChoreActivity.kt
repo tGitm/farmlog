@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
@@ -14,6 +15,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.farmlog.R
 import com.example.farmlog.chores.api.RetrofitClientChores
+import com.example.farmlog.chores.archive.ArchiveActivity
 import com.example.farmlog.chores.models.AddChoreResponse
 import com.example.farmlog.chores.models.ChoreAddBody
 import com.example.farmlog.landsmap.LandsMapActivity
@@ -79,8 +81,8 @@ class AddNewChoreActivity : AppCompatActivity() {
         choreTitle = findViewById(R.id.chore_name)
         choreDescription = findViewById(R.id.chore_description)
         choreAccessories = findViewById(R.id.chore_accessories)
-        addImage = findViewById(R.id.addImage)
-        importedImageView = findViewById(R.id.choreImage)
+        //addImage = findViewById(R.id.addImage)
+        //importedImageView = findViewById(R.id.choreImage)
         goBack = findViewById(R.id.backOnMain)
         addChore = findViewById(R.id.createNewChore)
 
@@ -115,13 +117,13 @@ class AddNewChoreActivity : AppCompatActivity() {
             val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(i, 101)
         }
-        */
+
 
         addImage.setOnClickListener() {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, pickImage)
         }
-
+        */
 
 
         // get and set data from retrofit to spinner
@@ -140,22 +142,31 @@ class AddNewChoreActivity : AppCompatActivity() {
             }
         }
 
-        val choreName = choreTitle.text.toString()
-        val choreDesc = choreDescription.text.toString()
-        val choreAccss = choreAccessories.text.toString()
-        val choreDate = pickDate.text.toString()
-        val newChore = ChoreAddBody(userId, landSelected, choreName, choreDesc, choreAccss, choreDate, "image.jpg")
 
         addChore.setOnClickListener {
+            val choreName = choreTitle.text.toString()
+            val choreDesc = choreDescription.text.toString()
+            val choreAccss = choreAccessories.text.toString()
+            val choreDate = pickDate.text.toString()
+            val newChore = ChoreAddBody(userId, landSelected, choreName, choreDesc, choreAccss, choreDate, "image.jpg")
 
             RetrofitClientChores.instance.createChore(newChore).enqueue(object : Callback<AddChoreResponse> {
                 override fun onResponse(
                     call: Call<AddChoreResponse>,
                     response: Response<AddChoreResponse>
                 ) {
-                    Log.i("FarmlogReponse", "${response.code()}")
                     if (response.code() == 200) {
                         Log.i("NewChoreSuccess", "${response.body()}")
+
+                        Handler().postDelayed({
+                            Intent()
+                            val archiveActivity = Intent(applicationContext, ArchiveActivity::class.java)
+                            startActivity(archiveActivity)
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                            finish()
+                        }, 1500)
+                    } else {
+                        Log.i("NewChoreFailed", "$response")
                     }
                 }
 

@@ -4,9 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-
     private const val BASE_URL = "https://farmlog-api.vercel.app/api/user/"
-
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->
