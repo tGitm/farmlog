@@ -40,6 +40,12 @@
     <string name="welcome_description">Aplikacija je namenjena lažjemu arhiviranju in pregledovanju opravljenega dela na vaših zemljiščih.</string>
     <string name="welcome_button">Prijavi se</string>
 
+    <!-- About text -->
+    <string name="about_title">Aplikacija FarmLog</string>
+    <string name="about_description">Prototip aplikacije je bil razvit za namen diplomske naloge na Fakulteti za računalništvo in informatiko v Ljubljani. Aplikacija je namenjena lažjemu arhiviranju in pregledovanju opravljenega dela na vaših zemljiščih.</string>
+    <string name="back_to_application">Vrni se v aplikacijo</string>
+    <string name="contact_info">Kontakt: timrus.dev@gmail.com</string>
+
     <!-- Top bar text -->
     <string name="menuText">MENI</string>
     <string name="archiveText">ARHIV</string>

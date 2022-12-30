@@ -9,5 +9,8 @@ import retrofit2.http.*
 interface ApiLands {
 
     @GET("get-geometry/{id}")
-    fun getLand(@Path("id") id: String?): Call<GeojsonResponse>
+    fun getLandsForSpinner(@Path("id") id: String?): Call<GeojsonResponse>
+
+    @GET("get-geometry/{id}")
+    suspend fun getLandsForMap(@Path("id") id: String?): GeojsonResponse
 }

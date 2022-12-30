@@ -21,6 +21,7 @@ import com.example.farmlog.landsmap.api.RetrofitClientLands
 import com.example.farmlog.landsmap.models.GeojsonResponse
 import com.example.farmlog.profile.ProfileActivity
 import com.example.farmlog.storage.SharedPrefManager
+import com.example.farmlog.welcome.AboutActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -30,10 +31,7 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.maps.android.clustering.ClusterManager
-import com.google.maps.android.collections.GroundOverlayManager
-import com.google.maps.android.collections.MarkerManager
 import com.google.maps.android.collections.PolygonManager
-import com.google.maps.android.collections.PolylineManager
 import com.google.maps.android.data.geojson.GeoJsonLayer
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle
 import org.json.JSONObject
@@ -163,11 +161,11 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                 return true
             }
             R.id.my_profile -> {
-                this.startActivity(Intent(this,ProfileActivity::class.java))
+                this.startActivity(Intent(this, ProfileActivity::class.java))
                 return true
             }
             R.id.to_about -> {
-                this.startActivity(Intent(this,ProfileActivity::class.java))
+                this.startActivity(Intent(this, AboutActivity::class.java))
                 return true
             }
             R.id.sign_out -> {
@@ -189,45 +187,29 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-        var geojson = ArrayList<GeojsonResponse>()
 
-        val markerManager = MarkerManager(mMap)
-        val groundOverlayManager = GroundOverlayManager(mMap)
-        val polygonManager = PolygonManager(mMap)
-        val polylineManager = PolylineManager(mMap)
-
-
+    fun getGeojsonData() : String {
         val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID
-
-        RetrofitClientLands.instance.getLand(userGerkId).enqueue(object : Callback<GeojsonResponse> {
+        var geo = ""
+        /*RetrofitClientLands.instance.getLand(userGerkId).enqueue(object : Callback<GeojsonResponse> {
             override fun onResponse(
                 call: Call<GeojsonResponse>,
                 response: Response<GeojsonResponse>
             ) {
                 if (response.code() == 200) {
                     val body = response.body()
-
-                    if (body != null) {
+                    //geo = body.toString()
+                    /*if (body != null) {
+                        Log.i("GeoTim0", "$body")
                         for (i in 0 until body.lands.size) {
                             val geo = body.lands[i]
 
                             val geos = geo.get("geometry")
                             val properties = geo.get("properties")
 
-                            //Log.i("Properties", properties.toString())
                             val geometryJson: JSONObject = JSONObject(geos.toString())
                             val geoJsonData: JSONObject = geometryJson
-
-                            /*val layer = GeoJsonLayer(
-                                mMap,
-                                geoJsonData,
-                                applicationContext,
-                                markerManager,
-                                polygonManager,
-                                polylineManager,
-                                groundOverlayManager)*/
+                            Log.i("GeoTim", "$geoJsonData")
 
                             val layer = GeoJsonLayer(mMap, geoJsonData)
                             val style: GeoJsonPolygonStyle = layer.defaultPolygonStyle
@@ -237,22 +219,22 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                             style.isClickable = false
                             layer.addLayerToMap()
 
-                            /*layer.setOnFeatureClickListener(
-                                GeoJsonOnFeatureClickListener { feature: Feature ->
+                            layer.setOnFeatureClickListener(
+                                GeoJsonLayer.GeoJsonOnFeatureClickListener {
+                                    Log.i("LayerClicked", "$properties")
                                     Toast.makeText(
                                         applicationContext,
                                         "GeoJSON polygon clicked: $properties",
                                         Toast.LENGTH_SHORT
                                     ).show()
-                                } as GeoJsonOnFeatureClickListener)*/
-                            mMap.setOnMapClickListener {
-                                Log.i("Map_clicked", "polygon: $properties")
-                            }
+                                }
+                            )
+
                         }
 
                     } else {
                         Log.i("Map-error", response.errorBody().toString())
-                    }
+                    }*/
                 }
             }
 
@@ -264,7 +246,19 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                     Toast.LENGTH_LONG
                 ).show()
             }
-        })
+        })*/
+        Log.i("getData", geo)
+        return geo
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        var geojson = ArrayList<GeojsonResponse>()
+        val polygonManager = PolygonManager(mMap)
+
+        getGeojsonData() // tuki bi rabu zdej dobit ta response
+
+        //Log.i("getDataTim", getGeojsonData())
 
         // adding marker
         mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(45.92757404830929, 15.595209429220395)))

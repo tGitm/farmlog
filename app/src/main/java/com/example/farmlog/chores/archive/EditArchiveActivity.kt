@@ -184,7 +184,7 @@ class EditArchiveActivity : AppCompatActivity() {
     private fun addLandsToSpinner() {
         val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID
 
-        RetrofitClientLands.instance.getLand(userGerkId).enqueue(object :
+        RetrofitClientLands.instance.getLandsForSpinner(userGerkId).enqueue(object :
             Callback<GeojsonResponse> {
             override fun onResponse(
                 call: Call<GeojsonResponse>,

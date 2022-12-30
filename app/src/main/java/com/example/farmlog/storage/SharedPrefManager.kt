@@ -1,5 +1,6 @@
 package com.example.farmlog.storage
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.example.farmlog.auth.usermodels.User
 
@@ -60,7 +61,8 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
     }
 
     companion object {
-        private val SHARED_PREF_NAME = "my_shared_preff"
+        private const val SHARED_PREF_NAME = "my_shared_preff"
+        @SuppressLint("StaticFieldLeak")
         private var mInstance: SharedPrefManager? = null
 
         @Synchronized

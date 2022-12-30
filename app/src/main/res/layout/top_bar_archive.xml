@@ -36,17 +36,6 @@
             android:textColor="@color/primaryTextColor"
             android:textSize="26sp" />
 
-        <!--
-        <ImageView
-            android:id="@+id/archive"
-            android:layout_width="28sp"
-            android:layout_height="28sp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="35sp"
-            android:src="@drawable/ic_archive_folder" />
-            -->
-
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
