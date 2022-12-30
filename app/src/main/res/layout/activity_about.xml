@@ -89,18 +89,19 @@
             android:text="@string/about_description" />
 
         <TextView
-            style="@style/subHeaderText"
+            android:id="@+id/made_by_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/madeBy"
-            android:textColor="@color/gray" />
+            android:text="@string/about_made_by"
+            android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/contact"
+            android:id="@+id/contact_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="@string/contact_info" />
+            android:text="@string/contact_info"
+            android:textSize="16dp" />
 
     </LinearLayout>
 
@@ -112,6 +113,7 @@
         android:layout_marginTop="-80dp"
         android:layout_marginEnd="-200dp"
         android:rotationY="200"
+        android:alpha="0.8"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="@+id/constr"
         app:srcCompat="@drawable/background_vector"

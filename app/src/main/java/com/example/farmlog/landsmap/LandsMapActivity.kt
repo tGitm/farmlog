@@ -1,13 +1,13 @@
 package com.example.farmlog.landsmap
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
@@ -17,7 +17,6 @@ import com.example.farmlog.R
 import com.example.farmlog.auth.login.LoginActivity
 import com.example.farmlog.chores.AddNewChoreActivity
 import com.example.farmlog.chores.archive.ArchiveActivity
-import com.example.farmlog.landsmap.api.RetrofitClientLands
 import com.example.farmlog.landsmap.models.GeojsonResponse
 import com.example.farmlog.profile.ProfileActivity
 import com.example.farmlog.storage.SharedPrefManager
@@ -30,14 +29,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
-import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.collections.PolygonManager
-import com.google.maps.android.data.geojson.GeoJsonLayer
-import com.google.maps.android.data.geojson.GeoJsonPolygonStyle
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
@@ -169,11 +161,24 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
                 return true
             }
             R.id.sign_out -> {
-                SharedPrefManager.getInstance(applicationContext).clear()
+                val preferences = getSharedPreferences("loginPrefs", MODE_PRIVATE)
+                val editor = preferences.edit()
+                editor.clear()
+                editor.apply()
+
+                // set checkbox to false
+                val rememberPreferences: SharedPreferences = getSharedPreferences("checkbox", MODE_PRIVATE)
+                val rememberEditor: SharedPreferences.Editor = rememberPreferences.edit()
+                rememberEditor.putString("remember", "false")
+                rememberEditor.apply()
+
+                //SharedPrefManager.getInstance(applicationContext).clear()
                 val loginActivity = Intent(this, LoginActivity::class.java)
                 loginActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-                this.startActivity(loginActivity)
+                startActivity(loginActivity)
+
+                finish()
                 return true
             }
             else -> super.onOptionsItemSelected(item)

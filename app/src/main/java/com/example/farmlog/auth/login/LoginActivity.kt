@@ -45,9 +45,9 @@ class LoginActivity : AppCompatActivity() {
         val preferences: SharedPreferences = getSharedPreferences("checkbox", MODE_PRIVATE);
         val checkbox: String = preferences.getString("remember", "").toString()
 
-        if (checkbox == "false") {
+        if (checkbox == "true") {
             startActivity(mainActivity)
-        } else if (checkbox == "true") {
+        } else if (checkbox == "false") {
             Toast.makeText(this, "Prosim prijavite se", Toast.LENGTH_SHORT).show()
         }
 
