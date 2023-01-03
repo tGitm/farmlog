@@ -8,6 +8,7 @@
         <item name="colorSecondary">@color/darkGray</item>
         <item name="colorSecondaryVariant">@color/gray</item>
         <item name="colorControlHighlight">@color/lightGray</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="Theme.Farmlog.NoActionBar">

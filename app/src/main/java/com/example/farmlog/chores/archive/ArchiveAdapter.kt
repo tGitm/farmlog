@@ -54,6 +54,7 @@ class ArchiveAdapter(private var choresList: MutableList<Chores>, clickListener:
 
     class ChoresViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         private var archiveTitle: TextView = view.findViewById(R.id.archiveTitleField)
+        private var archiveLand: TextView = view.findViewById(R.id.archiveLandField)
         private var archiveDate: TextView = view.findViewById(R.id.archiveDateField)
 
         fun bindView(chore: Chores) {
@@ -63,10 +64,11 @@ class ArchiveAdapter(private var choresList: MutableList<Chores>, clickListener:
             Log.i("Adapter", chore._id)
             Log.i("Adapter", chore.work_title)
 
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
-            val formatted = current.format(formatter)
+            //val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+            //val formatted = current.format(formatter)
 
             archiveTitle.text = chore.work_title
+            archiveLand.text = chore.land_id
             archiveDate.text = chore.date
 
         }
@@ -85,7 +87,8 @@ class ArchiveAdapter(private var choresList: MutableList<Chores>, clickListener:
 
                     for (chore in choresListFiltered) {
                         if (chore.work_title.toLowerCase(Locale.getDefault()).contains(searchChar) || chore.accessories_used.toLowerCase(
-                                Locale.getDefault()).contains(searchChar) || chore.createdAt.toLowerCase(
+                                Locale.getDefault()).contains(searchChar) || chore.date.toLowerCase(
+                                Locale.getDefault()).contains(searchChar) || chore.land_id.toLowerCase(
                                 Locale.getDefault()).contains(searchChar)) {
                                 filteredResults.add(chore)
                         }

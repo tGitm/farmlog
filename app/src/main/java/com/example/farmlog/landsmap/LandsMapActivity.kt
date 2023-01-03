@@ -8,15 +8,18 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
+import androidx.lifecycle.lifecycleScope
 import com.example.farmlog.R
 import com.example.farmlog.auth.login.LoginActivity
 import com.example.farmlog.chores.AddNewChoreActivity
 import com.example.farmlog.chores.archive.ArchiveActivity
+import com.example.farmlog.landsmap.api.RetrofitClientLands
 import com.example.farmlog.landsmap.models.GeojsonResponse
 import com.example.farmlog.profile.ProfileActivity
 import com.example.farmlog.storage.SharedPrefManager
@@ -30,6 +33,12 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.maps.android.collections.PolygonManager
+import com.google.maps.android.data.geojson.GeoJsonLayer
+import com.google.maps.android.data.geojson.GeoJsonPolygonStyle
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.json.JSONArray
+import org.json.JSONObject
 
 
 class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
@@ -44,6 +53,8 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
     private lateinit var bottomAppBar: BottomAppBar
     private lateinit var content: CoordinatorLayout
     private lateinit var addChore: FloatingActionButton
+    private var geo: String = ""
+
 
     private var END_SCALE: Float = 0.7f
 
@@ -56,6 +67,15 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lands_map)
+
+        val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID
+        lifecycleScope.launch{
+            val landsList = RetrofitClientLands.instance.getLandsForMap(userGerkId)
+            geo = landsList.toString()
+            with(Dispatchers.Main){
+                Log.i("GeoLog", geo)
+            }
+        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -192,78 +212,71 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
-
-    fun getGeojsonData() : String {
-        val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID
-        var geo = ""
-        /*RetrofitClientLands.instance.getLand(userGerkId).enqueue(object : Callback<GeojsonResponse> {
-            override fun onResponse(
-                call: Call<GeojsonResponse>,
-                response: Response<GeojsonResponse>
-            ) {
-                if (response.code() == 200) {
-                    val body = response.body()
-                    //geo = body.toString()
-                    /*if (body != null) {
-                        Log.i("GeoTim0", "$body")
-                        for (i in 0 until body.lands.size) {
-                            val geo = body.lands[i]
-
-                            val geos = geo.get("geometry")
-                            val properties = geo.get("properties")
-
-                            val geometryJson: JSONObject = JSONObject(geos.toString())
-                            val geoJsonData: JSONObject = geometryJson
-                            Log.i("GeoTim", "$geoJsonData")
-
-                            val layer = GeoJsonLayer(mMap, geoJsonData)
-                            val style: GeoJsonPolygonStyle = layer.defaultPolygonStyle
-                            style.fillColor = resources.getColor(R.color.darkGray)
-                            style.strokeColor = resources.getColor(R.color.darkerGray)
-                            style.strokeWidth = 2f
-                            style.isClickable = false
-                            layer.addLayerToMap()
-
-                            layer.setOnFeatureClickListener(
-                                GeoJsonLayer.GeoJsonOnFeatureClickListener {
-                                    Log.i("LayerClicked", "$properties")
-                                    Toast.makeText(
-                                        applicationContext,
-                                        "GeoJSON polygon clicked: $properties",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                            )
-
-                        }
-
-                    } else {
-                        Log.i("Map-error", response.errorBody().toString())
-                    }*/
-                }
-            }
-
-            override fun onFailure(call: Call<GeojsonResponse>, t: Throwable) {
-                Log.i("Map response", t.message.toString())
-                Toast.makeText(
-                    applicationContext,
-                    "Prišlo je do napake, na novo zaženite aplikacijo",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        })*/
-        Log.i("getData", geo)
-        return geo
-    }
-
     override fun onMapReady(googleMap: GoogleMap) {
+        val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID
         mMap = googleMap
         var geojson = ArrayList<GeojsonResponse>()
         val polygonManager = PolygonManager(mMap)
 
-        getGeojsonData() // tuki bi rabu zdej dobit ta response
+        //getGeojsonData() // tuki bi rabu zdej dobit ta response
 
-        //Log.i("getDataTim", getGeojsonData())
+        lifecycleScope.launch{
+            val landsList = RetrofitClientLands.instance.getLandsForMap(userGerkId)
+            var geojsonData: JSONArray = JSONArray()
+            for (i in 0 until landsList.lands.size) {
+                val geo = landsList.lands[i]
+                geojsonData.put(geo)
+                val geos = geo.get("geometry")
+                val properties = geo.get("properties")
+
+                val geometryJson: JSONObject = JSONObject(geos.toString())
+                val geoJsonData: JSONObject = geometryJson
+                Log.i("GeoTim", "$geoJsonData")
+
+                val layer = GeoJsonLayer(mMap, geoJsonData)
+                val style: GeoJsonPolygonStyle = layer.defaultPolygonStyle
+                style.fillColor = resources.getColor(R.color.darkGray)
+                style.strokeColor = resources.getColor(R.color.darkerGray)
+                style.strokeWidth = 2f
+                style.isClickable = true
+
+                layer.addLayerToMap()
+
+                layer.setOnFeatureClickListener(
+                    GeoJsonLayer.GeoJsonOnFeatureClickListener {
+                        Log.i("LayerClicked", "$properties")
+                        Toast.makeText(
+                            applicationContext,
+                            "GeoJSON polygon clicked: $properties",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                )
+            }
+
+            /*
+            val geojson = JSONObject()
+            geojson.put("features", geojsonData)
+
+            Log.i("GEO", geojson.get("geometry").toString())
+
+            val layer = GeoJsonLayer(mMap, geojson)
+            val style: GeoJsonPolygonStyle = layer.defaultPolygonStyle
+            style.fillColor = resources.getColor(R.color.darkGray)
+            style.strokeColor = resources.getColor(R.color.darkerGray)
+            style.strokeWidth = 2f
+            style.isClickable = true
+
+            layer.addLayerToMap()
+
+            layer.setOnFeatureClickListener(
+                GeoJsonLayer.GeoJsonOnFeatureClickListener {
+                    Log.i("LayerClicked", "kliknil si")
+
+                }
+            )
+            */
+        }
 
         // adding marker
         mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(45.92757404830929, 15.595209429220395)))
