@@ -6,7 +6,7 @@ data class Chores(
     val accessories_used: String,
     val createdAt: String,
     val date: String,
-    val img: String,
+    //val img: String,
     val land_id: String,
     val updatedAt: String,
     val user_id: String,

@@ -211,7 +211,7 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         super.finish()
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
-
+/*
     override fun onMapReady(googleMap: GoogleMap) {
         val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID
         mMap = googleMap
@@ -284,6 +284,42 @@ class LandsMapActivity : AppCompatActivity(), OnMapReadyCallback,
         mMap.animateCamera( CameraUpdateFactory.zoomTo( 12.5f ) );
 
     }
+*/
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        val userGerkId: String? = SharedPrefManager.getInstance(applicationContext).user.gerkMID
+        mMap = googleMap
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(45.92757404830929, 15.595209429220395), 12.5f))
+        mMap.uiSettings.isZoomControlsEnabled = true
+        //mMap.animateCamera( CameraUpdateFactory.zoomTo( 12.5f ) )
+
+        lifecycleScope.launch{
+            val landsList = RetrofitClientLands.instance.
+            getLandsForMap(userGerkId)
+            val geojsonData: JSONArray = JSONArray()
+            Log.i("geojsonVilja", "$landsList")
+            for (i in 0 until landsList.lands.size) {
+                val geo = landsList.lands[i]
+
+                geojsonData.put(geo)
+                val geos = geo.get("geometry")
+                val properties = geo.get("properties")
+                val geometryJson: JSONObject = JSONObject(geos.toString())
+                val geoJsonData: JSONObject = geometryJson
+
+                Log.i("geojsonViljaItem", "$geoJsonData")
+                val layer = GeoJsonLayer(mMap, geoJsonData)
+                val style: GeoJsonPolygonStyle = layer.defaultPolygonStyle
+                style.fillColor = resources.getColor(R.color.darkGray)
+                style.strokeColor = resources.getColor(R.color.darkerGray)
+                style.strokeWidth = 2f
+                style.isClickable = true
+                layer.addLayerToMap()
+            }
+        }
+
+    }
+
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)

@@ -113,18 +113,21 @@ class EditArchiveActivity : AppCompatActivity() {
         saveEdited.setOnClickListener {
 
             choreTitleTemp = choreName.text.toString().ifEmpty {
-                intent.getStringExtra("choreName").toString()
+                choreName.hint.toString()
             }
 
             choreDescTemp = choreDesc.text.toString().ifEmpty {
-                intent.getStringExtra("choreDesc").toString()
+                //intent.getStringExtra("choreDesc").toString()
+                choreDesc.hint.toString()
             }
 
             choreAccessoriesTemp = choreAccessories.text.toString().ifEmpty {
-                intent.getStringExtra("choreAcc").toString()
+                choreAccessories.hint.toString()
+                //intent.getStringExtra("choreAcc").toString()
             }
 
             choreDateTemp = choreDate.text.toString().ifEmpty {
+                //choreDate.hint.toString()
                 choreDate.hint.toString()
             }
 
